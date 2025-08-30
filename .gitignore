@@ -1,0 +1,19 @@
+# Ignore documents and scripts
+*.docx
+*.xlsx
+*.ps1
+*.py
+*.md
+*.pdf
+
+# Ignore extracted text files
+*_extracted.txt
+
+# Ignore development/tooling files
+.claude/
+icon-generator.js
+generate_icons.py
+test.html
+
+# Re-include essential markdown files (if any)
+!README.md
