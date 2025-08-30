@@ -1,0 +1,69 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景円 -->
+  <circle cx="256" cy="256" r="256" fill="#1976d2"/>
+  
+  <!-- 外側の装飾リング -->
+  <circle cx="256" cy="256" r="240" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.2"/>
+  
+  <!-- 本のベース -->
+  <g transform="translate(256, 280)">
+    <!-- 本の背面 -->
+    <rect x="-85" y="-25" width="170" height="120" rx="8" fill="#2196f3" stroke="#1565c0" stroke-width="2"/>
+    <!-- 本の表面 -->
+    <rect x="-80" y="-30" width="160" height="120" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+    
+    <!-- 本のページライン -->
+    <g stroke="#e0e0e0" stroke-width="1" opacity="0.6">
+      <line x1="-60" y1="-10" x2="60" y2="-10"/>
+      <line x1="-60" y1="10" x2="60" y2="10"/>
+      <line x1="-60" y1="30" x2="60" y2="30"/>
+      <line x1="-60" y1="50" x2="60" y2="50"/>
+    </g>
+    
+    <!-- 本の文字「CPP」 -->
+    <text x="0" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1976d2">CPP</text>
+  </g>
+  
+  <!-- 卒業帽 -->
+  <g transform="translate(256, 180)">
+    <!-- 帽子の本体 -->
+    <ellipse cx="0" cy="0" rx="65" ry="20" fill="#424242"/>
+    <!-- 帽子の上部 -->
+    <rect x="-55" y="-35" width="110" height="35" fill="#616161"/>
+    <!-- 帽子の角帽 -->
+    <rect x="-50" y="-65" width="100" height="30" fill="#424242"/>
+    
+    <!-- 房（タッセル） -->
+    <g transform="translate(45, -50)">
+      <line x1="0" y1="0" x2="25" y2="-15" stroke="#ff9800" stroke-width="3"/>
+      <circle cx="25" cy="-15" r="4" fill="#ff9800"/>
+      <!-- タッセルの房 -->
+      <g transform="translate(25, -15)" stroke="#ff9800" stroke-width="2" opacity="0.8">
+        <line x1="0" y1="0" x2="3" y2="12"/>
+        <line x1="0" y1="0" x2="0" y2="15"/>
+        <line x1="0" y1="0" x2="-3" y2="12"/>
+        <line x1="0" y1="0" x2="-6" y2="10"/>
+        <line x1="0" y1="0" x2="6" y2="10"/>
+      </g>
+    </g>
+  </g>
+  
+  <!-- キラキラエフェクト -->
+  <g fill="#ffffff" opacity="0.7">
+    <g transform="translate(180, 140)">
+      <polygon points="0,-8 2,0 8,0 3,3 5,9 0,6 -5,9 -3,3 -8,0 -2,0" fill="#ffffff"/>
+    </g>
+    <g transform="translate(340, 160) scale(0.7)">
+      <polygon points="0,-8 2,0 8,0 3,3 5,9 0,6 -5,9 -3,3 -8,0 -2,0" fill="#ffffff"/>
+    </g>
+    <g transform="translate(160, 320) scale(0.5)">
+      <polygon points="0,-8 2,0 8,0 3,3 5,9 0,6 -5,9 -3,3 -8,0 -2,0" fill="#ffffff"/>
+    </g>
+    <g transform="translate(350, 300) scale(0.6)">
+      <polygon points="0,-8 2,0 8,0 3,3 5,9 0,6 -5,9 -3,3 -8,0 -2,0" fill="#ffffff"/>
+    </g>
+  </g>
+  
+  <!-- サブタイトル -->
+  <text x="256" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff" opacity="0.9">Master</text>
+</svg>

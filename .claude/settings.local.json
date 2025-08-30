@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(where python)",
+      "Bash(powershell:*)",
+      "Bash(dir \"C:\\GEMINI\\*.docx\" /Q)",
+      "WebSearch",
+      "WebFetch(domain:cpp.jma.or.jp)",
+      "WebFetch(domain:school.jma.or.jp)",
+      "Bash(py --version)",
+      "Bash(py:*)",
+      "Bash(npx http-server:*)",
+      "Bash(node:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
