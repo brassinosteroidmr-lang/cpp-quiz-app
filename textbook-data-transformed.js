@@ -536,8 +536,38 @@ const TEXTBOOK_DATA = [
                 content: `
                     <p>調達のプロフェッショナルになるには、どのようなスキルが必要でしょうか？そして、どのように成長していけばよいのでしょうか？本章では、調達の専門家として活躍するための「能力の全体像」と「具体的な成長ステップ」を分かりやすく解説します。</p>
                     
-                    <h4>調達プロフェッショナルへの3ステップ成長モデル</h4>
+                    <h4>📊 調達プロフェッショナルへの3ステップ成長モデル</h4>
                     <p>調達の専門家は、新人から始まって段階的にスキルを積み上げ、最終的にはリーダーへと成長します。この成長プロセスを「3ステップモデル」で整理すると、目標設定と能力開発がより明確になります。</p>
+                    
+                    <div style="background: linear-gradient(to right, #e3f2fd, #bbdefb, #90caf9); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <h5 style="text-align: center; margin-bottom: 15px;">🎯 成長ロードマップ：調達担当者から調達リーダーまでの道のり</h5>
+                        <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                            <tr style="background: #1976d2; color: white;">
+                                <th style="padding: 15px; text-align: center; width: 20%;">ステップ</th>
+                                <th style="padding: 15px; text-align: center; width: 20%;">期間・レベル</th>
+                                <th style="padding: 15px; text-align: center; width: 30%;">主な目標</th>
+                                <th style="padding: 15px; text-align: center; width: 30%;">期待される成果</th>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #e0e0e0;">
+                                <td style="padding: 15px; text-align: center; font-weight: bold; background: #fff3e0;">🌱 Step 1<br>調達担当者</td>
+                                <td style="padding: 15px; text-align: center;">新人〜3年目<br>(約2-3年)</td>
+                                <td style="padding: 15px;">調達の基本業務を確実に遂行</td>
+                                <td style="padding: 15px;">ミスなく業務遂行<br>年3%以上のコスト削減</td>
+                            </tr>
+                            <tr style="border-bottom: 2px solid #e0e0e0;">
+                                <td style="padding: 15px; text-align: center; font-weight: bold; background: #f3e5f5;">🚀 Step 2<br>調達エキスパート</td>
+                                <td style="padding: 15px; text-align: center;">4〜8年目<br>(約3-5年)</td>
+                                <td style="padding: 15px;">戦略的な視点で調達業務を企画・実行</td>
+                                <td style="padding: 15px;">戦略的成果創出<br>部門間連携成功<br>後輩指導</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; text-align: center; font-weight: bold; background: #e8f5e8;">👑 Step 3<br>調達リーダー</td>
+                                <td style="padding: 15px; text-align: center;">9年目以上<br>(5年以上の継続成長)</td>
+                                <td style="padding: 15px;">組織全体の調達機能を変革し競争力向上に貢献</td>
+                                <td style="padding: 15px;">組織変革<br>事業成果<br>業界での認知</td>
+                            </tr>
+                        </table>
+                    </div>
                     
                     <h5>ステップ1：調達担当者（新人〜3年目）</h5>
                     <p><strong>この段階の目標</strong>：調達の基本業務を確実にできるようになる</p>
@@ -578,8 +608,54 @@ const TEXTBOOK_DATA = [
                     
                     <p><strong>身につける期間</strong>：5年以上の継続的成長 | <strong>成果の目安</strong>：組織変革・事業成果・業界での認知</p>
 
-                    <h4>調達プロフェッショナルの4つの主要スキル</h4>
+                    <h4>🎯 調達プロフェッショナルの4つの主要スキル</h4>
                     <p>調達のプロとして活躍するには、以下の4つのスキル分野をバランス良く身につける必要があります。各スキルは段階的に高度化していき、最終的には戦略レベルまで使いこなせるようになります。</p>
+                    
+                    <div style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 25px; border-radius: 15px; margin: 20px 0;">
+                        <h5 style="text-align: center; margin-bottom: 20px; color: #495057;">💪 スキル習得レベル一覧表</h5>
+                        <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                            <tr style="background: linear-gradient(to right, #6c757d, #495057); color: white;">
+                                <th style="padding: 15px; width: 25%;">スキル分野</th>
+                                <th style="padding: 15px; width: 25%;">基礎レベル</th>
+                                <th style="padding: 15px; width: 25%;">応用レベル</th>
+                                <th style="padding: 15px; width: 25%;">戦略レベル</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e9ecef;">
+                                <td style="padding: 15px; font-weight: bold; background: #fff3cd;">🎯 サプライヤー<br>選定力</td>
+                                <td style="padding: 15px;">ネットや展示会で候補探し<br>基本的な比較</td>
+                                <td style="padding: 15px;">品質・コスト・納期・サービス<br>総合評価でベストパートナー選定</td>
+                                <td style="padding: 15px;">市場全体分析<br>将来性考慮した長期戦略構築</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e9ecef;">
+                                <td style="padding: 15px; font-weight: bold; background: #d1ecf1;">💰 コスト<br>削減力</td>
+                                <td style="padding: 15px;">相見積もり取得<br>基本的な価格交渉</td>
+                                <td style="padding: 15px;">原価詳細分析<br>根拠に基づく効果的交渉</td>
+                                <td style="padding: 15px;">市場価格動向予測<br>中長期コスト最適化戦略</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e9ecef;">
+                                <td style="padding: 15px; font-weight: bold; background: #d4edda;">🤝 関係<br>構築力</td>
+                                <td style="padding: 15px;">定期的コミュニケーション<br>信頼関係構築</td>
+                                <td style="padding: 15px;">サプライヤー課題理解<br>共同改善プロジェクト推進</td>
+                                <td style="padding: 15px;">技術開発・人材交流含む<br>戦略的パートナーシップ</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; font-weight: bold; background: #f8d7da;">⚠️ リスク<br>管理力</td>
+                                <td style="padding: 15px;">日常的な品質・納期問題<br>迅速発見・対処</td>
+                                <td style="padding: 15px;">財務・操業リスク定期チェック<br>予防策実施</td>
+                                <td style="padding: 15px;">地政学・気候変動含む<br>包括的リスク管理体制</td>
+                            </tr>
+                        </table>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border-radius: 8px;">
+                            <h6 style="margin-bottom: 10px; color: #0066cc;">📈 各スキルの成果指標例：</h6>
+                            <ul style="margin: 0; padding-left: 20px; color: #495057;">
+                                <li><strong>サプライヤー選定：</strong> 品質向上・納期短縮・長期パートナー比率30%以上</li>
+                                <li><strong>コスト削減：</strong> 年間3-10%のコスト削減・価格競争力向上</li>
+                                <li><strong>関係構築：</strong> サプライヤー満足度80%以上・共同プロジェクト年2件以上</li>
+                                <li><strong>リスク管理：</strong> 供給停止ゼロ・復旧時間50%短縮・予測精度90%以上</li>
+                            </ul>
+                        </div>
+                    </div>
                     
                     <h5>スキル1：良いサプライヤーを見つけて選ぶ力</h5>
                     <p><strong>なぜ重要か</strong>：良いパートナーを見つけることが、調達成功の8割を決める</p>
@@ -629,8 +705,63 @@ const TEXTBOOK_DATA = [
                     
                     <p><strong>成果の目安</strong>：供給停止ゼロ・復旧時間50%短縮・リスク予測精度90%以上</p>
 
-                    <h4>調達プロフェッショナルに必要な3つの能力タイプ</h4>
+                    <h4>🧠 調達プロフェッショナルに必要な3つの能力タイプ</h4>
                     <p>調達のプロになるためには、「知識」「実践スキル」「人間力」の3つの能力をバランス良く身につけることが重要です。この3つの能力について、具体的に何を学び、どう身につければよいかを説明します。</p>
+                    
+                    <div style="background: linear-gradient(45deg, #f5f7fa, #c3cfe2); padding: 25px; border-radius: 15px; margin: 20px 0;">
+                        <h5 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">🎯 3つの能力タイプ習得ガイド</h5>
+                        
+                        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                            <div style="flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <h6 style="color: #e74c3c; text-align: center; margin-bottom: 15px;">📚 能力タイプ1：基礎知識</h6>
+                                <p style="font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 10px;">頭で理解する力</p>
+                                <div style="background: #fdedec; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+                                    <strong>習得内容：</strong><br>
+                                    • 調達の基本ルール<br>
+                                    • ビジネス基本知識<br>
+                                    • 法律・規制理解
+                                </div>
+                                <div style="background: #eaf2f8; padding: 8px; border-radius: 4px;">
+                                    <strong>習得方法：</strong> 研修・資格勉強・指導<br>
+                                    <strong>証明：</strong> 資格取得・テスト合格
+                                </div>
+                            </div>
+                            
+                            <div style="flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <h6 style="color: #3498db; text-align: center; margin-bottom: 15px;">⚙️ 能力タイプ2：実践スキル</h6>
+                                <p style="font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 10px;">実際にできる力</p>
+                                <div style="background: #ebf3fd; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+                                    <strong>習得内容：</strong><br>
+                                    • 分析・企画力<br>
+                                    • コミュニケーション・交渉力<br>
+                                    • ITツール活用力
+                                </div>
+                                <div style="background: #eaf2f8; padding: 8px; border-radius: 4px;">
+                                    <strong>習得方法：</strong> 実務・プロジェクト参加<br>
+                                    <strong>証明：</strong> 問題解決・業務効率化
+                                </div>
+                            </div>
+                            
+                            <div style="flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <h6 style="color: #27ae60; text-align: center; margin-bottom: 15px;">💖 能力タイプ3：人間力・マインド</h6>
+                                <p style="font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 10px;">信頼される力</p>
+                                <div style="background: #eafaf1; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+                                    <strong>習得内容：</strong><br>
+                                    • リーダーシップ・影響力<br>
+                                    • 誠実さ・プロ意識<br>
+                                    • 学習・成長姿勢
+                                </div>
+                                <div style="background: #eaf2f8; padding: 8px; border-radius: 4px;">
+                                    <strong>習得方法：</strong> 指導・フィードバック・経験<br>
+                                    <strong>証明：</strong> 信頼・貢献・成長支援
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #fff; padding: 15px; border-radius: 10px; border-left: 5px solid #f39c12;">
+                            <strong style="color: #d35400;">💡 成功のポイント：</strong> 3つの能力をバランス良く身につけることが重要です。知識だけでも、スキルだけでも、人間力だけでも調達のプロにはなれません。段階的に、継続的に、すべての能力を向上させていきましょう。
+                        </div>
+                    </div>
                     
                     <h5>能力タイプ1：基礎知識（頭で理解する力）</h5>
                     <p><strong>なぜ必要か</strong>：調達業務の基本的なルールや仕組みを知らないと、正しい判断ができない</p>
@@ -715,8 +846,77 @@ const TEXTBOOK_DATA = [
                     
                     <p><strong>どう身につけるか</strong>：先輩からの指導・周りからのフィードバック・リーダー経験 | <strong>身についた証拠</strong>：周囲からの信頼・成果への貢献・後輩の成長</p>
 
-                    <h4>成長するための4つのステップ（PDCAサイクル）</h4>
+                    <h4>🔄 成長するための4つのステップ（PDCAサイクル）</h4>
                     <p>調達のプロになるために継続的に成長していくには、「計画→実行→評価→改善」の4つのステップを繰り返すことが重要です。このサイクルを意識的に回すことで、確実にレベルアップできます。</p>
+                    
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 30px; border-radius: 20px; margin: 20px 0; color: white;">
+                        <h5 style="text-align: center; margin-bottom: 25px; color: white;">🎯 PDCAサイクルによる継続的成長モデル</h5>
+                        
+                        <div style="position: relative; display: flex; justify-content: center; margin-bottom: 25px;">
+                            <div style="background: rgba(255,255,255,0.1); border-radius: 50%; width: 300px; height: 300px; position: relative; border: 3px solid rgba(255,255,255,0.3);">
+                                <!-- PDCA Circle Visualization -->
+                                <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">P<br>計画</div>
+                                <div style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); background: #3498db; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">D<br>実行</div>
+                                <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #f39c12; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">C<br>評価</div>
+                                <div style="position: absolute; top: 50%; left: 20px; transform: translateY(-50%); background: #27ae60; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">A<br>改善</div>
+                                <!-- Arrows -->
+                                <div style="position: absolute; top: 35%; right: 35%; font-size: 24px; color: rgba(255,255,255,0.8);">→</div>
+                                <div style="position: absolute; bottom: 35%; right: 35%; font-size: 24px; color: rgba(255,255,255,0.8); transform: rotate(90deg);">→</div>
+                                <div style="position: absolute; bottom: 35%; left: 35%; font-size: 24px; color: rgba(255,255,255,0.8); transform: rotate(180deg);">→</div>
+                                <div style="position: absolute; top: 35%; left: 35%; font-size: 24px; color: rgba(255,255,255,0.8); transform: rotate(270deg);">→</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px;">
+                                <h6 style="color: #e74c3c; margin-bottom: 15px; font-size: 18px;">📋 Plan（計画）- 現状把握と目標設定</h6>
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                                    <li>自己診断でレベルチェック</li>
+                                    <li>課題の明確化</li>
+                                    <li>学習計画作成</li>
+                                    <li>学習方法の選択</li>
+                                </ul>
+                                <p style="margin-top: 10px; font-weight: bold; color: #fff3cd;">作成物：診断シート・目標・学習計画表</p>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px;">
+                                <h6 style="color: #3498db; margin-bottom: 15px; font-size: 18px;">🚀 Do（実行）- 学習と実践</h6>
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                                    <li>研修・勉強で学ぶ</li>
+                                    <li>実際の仕事で習得</li>
+                                    <li>個人的な努力</li>
+                                    <li>人脈作り・ネットワーキング</li>
+                                </ul>
+                                <p style="margin-top: 10px; font-weight: bold; color: #d4edda;">成果物：学習記録・資格・プロジェクト成果・人脈</p>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px;">
+                                <h6 style="color: #f39c12; margin-bottom: 15px; font-size: 18px;">📊 Check（評価）- 成果を確認</h6>
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                                    <li>スキルアップの確認</li>
+                                    <li>仕事での成果確認</li>
+                                    <li>周りからのフィードバック</li>
+                                    <li>投資効果の確認</li>
+                                </ul>
+                                <p style="margin-top: 10px; font-weight: bold; color: #fff3cd;">まとめ：評価結果・実績・フィードバック・効果分析</p>
+                            </div>
+                            
+                            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 10px;">
+                                <h6 style="color: #27ae60; margin-bottom: 15px; font-size: 18px;">🔧 Action（改善）- 次のサイクルへ</h6>
+                                <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                                    <li>学習方法の改善</li>
+                                    <li>新しい目標設定</li>
+                                    <li>経験を他の人と共有</li>
+                                    <li>会社の仕組み改善提案</li>
+                                </ul>
+                                <p style="margin-top: 10px; font-weight: bold; color: #d4edda;">まとめ：改善計画・次回目標・事例集</p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-top: 20px; text-align: center;">
+                            <strong>🎯 PDCAサイクルの成功ポイント：</strong> このサイクルを3-6ヶ月ごとに繰り返すことで、着実にプロフェッショナルレベルに到達できます。重要なのは継続性と客観的な評価です。
+                        </div>
+                    </div>
                     
                     <h5>ステップ1：Plan（計画）- 現状把握と目標設定</h5>
                     <p><strong>何をするか</strong>：自分の今のレベルを正確に把握し、次に目指すべき目標を決める</p>
