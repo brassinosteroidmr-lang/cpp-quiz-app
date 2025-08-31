@@ -17,3 +17,4 @@ test.html
 
 # Re-include essential markdown files (if any)
 !README.md
+"*.doc" 

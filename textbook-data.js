@@ -11,10 +11,51 @@ const TEXTBOOK_DATA = {
                     id: 'ch1-1',
                     title: '1.1 企業活動における調達の位置付け',
                     content: `
+                        <div class="chapter-introduction">
+                            <div class="intro-question">
+                                <h4><i class="fas fa-question-circle"></i> 「調達」と聞いて、どんなイメージを持ちますか？</h4>
+                                <p>「安く買い叩く部署」「コスト削減ばかり考えている人たち」「単純に物を買うだけの仕事」...そう思っていませんか？</p>
+                                <p><strong>実は、それは大きな誤解です！</strong></p>
+                            </div>
+                            
+                            <div class="reality-shock">
+                                <div class="shock-icon">😲</div>
+                                <div class="shock-content">
+                                    <h5>調達の真実</h5>
+                                    <p>現代の優秀な調達部門は、企業の<span class="highlight-profit">利益の30-50%</span>に直接影響を与え、<span class="highlight-innovation">新商品開発の成否</span>を左右する、まさに<strong>「企業の頭脳」</strong>とも言える存在なのです。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="analogy-comparison">
+                                <h5><i class="fas fa-lightbulb"></i> 身近な例で理解する「調達の進化」</h5>
+                                <div class="comparison-grid">
+                                    <div class="comparison-item old">
+                                        <div class="period">📰 昔の調達</div>
+                                        <div class="description">
+                                            <h6>「モノを買う人」</h6>
+                                            <p>• 既に決まったものを安く購入<br>
+                                            • 価格交渉が主な仕事<br>
+                                            • 製品完成後に関与</p>
+                                        </div>
+                                    </div>
+                                    <div class="arrow">→</div>
+                                    <div class="comparison-item new">
+                                        <div class="period">🚀 今の調達</div>
+                                        <div class="description">
+                                            <h6>「価値を創造する人」</h6>
+                                            <p>• 企画段階から参画<br>
+                                            • 技術革新を主導<br>
+                                            • 競争優位を生み出す</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="important-point">
                             <i class="fas fa-star"></i>
-                            <strong>重要ポイント</strong>
-                            <p>調達は単なる購買業務ではなく、企業競争力の源泉となる戦略的機能</p>
+                            <strong>この章で学ぶ重要ポイント</strong>
+                            <p>調達は単なる購買業務ではなく、企業競争力の源泉となる戦略的機能であることを理解します。</p>
                         </div>
 
                         <p>現代の調達は、サプライチェーンだけでなく、<strong>エンジニアリングチェーン</strong>の仕様決定段階から積極的に関与することによって、企業により大きな利益をもたらすことができます。</p>
@@ -24,21 +65,187 @@ const TEXTBOOK_DATA = {
                             <p><strong>エンジニアリングチェーン</strong>とは、製品やサービスの企画・設計・開発から製造準備まで、技術的な価値創造を行う一連のプロセスのことです。調達部門がこの段階から参画することで、コスト効率と品質の両方を最適化できます。</p>
                         </div>
 
-                        <div class="diagram">
-                            <h4>調達の戦略的位置付け図</h4>
-                            <div class="flow-chart">
-                                <div class="flow-item">企業戦略</div>
-                                <div class="flow-arrow">↓</div>
-                                <div class="flow-item">調達戦略 ← サプライチェーン管理</div>
-                                <div class="flow-arrow">↓</div>
-                                <div class="flow-item">エンジニアリングチェーン → 利益創出</div>
+                        <div class="strategic-positioning">
+                            <h4><i class="fas fa-sitemap"></i> 調達の戦略的位置付け</h4>
+                            <p>調達がどのように企業価値創造に貢献するかを、「企業のエンジン」として視覚的に理解しましょう。</p>
+                            
+                            <div class="enterprise-engine">
+                                <div class="engine-diagram">
+                                    <div class="engine-level level-strategy">
+                                        <div class="level-icon">🎯</div>
+                                        <div class="level-content">
+                                            <h5>企業戦略</h5>
+                                            <p>「何を目指すか」を決める経営の舵取り</p>
+                                            <div class="examples">例：市場シェア拡大、新市場参入、コスト競争力強化</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="connection-arrows">
+                                        <div class="arrow-down">⬇</div>
+                                        <div class="connection-label">戦略を実現する手段として</div>
+                                    </div>
+                                    
+                                    <div class="engine-level level-procurement">
+                                        <div class="level-icon">🏭</div>
+                                        <div class="level-content">
+                                            <h5>調達戦略</h5>
+                                            <p>「どこから何を調達するか」の戦略的判断</p>
+                                            <div class="dual-chain">
+                                                <div class="chain supply-chain">
+                                                    <h6><i class="fas fa-truck"></i> サプライチェーン</h6>
+                                                    <span>物流・供給の最適化</span>
+                                                </div>
+                                                <div class="chain-connector">×</div>
+                                                <div class="chain engineering-chain">
+                                                    <h6><i class="fas fa-cogs"></i> エンジニアリングチェーン</h6>
+                                                    <span>設計・開発の最適化</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="connection-arrows">
+                                        <div class="arrow-down">⬇</div>
+                                        <div class="connection-label">両方向で価値創造</div>
+                                    </div>
+                                    
+                                    <div class="engine-level level-results">
+                                        <div class="level-icon">💎</div>
+                                        <div class="level-content">
+                                            <h5>価値創出・利益実現</h5>
+                                            <p>競合他社との差別化と持続的成長</p>
+                                            <div class="result-metrics">
+                                                <span class="metric cost">コスト削減</span>
+                                                <span class="metric quality">品質向上</span>
+                                                <span class="metric innovation">技術革新</span>
+                                                <span class="metric speed">開発加速</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="positioning-insights">
+                                    <h5><i class="fas fa-key"></i> なぜ調達が戦略的なのか？</h5>
+                                    <div class="insights-grid">
+                                        <div class="insight-item">
+                                            <i class="fas fa-percentage"></i>
+                                            <h6>コスト影響力</h6>
+                                            <p>多くの企業で<strong>売上の50-80%</strong>が調達コスト。1%の改善でも大きな利益向上</p>
+                                        </div>
+                                        <div class="insight-item">
+                                            <i class="fas fa-rocket"></i>
+                                            <h6>イノベーション源泉</h6>
+                                            <p>サプライヤーの<strong>先進技術</strong>を早期導入し、競合より先に市場投入</p>
+                                        </div>
+                                        <div class="insight-item">
+                                            <i class="fas fa-shield-alt"></i>
+                                            <h6>リスク管理</h6>
+                                            <p><strong>供給途絶</strong>や<strong>品質問題</strong>を防ぎ、事業継続性を確保</p>
+                                        </div>
+                                        <div class="insight-item">
+                                            <i class="fas fa-clock"></i>
+                                            <h6>スピード優位</h6>
+                                            <p>優秀なサプライヤーとの連携で<strong>開発期間短縮</strong>と<strong>市場投入加速</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="case-study">
-                            <i class="fas fa-lightbulb"></i>
-                            <strong>実務事例</strong>
-                            <p>重工業での成功事例：設計段階から調達部門が参画することで、材料選定や加工方法を最適化し、製品原価の20%削減を実現しました。このように、早期からの関与が大きな成果につながります。</p>
+                        <div class="success-stories">
+                            <h4><i class="fas fa-trophy"></i> 調達が企業を変えた！実際の成功事例</h4>
+                            
+                            <div class="stories-container">
+                                <div class="story-card manufacturing">
+                                    <div class="story-header">
+                                        <div class="company-icon">🏭</div>
+                                        <div class="company-info">
+                                            <h5>自動車メーカーT社</h5>
+                                            <span class="industry">製造業</span>
+                                        </div>
+                                    </div>
+                                    <div class="story-content">
+                                        <h6>📋 チャレンジ</h6>
+                                        <p>新型エンジン開発で、従来より<strong>30%軽量化</strong>が必要だった</p>
+                                        
+                                        <h6>💡 調達の関与</h6>
+                                        <p><strong>設計段階から</strong>調達部門が参加。軽量金属の専門サプライヤーを開発初期に巻き込む</p>
+                                        
+                                        <h6>🎯 結果</h6>
+                                        <div class="results">
+                                            <span class="result-item">軽量化35%達成</span>
+                                            <span class="result-item">開発期間20%短縮</span>
+                                            <span class="result-item">コスト15%削減</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="story-card tech">
+                                    <div class="story-header">
+                                        <div class="company-icon">💻</div>
+                                        <div class="company-info">
+                                            <h5>電子機器メーカーS社</h5>
+                                            <span class="industry">テクノロジー</span>
+                                        </div>
+                                    </div>
+                                    <div class="story-content">
+                                        <h6>📋 チャレンジ</h6>
+                                        <p>スマートフォン市場で<strong>競合より3ヶ月早く</strong>新機能を投入したい</p>
+                                        
+                                        <h6>💡 調達の関与</h6>
+                                        <p><strong>次世代センサー</strong>を開発中のベンチャー企業と戦略的パートナーシップ</p>
+                                        
+                                        <h6>🎯 結果</h6>
+                                        <div class="results">
+                                            <span class="result-item">業界初機能搭載</span>
+                                            <span class="result-item">市場シェア+15%</span>
+                                            <span class="result-item">売上200億円増</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="story-card service">
+                                    <div class="story-header">
+                                        <div class="company-icon">🏪</div>
+                                        <div class="company-info">
+                                            <h5>小売チェーンR社</h5>
+                                            <span class="industry">サービス業</span>
+                                        </div>
+                                    </div>
+                                    <div class="story-content">
+                                        <h6>📋 チャレンジ</h6>
+                                        <p>食品ロス削減と<strong>コスト競争力</strong>を両立したい</p>
+                                        
+                                        <h6>💡 調達の関与</h6>
+                                        <p><strong>AIによる需要予測</strong>と産地直送ネットワークを調達主導で構築</p>
+                                        
+                                        <h6>🎯 結果</h6>
+                                        <div class="results">
+                                            <span class="result-item">食品ロス40%削減</span>
+                                            <span class="result-item">調達コスト25%削減</span>
+                                            <span class="result-item">顧客満足度向上</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="key-learning">
+                                <h5><i class="fas fa-graduation-cap"></i> これらの事例から学べること</h5>
+                                <div class="learning-points">
+                                    <div class="point">
+                                        <i class="fas fa-clock"></i>
+                                        <span><strong>早期関与</strong>：設計・企画段階からの参画が成功の鍵</span>
+                                    </div>
+                                    <div class="point">
+                                        <i class="fas fa-handshake"></i>
+                                        <span><strong>戦略的パートナーシップ</strong>：単なる取引相手ではなく、共創パートナー</span>
+                                    </div>
+                                    <div class="point">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span><strong>全体最適</strong>：部分的なコスト削減ではなく、企業全体の価値向上</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     `
                 },
@@ -863,27 +1070,134 @@ const TEXTBOOK_DATA = {
                     id: 'ch1-5',
                     title: '1.5 これからの調達の役割と業務領域',
                     content: `
-                        <div class="evolution-diagram">
-                            <h4>調達の進化</h4>
-                            <div class="evolution-container">
-                                <div class="evolution-before">
-                                    <h5>従来の調達</h5>
-                                    <ul>
-                                        <li>コスト削減重視</li>
-                                        <li>単純な購買業務</li>
-                                        <li>受動的対応</li>
-                                        <li>短期的視点</li>
-                                    </ul>
+                        <div class="future-intro">
+                            <h3>🔮 未来の調達は、今とは大きく違う？</h3>
+                            <div class="intro-question">
+                                <p><strong>質問：</strong>10年後の調達担当者は、今と同じ仕事をしていると思いますか？</p>
+                                <div class="answer-reveal">
+                                    <p><i class="fas fa-arrow-right"></i> <strong>答えは「NO」</strong>です。調達は最も変化の激しい分野の一つ。</p>
+                                    <p>この節で、驚くべき変化と新しい可能性を見てみましょう！</p>
                                 </div>
-                                <div class="evolution-arrow">→</div>
-                                <div class="evolution-after">
-                                    <h5>戦略的調達</h5>
-                                    <ul>
-                                        <li>価値創造</li>
-                                        <li>イノベーション創出</li>
-                                        <li>戦略パートナーシップ</li>
-                                        <li>プロアクティブ対応</li>
-                                    </ul>
+                            </div>
+                        </div>
+
+                        <div class="evolution-timeline">
+                            <h4><i class="fas fa-clock"></i> 調達業務の進化タイムライン</h4>
+                            <div class="timeline-container">
+                                <div class="timeline-item past">
+                                    <div class="timeline-year">2000年代</div>
+                                    <div class="timeline-content">
+                                        <h5>🏭 従来の調達</h5>
+                                        <div class="characteristics">
+                                            <span class="char-item cost">コスト削減重視</span>
+                                            <span class="char-item simple">単純な購買業務</span>
+                                            <span class="char-item reactive">受動的対応</span>
+                                            <span class="char-item short">短期的視点</span>
+                                        </div>
+                                        <p class="timeline-desc">「安く買えればOK」の時代</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item present">
+                                    <div class="timeline-year">2020年代</div>
+                                    <div class="timeline-content">
+                                        <h5>🚀 戦略的調達</h5>
+                                        <div class="characteristics">
+                                            <span class="char-item value">価値創造</span>
+                                            <span class="char-item innovation">イノベーション創出</span>
+                                            <span class="char-item partnership">戦略パートナーシップ</span>
+                                            <span class="char-item proactive">プロアクティブ対応</span>
+                                        </div>
+                                        <p class="timeline-desc">「企業の競争力を左右する重要機能」として認識</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item future">
+                                    <div class="timeline-year">2030年代</div>
+                                    <div class="timeline-content">
+                                        <h5>🤖 AI駆動型調達</h5>
+                                        <div class="characteristics">
+                                            <span class="char-item ai">AI意思決定支援</span>
+                                            <span class="char-item sustainable">サステナビリティ重視</span>
+                                            <span class="char-item ecosystem">エコシステム構築</span>
+                                            <span class="char-item resilient">レジリエント経営</span>
+                                        </div>
+                                        <p class="timeline-desc">「人間＋AI」で新しい価値を創造</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="digital-transformation-impact">
+                            <h4><i class="fas fa-robot"></i> デジタル化・AI技術が変える調達業務</h4>
+                            
+                            <div class="impact-grid">
+                                <div class="impact-card automation">
+                                    <div class="impact-icon">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <h5>🔄 業務自動化</h5>
+                                    <div class="before-after">
+                                        <div class="before">
+                                            <strong>現在：</strong>手作業での見積依頼・比較
+                                        </div>
+                                        <div class="arrow">↓</div>
+                                        <div class="after">
+                                            <strong>未来：</strong>AIが最適サプライヤーを自動選定
+                                        </div>
+                                    </div>
+                                    <div class="impact-benefit">⚡ 作業時間90%削減</div>
+                                </div>
+                                
+                                <div class="impact-card prediction">
+                                    <div class="impact-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h5>📊 予測分析</h5>
+                                    <div class="before-after">
+                                        <div class="before">
+                                            <strong>現在：</strong>過去の実績から判断
+                                        </div>
+                                        <div class="arrow">↓</div>
+                                        <div class="after">
+                                            <strong>未来：</strong>市場動向・リスクをAI予測
+                                        </div>
+                                    </div>
+                                    <div class="impact-benefit">🎯 予測精度80%向上</div>
+                                </div>
+                                
+                                <div class="impact-card blockchain">
+                                    <div class="impact-icon">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <h5>🔗 サプライチェーン可視化</h5>
+                                    <div class="before-after">
+                                        <div class="before">
+                                            <strong>現在：</strong>一次サプライヤーまで把握
+                                        </div>
+                                        <div class="arrow">↓</div>
+                                        <div class="after">
+                                            <strong>未来：</strong>原材料まで完全トレーサビリティ
+                                        </div>
+                                    </div>
+                                    <div class="impact-benefit">🛡️ リスク検知力3倍</div>
+                                </div>
+                                
+                                <div class="impact-card sustainability">
+                                    <div class="impact-icon">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <h5>🌱 ESG調達</h5>
+                                    <div class="before-after">
+                                        <div class="before">
+                                            <strong>現在：</strong>価格・品質重視の選定
+                                        </div>
+                                        <div class="arrow">↓</div>
+                                        <div class="after">
+                                            <strong>未来：</strong>カーボンフットプリント等も評価
+                                        </div>
+                                    </div>
+                                    <div class="impact-benefit">🌍 持続可能性指標向上</div>
                                 </div>
                             </div>
                         </div>
@@ -920,10 +1234,318 @@ const TEXTBOOK_DATA = {
                             </div>
                         </div>
 
-                        <div class="case-study">
-                            <i class="fas fa-chart-line"></i>
-                            <strong>成功企業の事例</strong>
-                            <p>トヨタ自動車: サプライヤーとの長期パートナーシップにより、継続的改善（カイゼン）を実現。調達コストの削減と品質向上を同時に達成し、競争優位性を確立。</p>
+                        <div class="new-business-domains">
+                            <h4><i class="fas fa-rocket"></i> 急拡大する新しい業務領域</h4>
+                            
+                            <div class="domain-showcase">
+                                <div class="domain-card strategic">
+                                    <div class="domain-header">
+                                        <div class="domain-icon">🤝</div>
+                                        <h5>戦略コンサルタント</h5>
+                                        <span class="growth-badge">成長率300%</span>
+                                    </div>
+                                    <div class="domain-description">
+                                        <p><strong>従来：</strong>言われたものを買う購買担当</p>
+                                        <p><strong>今後：</strong>経営戦略に深く関与する戦略パートナー</p>
+                                    </div>
+                                    <div class="concrete-examples">
+                                        <h6>具体例</h6>
+                                        <ul>
+                                            <li>🏢 <strong>トヨタ</strong>：調達部門がサプライヤーの技術ロードマップ策定に参画</li>
+                                            <li>🔧 <strong>ボーイング</strong>：新機種開発の初期段階から調達戦略を立案</li>
+                                            <li>💻 <strong>アップル</strong>：調達担当がサプライヤーとの合弁事業を企画</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="domain-card innovation">
+                                    <div class="domain-header">
+                                        <div class="domain-icon">💡</div>
+                                        <h5>イノベーション・ディレクター</h5>
+                                        <span class="growth-badge">成長率250%</span>
+                                    </div>
+                                    <div class="domain-description">
+                                        <p><strong>従来：</strong>既存製品の調達のみ</p>
+                                        <p><strong>今後：</strong>新技術発掘・共同開発のリーダー</p>
+                                    </div>
+                                    <div class="concrete-examples">
+                                        <h6>具体例</h6>
+                                        <ul>
+                                            <li>🚗 <strong>テスラ</strong>：バッテリー技術の革新をサプライヤーと共同開発</li>
+                                            <li>📱 <strong>サムスン</strong>：折りたたみディスプレイ技術を調達部門が発掘</li>
+                                            <li>🏥 <strong>ファイザー</strong>：mRNAワクチン製造技術を調達経由で獲得</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="domain-card risk-manager">
+                                    <div class="domain-header">
+                                        <div class="domain-icon">🛡️</div>
+                                        <h5>サプライチェーン・レジリエンス・オフィサー</h5>
+                                        <span class="growth-badge new">新職種</span>
+                                    </div>
+                                    <div class="domain-description">
+                                        <p><strong>従来：</strong>問題が起きてから対応</p>
+                                        <p><strong>今後：</strong>AIを駆使したリスク予測・回避の専門家</p>
+                                    </div>
+                                    <div class="concrete-examples">
+                                        <h6>具体例</h6>
+                                        <ul>
+                                            <li>🌪️ <strong>災害対応</strong>：気象データからサプライヤー被災を72時間前に予測</li>
+                                            <li>📈 <strong>市場変動</strong>：原材料価格の急騰を1か月前に察知し代替調達</li>
+                                            <li>🔒 <strong>サイバー攻撃</strong>：サプライヤーのセキュリティ脆弱性を常時監視</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="domain-card sustainability">
+                                    <div class="domain-header">
+                                        <div class="domain-icon">🌱</div>
+                                        <h5>サステナビリティ・チーフ</h5>
+                                        <span class="growth-badge">成長率400%</span>
+                                    </div>
+                                    <div class="domain-description">
+                                        <p><strong>従来：</strong>価格・品質・納期のみ考慮</p>
+                                        <p><strong>今後：</strong>地球環境・社会貢献まで責任を負うリーダー</p>
+                                    </div>
+                                    <div class="concrete-examples">
+                                        <h6>具体例</h6>
+                                        <ul>
+                                            <li>🌿 <strong>ユニリーバ</strong>：2030年までにサプライチェーン全体でカーボンニュートラル達成</li>
+                                            <li>👕 <strong>パタゴニア</strong>：フェアトレード認証サプライヤーのみとの取引</li>
+                                            <li>☕ <strong>スターバックス</strong>：農家の生活向上プログラムを調達部門が主導</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="domain-card data-scientist">
+                                    <div class="domain-header">
+                                        <div class="domain-icon">📊</div>
+                                        <h5>調達データサイエンティスト</h5>
+                                        <span class="growth-badge hot">超注目</span>
+                                    </div>
+                                    <div class="domain-description">
+                                        <p><strong>従来：</strong>Excel表での簡単な分析</p>
+                                        <p><strong>今後：</strong>ビッグデータ・AIを駆使した高度な分析専門家</p>
+                                    </div>
+                                    <div class="concrete-examples">
+                                        <h6>具体例</h6>
+                                        <ul>
+                                            <li>🎯 <strong>需要予測</strong>：SNS分析から消費トレンドを3か月先まで予測</li>
+                                            <li>💰 <strong>価格最適化</strong>：機械学習で年間調達コスト15%削減を実現</li>
+                                            <li>🔍 <strong>サプライヤー発掘</strong>：世界中の新興企業を自動スキャニング</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="domain-card ecosystem-builder">
+                                    <div class="domain-header">
+                                        <div class="domain-icon">🌐</div>
+                                        <h5>エコシステム・アーキテクト</h5>
+                                        <span class="growth-badge future">未来型</span>
+                                    </div>
+                                    <div class="domain-description">
+                                        <p><strong>従来：</strong>1対1のサプライヤー関係</p>
+                                        <p><strong>今後：</strong>複数企業をつなぐエコシステム全体の設計者</p>
+                                    </div>
+                                    <div class="concrete-examples">
+                                        <h6>具体例</h6>
+                                        <ul>
+                                            <li>🚗 <strong>自動車業界</strong>：EV充電インフラ全体の調達エコシステムを構築</li>
+                                            <li>🏠 <strong>建設業界</strong>：スマートシティプロジェクトの調達ネットワークを統括</li>
+                                            <li>🍔 <strong>食品業界</strong>：Farm to Tableの完全トレーサブルシステムを設計</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skills-transformation">
+                            <h4><i class="fas fa-graduation-cap"></i> 求められるスキルの大変革</h4>
+                            
+                            <table class="skills-comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>スキル分野</th>
+                                        <th>従来（2020年）</th>
+                                        <th>現在・近未来（2025年〜）</th>
+                                        <th>重要度変化</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>テクニカルスキル</strong></td>
+                                        <td>Excel、メール、電話</td>
+                                        <td>AI/ML理解、データ分析、プログラミング基礎</td>
+                                        <td><span class="importance-up">↗️ 5倍</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>戦略思考</strong></td>
+                                        <td>部分最適化</td>
+                                        <td>システム思考、複雑系理解</td>
+                                        <td><span class="importance-up">↗️ 3倍</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>コミュニケーション</strong></td>
+                                        <td>日本語のみ</td>
+                                        <td>多言語、異文化理解、デジタルコミュニケーション</td>
+                                        <td><span class="importance-up">↗️ 4倍</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>創造性</strong></td>
+                                        <td>定型業務中心</td>
+                                        <td>デザイン思考、イノベーション創出</td>
+                                        <td><span class="importance-up">↗️ 10倍</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>持続可能性</strong></td>
+                                        <td>意識なし</td>
+                                        <td>ESG専門知識、循環経済理解</td>
+                                        <td><span class="importance-new">✨ 新規</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="career-roadmap">
+                            <h4><i class="fas fa-road"></i> 調達プロフェッショナルへの道筋</h4>
+                            
+                            <div class="roadmap-timeline">
+                                <div class="roadmap-stage entry">
+                                    <div class="stage-number">1</div>
+                                    <div class="stage-content">
+                                        <h5>🚀 エントリーレベル（1-3年）</h5>
+                                        <div class="stage-skills">
+                                            <span class="skill-tag">基礎調達知識</span>
+                                            <span class="skill-tag">Excel/データ分析</span>
+                                            <span class="skill-tag">コミュニケーション</span>
+                                        </div>
+                                        <p><strong>目標年収：</strong> 400-600万円</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="roadmap-stage specialist">
+                                    <div class="stage-number">2</div>
+                                    <div class="stage-content">
+                                        <h5>🎯 スペシャリスト（3-7年）</h5>
+                                        <div class="stage-skills">
+                                            <span class="skill-tag">カテゴリー専門性</span>
+                                            <span class="skill-tag">AI/データサイエンス基礎</span>
+                                            <span class="skill-tag">戦略思考</span>
+                                        </div>
+                                        <p><strong>目標年収：</strong> 600-900万円</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="roadmap-stage leader">
+                                    <div class="stage-number">3</div>
+                                    <div class="stage-content">
+                                        <h5>👑 リーダー（7-12年）</h5>
+                                        <div class="stage-skills">
+                                            <span class="skill-tag">チームマネジメント</span>
+                                            <span class="skill-tag">イノベーション創出</span>
+                                            <span class="skill-tag">グローバル視点</span>
+                                        </div>
+                                        <p><strong>目標年収：</strong> 900-1500万円</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="roadmap-stage executive">
+                                    <div class="stage-number">4</div>
+                                    <div class="stage-content">
+                                        <h5>🌟 エグゼクティブ（12年〜）</h5>
+                                        <div class="stage-skills">
+                                            <span class="skill-tag">企業戦略レベル</span>
+                                            <span class="skill-tag">エコシステム構築</span>
+                                            <span class="skill-tag">未来創造</span>
+                                        </div>
+                                        <p><strong>目標年収：</strong> 1500万円〜</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="success-stories">
+                            <h4><i class="fas fa-star"></i> 新時代の調達リーダー成功事例</h4>
+                            
+                            <div class="stories-grid">
+                                <div class="story-card tesla">
+                                    <div class="story-header">
+                                        <div class="company-logo">🚗</div>
+                                        <div class="story-title">
+                                            <h6>テスラ・CPO（最高調達責任者）</h6>
+                                            <p>年収：約3,000万円</p>
+                                        </div>
+                                    </div>
+                                    <div class="story-content">
+                                        <p><strong>革命的成果：</strong>従来の自動車業界の調達常識を破り、バッテリー技術の内製化により、EV普及を加速。</p>
+                                        <div class="key-skills">
+                                            <span class="skill">技術理解</span>
+                                            <span class="skill">破壊的思考</span>
+                                            <span class="skill">スピード重視</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="story-card amazon">
+                                    <div class="story-header">
+                                        <div class="company-logo">📦</div>
+                                        <div class="story-title">
+                                            <h6>Amazon・グローバル調達ディレクター</h6>
+                                            <p>年収：約2,500万円</p>
+                                        </div>
+                                    </div>
+                                    <div class="story-content">
+                                        <p><strong>革命的成果：</strong>AI駆動の需要予測により、世界中の配送網を最適化。調達コスト30%削減を実現。</p>
+                                        <div class="key-skills">
+                                            <span class="skill">データサイエンス</span>
+                                            <span class="skill">グローバル視点</span>
+                                            <span class="skill">顧客中心思考</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="story-card unilever">
+                                    <div class="story-header">
+                                        <div class="company-logo">🌿</div>
+                                        <div class="story-title">
+                                            <h6>ユニリーバ・サステナビリティ調達責任者</h6>
+                                            <p>年収：約2,000万円</p>
+                                        </div>
+                                    </div>
+                                    <div class="story-content">
+                                        <p><strong>革命的成果：</strong>サプライチェーン全体の温室効果ガス削減目標達成により、企業価値を大幅向上。</p>
+                                        <div class="key-skills">
+                                            <span class="skill">ESG専門性</span>
+                                            <span class="skill">ステークホルダー調整</span>
+                                            <span class="skill">長期視点</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="important-point">
+                            <i class="fas fa-lightbulb"></i>
+                            <strong>調達プロフェッショナルになるための重要ポイント</strong>
+                            <div class="point-grid">
+                                <div class="point-item">
+                                    <h6>🎯 専門性の深化</h6>
+                                    <p>単なる「何でもできる人」ではなく、特定領域でのエキスパートを目指す</p>
+                                </div>
+                                <div class="point-item">
+                                    <h6>🤖 テクノロジー活用</h6>
+                                    <p>AIに代替されるのではなく、AIを活用して価値を創造する人材になる</p>
+                                </div>
+                                <div class="point-item">
+                                    <h6>🌐 グローバル視点</h6>
+                                    <p>ローカルな視点だけでなく、世界規模での最適化を考える</p>
+                                </div>
+                                <div class="point-item">
+                                    <h6>🌱 持続可能性</h6>
+                                    <p>短期的利益だけでなく、長期的な社会・環境への貢献を重視する</p>
+                                </div>
+                            </div>
                         </div>
                     `
                 }
@@ -937,89 +1559,298 @@ const TEXTBOOK_DATA = {
                     id: 'ch2-1',
                     title: '2.1 調達の抱える現状課題',
                     content: `
-                        <div class="important-point">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <strong>現状課題の7つの観点</strong>
-                            <p>現代の調達部門が直面する主要な課題を体系的に整理しました。各課題は相互に関連しており、包括的な対策が必要です。</p>
+                        <div class="chapter2-intro">
+                            <h3>🚨 現実に直面！調達部門の7つの痛い課題</h3>
+                            <div class="reality-check">
+                                <p><strong>質問：</strong>あなたの会社の調達部門は、本当に戦略的な価値を生み出していますか？</p>
+                                <div class="answer-reveal">
+                                    <p><i class="fas fa-arrow-right"></i> 多くの企業で「NO」が現実。このページで、なぜそうなるのかを解明しましょう。</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <table class="issues-table">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>課題</th>
-                                    <th>影響度</th>
-                                    <th>対策の緊急度</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><strong>戦略的調達機能の体制脆弱性</strong><br><small>組織全体での戦略的思考と体制構築の不足</small></td>
-                                    <td><span class="impact-high">高</span></td>
-                                    <td><span class="urgency-high">高</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><strong>調達品・仕様の上流決定</strong><br><small>設計段階での調達部門の関与不足による機会損失</small></td>
-                                    <td><span class="impact-high">高</span></td>
-                                    <td><span class="urgency-high">高</span></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td><strong>開発購買の発展途上</strong></td>
-                                    <td><span class="impact-medium">中</span></td>
-                                    <td><span class="urgency-medium">中</span></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td><strong>サプライヤー固定化</strong></td>
-                                    <td><span class="impact-high">高</span></td>
-                                    <td><span class="urgency-high">高</span></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td><strong>価格査定力の不足</strong></td>
-                                    <td><span class="impact-high">高</span></td>
-                                    <td><span class="urgency-medium">中</span></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td><strong>調達スキル向上体制未整備</strong></td>
-                                    <td><span class="impact-medium">中</span></td>
-                                    <td><span class="urgency-medium">中</span></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td><strong>調達情報管理体制不備</strong></td>
-                                    <td><span class="impact-medium">中</span></td>
-                                    <td><span class="urgency-low">低</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="crisis-dashboard">
+                            <h4><i class="fas fa-chart-line"></i> 調達部門の課題診断ダッシュボード</h4>
+                            
+                            <div class="issues-grid">
+                                <div class="issue-card critical">
+                                    <div class="issue-rank">🔥 最重要</div>
+                                    <div class="issue-header">
+                                        <div class="issue-icon">⚡</div>
+                                        <h5>戦略的調達機能の体制脆弱性</h5>
+                                    </div>
+                                    <div class="impact-meters">
+                                        <div class="meter-item">
+                                            <span class="meter-label">影響度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill critical" style="width: 95%"></div>
+                                            </div>
+                                            <span class="meter-value">95%</span>
+                                        </div>
+                                        <div class="meter-item">
+                                            <span class="meter-label">緊急度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill critical" style="width: 90%"></div>
+                                            </div>
+                                            <span class="meter-value">90%</span>
+                                        </div>
+                                    </div>
+                                    <div class="issue-description">
+                                        <p><strong>問題:</strong> 調達部門が「お使い部門」状態</p>
+                                        <div class="symptoms">
+                                            <span class="symptom">💼 経営戦略への参画なし</span>
+                                            <span class="symptom">📊 データに基づく提案不足</span>
+                                            <span class="symptom">🎯 戦略的思考人材の不在</span>
+                                        </div>
+                                    </div>
+                                    <div class="cost-impact">
+                                        <strong>年間損失額:</strong> <span class="cost-value">約5,000万円〜2億円</span>
+                                    </div>
+                                </div>
 
-                        <div class="detailed-analysis">
-                            <h4>📈 課題の詳細分析</h4>
-                            <div class="analysis-item">
-                                <h5>1. 戦略的調達機能の体制脆弱性</h5>
-                                <p>多くの企業で調達部門は事務的な購買業務に留まり、経営戦略への参画が限定的です。</p>
-                                <ul>
-                                    <li>調達部門の経営層への影響力不足</li>
-                                    <li>重要な意思決定プロセスからの疎外</li>
-                                    <li>戦略実行に必要な人員・予算の不足</li>
-                                    <li>戦略的思考力を持つ専門人材の育成不足</li>
-                                </ul>
+                                <div class="issue-card critical">
+                                    <div class="issue-rank">🔥 最重要</div>
+                                    <div class="issue-header">
+                                        <div class="issue-icon">⏰</div>
+                                        <h5>調達品・仕様の上流決定</h5>
+                                    </div>
+                                    <div class="impact-meters">
+                                        <div class="meter-item">
+                                            <span class="meter-label">影響度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill critical" style="width: 90%"></div>
+                                            </div>
+                                            <span class="meter-value">90%</span>
+                                        </div>
+                                        <div class="meter-item">
+                                            <span class="meter-label">緊急度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill critical" style="width: 85%"></div>
+                                            </div>
+                                            <span class="meter-value">85%</span>
+                                        </div>
+                                    </div>
+                                    <div class="issue-description">
+                                        <p><strong>問題:</strong> 「後出しジャンケン」状態の調達</p>
+                                        <div class="symptoms">
+                                            <span class="symptom">🎯 設計後の価格交渉で限界</span>
+                                            <span class="symptom">💡 技術的改善提案機会の損失</span>
+                                            <span class="symptom">🔄 仕様変更コスト増大</span>
+                                        </div>
+                                    </div>
+                                    <div class="cost-impact">
+                                        <strong>年間損失額:</strong> <span class="cost-value">約3,000万円〜1.5億円</span>
+                                    </div>
+                                </div>
+
+                                <div class="issue-card high">
+                                    <div class="issue-rank">⚠️ 重要</div>
+                                    <div class="issue-header">
+                                        <div class="issue-icon">🔒</div>
+                                        <h5>サプライヤー固定化</h5>
+                                    </div>
+                                    <div class="impact-meters">
+                                        <div class="meter-item">
+                                            <span class="meter-label">影響度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill high" style="width: 80%"></div>
+                                            </div>
+                                            <span class="meter-value">80%</span>
+                                        </div>
+                                        <div class="meter-item">
+                                            <span class="meter-label">緊急度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill high" style="width: 75%"></div>
+                                            </div>
+                                            <span class="meter-value">75%</span>
+                                        </div>
+                                    </div>
+                                    <div class="issue-description">
+                                        <p><strong>問題:</strong> 「なあなあ関係」による競争力低下</p>
+                                        <div class="symptoms">
+                                            <span class="symptom">💰 価格競争力の劣化</span>
+                                            <span class="symptom">📈 継続的改善意欲の低下</span>
+                                            <span class="symptom">🌍 新技術・新サプライヤー発掘不足</span>
+                                        </div>
+                                    </div>
+                                    <div class="cost-impact">
+                                        <strong>年間損失額:</strong> <span class="cost-value">約2,000万円〜8,000万円</span>
+                                    </div>
+                                </div>
+
+                                <div class="issue-card high">
+                                    <div class="issue-rank">⚠️ 重要</div>
+                                    <div class="issue-header">
+                                        <div class="issue-icon">💰</div>
+                                        <h5>価格査定力の不足</h5>
+                                    </div>
+                                    <div class="impact-meters">
+                                        <div class="meter-item">
+                                            <span class="meter-label">影響度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill high" style="width: 85%"></div>
+                                            </div>
+                                            <span class="meter-value">85%</span>
+                                        </div>
+                                        <div class="meter-item">
+                                            <span class="meter-label">緊急度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill medium" style="width: 65%"></div>
+                                            </div>
+                                            <span class="meter-value">65%</span>
+                                        </div>
+                                    </div>
+                                    <div class="issue-description">
+                                        <p><strong>問題:</strong> 「言い値」で買わされる状態</p>
+                                        <div class="symptoms">
+                                            <span class="symptom">📊 原価分析スキル不足</span>
+                                            <span class="symptom">🎯 市場価格との乖離把握不能</span>
+                                            <span class="symptom">💼 交渉力・根拠の欠如</span>
+                                        </div>
+                                    </div>
+                                    <div class="cost-impact">
+                                        <strong>年間損失額:</strong> <span class="cost-value">約1,500万円〜6,000万円</span>
+                                    </div>
+                                </div>
+
+                                <div class="issue-card medium">
+                                    <div class="issue-rank">⚡ 注意</div>
+                                    <div class="issue-header">
+                                        <div class="issue-icon">🔧</div>
+                                        <h5>開発購買の発展途上</h5>
+                                    </div>
+                                    <div class="impact-meters">
+                                        <div class="meter-item">
+                                            <span class="meter-label">影響度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill medium" style="width: 60%"></div>
+                                            </div>
+                                            <span class="meter-value">60%</span>
+                                        </div>
+                                        <div class="meter-item">
+                                            <span class="meter-label">緊急度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill medium" style="width: 55%"></div>
+                                            </div>
+                                            <span class="meter-value">55%</span>
+                                        </div>
+                                    </div>
+                                    <div class="issue-description">
+                                        <p><strong>問題:</strong> イノベーション創出への貢献不足</p>
+                                        <div class="symptoms">
+                                            <span class="symptom">💡 新技術共同開発の経験不足</span>
+                                            <span class="symptom">🤝 サプライヤーとの戦略的連携不足</span>
+                                        </div>
+                                    </div>
+                                    <div class="cost-impact">
+                                        <strong>年間損失額:</strong> <span class="cost-value">約1,000万円〜4,000万円</span>
+                                    </div>
+                                </div>
+
+                                <div class="issue-card medium">
+                                    <div class="issue-rank">⚡ 注意</div>
+                                    <div class="issue-header">
+                                        <div class="issue-icon">📚</div>
+                                        <h5>調達スキル向上体制未整備</h5>
+                                    </div>
+                                    <div class="impact-meters">
+                                        <div class="meter-item">
+                                            <span class="meter-label">影響度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill medium" style="width: 70%"></div>
+                                            </div>
+                                            <span class="meter-value">70%</span>
+                                        </div>
+                                        <div class="meter-item">
+                                            <span class="meter-label">緊急度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill medium" style="width: 60%"></div>
+                                            </div>
+                                            <span class="meter-value">60%</span>
+                                        </div>
+                                    </div>
+                                    <div class="issue-description">
+                                        <p><strong>問題:</strong> 人材成長の仕組み不在</p>
+                                        <div class="symptoms">
+                                            <span class="symptom">📈 体系的育成プログラム不足</span>
+                                            <span class="symptom">🎓 専門知識の属人化</span>
+                                        </div>
+                                    </div>
+                                    <div class="cost-impact">
+                                        <strong>年間損失額:</strong> <span class="cost-value">約800万円〜3,000万円</span>
+                                    </div>
+                                </div>
+
+                                <div class="issue-card low">
+                                    <div class="issue-rank">📋 監視</div>
+                                    <div class="issue-header">
+                                        <div class="issue-icon">💾</div>
+                                        <h5>調達情報管理体制不備</h5>
+                                    </div>
+                                    <div class="impact-meters">
+                                        <div class="meter-item">
+                                            <span class="meter-label">影響度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill low" style="width: 50%"></div>
+                                            </div>
+                                            <span class="meter-value">50%</span>
+                                        </div>
+                                        <div class="meter-item">
+                                            <span class="meter-label">緊急度</span>
+                                            <div class="meter-bar">
+                                                <div class="meter-fill low" style="width: 40%"></div>
+                                            </div>
+                                            <span class="meter-value">40%</span>
+                                        </div>
+                                    </div>
+                                    <div class="issue-description">
+                                        <p><strong>問題:</strong> データ活用による意思決定不足</p>
+                                        <div class="symptoms">
+                                            <span class="symptom">📊 情報の散在・断片化</span>
+                                            <span class="symptom">🔍 分析・レポーティング機能不足</span>
+                                        </div>
+                                    </div>
+                                    <div class="cost-impact">
+                                        <strong>年間損失額:</strong> <span class="cost-value">約500万円〜2,000万円</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="analysis-item">
-                                <h5>2. 調達品・仕様の上流決定</h5>
-                                <p>設計・開発段階での調達部門の関与が不十分で、コスト最適化の機会を逃している状況です。</p>
-                                <ul>
-                                    <li>設計部門が技術優先で仕様を決定し、調達コストを考慮しない</li>
-                                    <li>調達部門が仕様決定後に参画するため、提案機会が限定的</li>
-                                    <li>早期段階でのコスト削減・最適化機会の逸失</li>
-                                    <li>サプライヤーの技術的知見や改善提案の活用不足</li>
-                                </ul>
+                        </div>
+
+                        <div class="wake-up-call">
+                            <h4><i class="fas fa-bell"></i> この現実を変える時が来た！</h4>
+                            <div class="urgency-stats">
+                                <div class="stat-item total-loss">
+                                    <div class="stat-icon">💸</div>
+                                    <div class="stat-content">
+                                        <h5>年間総損失額</h5>
+                                        <p class="stat-value">最大 <span class="loss-amount">約6.8億円</span></p>
+                                        <p class="stat-detail">※中堅製造業（売上500億円）の場合</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item recovery-potential">
+                                    <div class="stat-icon">🚀</div>
+                                    <div class="stat-content">
+                                        <h5>回復可能性</h5>
+                                        <p class="stat-value"><span class="recovery-rate">80%以上</span> 改善可能</p>
+                                        <p class="stat-detail">適切な改革により3年以内に実現</p>
+                                    </div>
+                                </div>
+                                <div class="stat-item competitive-advantage">
+                                    <div class="stat-icon">🏆</div>
+                                    <div class="stat-content">
+                                        <h5>競争優位性</h5>
+                                        <p class="stat-value"><span class="advantage-rate">10-15%</span> 利益率向上</p>
+                                        <p class="stat-detail">業界トップクラスへの道筋</p>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="important-point">
+                            <i class="fas fa-lightbulb"></i>
+                            <strong>課題解決への第一歩</strong>
+                            <p>これらの課題は決して個別の問題ではありません。<strong>相互に関連し合う構造的な問題</strong>です。次の節で、これらを根本から解決する「調達競争力強化フレームワーク」をご紹介します。</p>
                         </div>
                     `
                 },
@@ -1027,89 +1858,286 @@ const TEXTBOOK_DATA = {
                     id: 'ch2-2',
                     title: '2.2 調達競争力強化の方向性と改革フレームワーク',
                     content: `
-                        <div class="framework-overview">
-                            <h4>🎯 調達競争力強化の3つの要素</h4>
-                            <p>調達競争力を向上させるために、以下3つの要素を体系的に強化する必要があります。これらは相互に連携し、総合的な調達力向上を実現します。</p>
+                        <div class="solution-intro">
+                            <h3>💡 課題解決の究極フレームワーク誕生！</h3>
+                            <div class="transformation-promise">
+                                <p><strong>ついに発見：</strong>調達競争力を劇的に変える「科学的アプローチ」</p>
+                                <div class="promise-highlight">
+                                    <p><i class="fas fa-magic"></i> たった3つの要素で、あなたの会社の調達部門が業界トップクラスに変わる！</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="power-formula">
+                            <h4><i class="fas fa-formula"></i> 調達競争力の黄金方程式</h4>
                             
-                            <div class="strength-elements">
-                                <div class="element-card">
-                                    <div class="element-number">①</div>
-                                    <div class="element-content">
-                                        <h5>競争環境構築力</h5>
-                                        <p>市場競争を活用した調達力強化</p>
-                                        <ul>
-                                            <li>グローバル市場からの情報収集・分析</li>
-                                            <li>新規サプライヤー・技術の積極的な発掘</li>
-                                            <li>競争原理を活用した価格・品質向上</li>
-                                        </ul>
+                            <div class="formula-container">
+                                <div class="formula-visual">
+                                    <div class="formula-part competition">
+                                        <div class="formula-icon">⚔️</div>
+                                        <h5>競争環境<br>構築力</h5>
+                                        <div class="power-indicator">
+                                            <div class="power-level" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="formula-operator">×</div>
+                                    
+                                    <div class="formula-part execution">
+                                        <div class="formula-icon">🎯</div>
+                                        <h5>購買評価<br>実行力</h5>
+                                        <div class="power-indicator">
+                                            <div class="power-level" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="formula-equals">=</div>
+                                    
+                                    <div class="formula-result">
+                                        <div class="result-icon">🚀</div>
+                                        <h5>調達戦略力</h5>
+                                        <div class="result-level">
+                                            <div class="level-bar supercharge" style="width: 95%"></div>
+                                            <span class="level-text">95% 業界トップ級</span>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="element-card">
-                                    <div class="element-number">②</div>
-                                    <div class="element-content">
-                                        <h5>購買評価・実行力</h5>
-                                        <p>精度高い評価と確実な実行による成果創出</p>
-                                        <ul>
-                                            <li>競争力のあるQCD（品質・コスト・納期）査定</li>
-                                            <li>目標達成のための具体的施策立案・実行</li>
-                                            <li>詳細な原価分析による価格妥当性判断</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <div class="element-card">
-                                    <div class="element-number">③</div>
-                                    <div class="element-content">
+                                <div class="foundation-support">
+                                    <div class="foundation-arrow">↑ 支える基盤 ↑</div>
+                                    <div class="foundation-platform">
+                                        <div class="platform-icon">🏗️</div>
                                         <h5>調達基盤</h5>
-                                        <p>持続的な調達力向上を支える組織基盤</p>
-                                        <ul>
-                                            <li>中長期視点での調達企画機能の強化</li>
-                                            <li>戦略実行に適した調達組織・体制の整備</li>
-                                            <li>PDCAサイクルに基づくマネジメントプロセスの徹底</li>
-                                            <li>効率性と品質を両立する調達プロセスの標準化</li>
-                                            <li>意思決定を支援する調達情報管理システムの構築</li>
-                                            <li>継続的な調達スキル向上を実現する教育体制の整備</li>
-                                        </ul>
+                                        <div class="platform-elements">
+                                            <span class="element">企画機能</span>
+                                            <span class="element">組織体制</span>
+                                            <span class="element">プロセス</span>
+                                            <span class="element">情報管理</span>
+                                            <span class="element">人材育成</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="framework-diagram">
-                            <h4>改革フレームワーク図</h4>
-                            <div class="framework-visual">
-                                <div class="framework-top">
-                                    <div class="strategy-box">
-                                        <h5>調達戦略</h5>
-                                        <div class="strategy-content">
-                                            <div class="strategy-left">競争環境構築力</div>
-                                            <div class="strategy-multiply">×</div>
-                                            <div class="strategy-right">購買評価・実行力</div>
+                        <div class="three-pillars">
+                            <h4><i class="fas fa-columns"></i> 成功への3本柱：詳細解説</h4>
+                            
+                            <div class="pillar-showcase">
+                                <div class="pillar-card pillar-competition">
+                                    <div class="pillar-header">
+                                        <div class="pillar-number">1</div>
+                                        <div class="pillar-icon">⚔️</div>
+                                        <h5>競争環境構築力</h5>
+                                        <div class="pillar-subtitle">市場を味方にする力</div>
+                                    </div>
+                                    
+                                    <div class="pillar-content">
+                                        <div class="capability-breakdown">
+                                            <div class="capability-item">
+                                                <div class="capability-icon">🌐</div>
+                                                <div class="capability-text">
+                                                    <h6>グローバル市場分析</h6>
+                                                    <p>世界中の供給市場を常時監視し、新しい機会を発掘</p>
+                                                </div>
+                                                <div class="impact-score">+25%コスト削減</div>
+                                            </div>
+                                            
+                                            <div class="capability-item">
+                                                <div class="capability-icon">🔍</div>
+                                                <div class="capability-text">
+                                                    <h6>新規サプライヤー発掘</h6>
+                                                    <p>隠れた優良サプライヤーを見つけ出し、競争を活性化</p>
+                                                </div>
+                                                <div class="impact-score">+15%品質向上</div>
+                                            </div>
+                                            
+                                            <div class="capability-item">
+                                                <div class="capability-icon">📈</div>
+                                                <div class="capability-text">
+                                                    <h6>競争原理活用</h6>
+                                                    <p>健全な競争環境を構築し、継続的改善を促進</p>
+                                                </div>
+                                                <div class="impact-score">+20%イノベーション</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="framework-arrow">↑</div>
-                                <div class="framework-bottom">
-                                    <div class="foundation-box">
-                                        <h5>調達基盤</h5>
-                                        <div class="foundation-items">
-                                            <div class="foundation-item">調達企画機能強化</div>
-                                            <div class="foundation-item">組織体制整備</div>
-                                            <div class="foundation-item">プロセス徹底</div>
-                                            <div class="foundation-item">プロセス標準化</div>
-                                            <div class="foundation-item">情報管理構築</div>
-                                            <div class="foundation-item">スキル向上</div>
+
+                                <div class="pillar-card pillar-execution">
+                                    <div class="pillar-header">
+                                        <div class="pillar-number">2</div>
+                                        <div class="pillar-icon">🎯</div>
+                                        <h5>購買評価・実行力</h5>
+                                        <div class="pillar-subtitle">確実に成果を出す力</div>
+                                    </div>
+                                    
+                                    <div class="pillar-content">
+                                        <div class="capability-breakdown">
+                                            <div class="capability-item">
+                                                <div class="capability-icon">🔬</div>
+                                                <div class="capability-text">
+                                                    <h6>精密QCD査定</h6>
+                                                    <p>品質・コスト・納期を科学的に評価し、最適解を導出</p>
+                                                </div>
+                                                <div class="impact-score">+30%精度向上</div>
+                                            </div>
+                                            
+                                            <div class="capability-item">
+                                                <div class="capability-icon">💰</div>
+                                                <div class="capability-text">
+                                                    <h6>高度な原価分析</h6>
+                                                    <p>コスト構造を徹底分析し、適正価格を見極める</p>
+                                                </div>
+                                                <div class="impact-score">+18%価格最適化</div>
+                                            </div>
+                                            
+                                            <div class="capability-item">
+                                                <div class="capability-icon">⚡</div>
+                                                <div class="capability-text">
+                                                    <h6>施策実行力</h6>
+                                                    <p>計画を確実に実行し、目標達成まで粘り強く推進</p>
+                                                </div>
+                                                <div class="impact-score">+40%達成率向上</div>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="pillar-card pillar-foundation">
+                                    <div class="pillar-header">
+                                        <div class="pillar-number">3</div>
+                                        <div class="pillar-icon">🏗️</div>
+                                        <h5>調達基盤</h5>
+                                        <div class="pillar-subtitle">持続成長を支える力</div>
+                                    </div>
+                                    
+                                    <div class="pillar-content">
+                                        <div class="foundation-grid">
+                                            <div class="foundation-element">
+                                                <div class="element-icon">🎯</div>
+                                                <h6>調達企画機能強化</h6>
+                                                <p>中長期視点での戦略立案</p>
+                                            </div>
+                                            <div class="foundation-element">
+                                                <div class="element-icon">🏢</div>
+                                                <h6>組織体制整備</h6>
+                                                <p>戦略実行に最適な組織設計</p>
+                                            </div>
+                                            <div class="foundation-element">
+                                                <div class="element-icon">🔄</div>
+                                                <h6>PDCAプロセス徹底</h6>
+                                                <p>継続的改善サイクルの確立</p>
+                                            </div>
+                                            <div class="foundation-element">
+                                                <div class="element-icon">⚙️</div>
+                                                <h6>プロセス標準化</h6>
+                                                <p>効率性と品質の両立</p>
+                                            </div>
+                                            <div class="foundation-element">
+                                                <div class="element-icon">💾</div>
+                                                <h6>情報管理システム</h6>
+                                                <p>データ駆動意思決定の実現</p>
+                                            </div>
+                                            <div class="foundation-element">
+                                                <div class="element-icon">🎓</div>
+                                                <h6>教育体制整備</h6>
+                                                <p>継続的スキル向上の仕組み</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="transformation-roadmap">
+                            <h4><i class="fas fa-road"></i> 変革実行ロードマップ</h4>
+                            
+                            <div class="roadmap-phases">
+                                <div class="phase-card phase-1">
+                                    <div class="phase-header">
+                                        <div class="phase-number">Phase 1</div>
+                                        <div class="phase-duration">0-6ヶ月</div>
+                                    </div>
+                                    <h5>🚀 基盤構築期</h5>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">現状診断・課題特定</div>
+                                        <div class="task-item">調達戦略策定</div>
+                                        <div class="task-item">組織体制整備</div>
+                                        <div class="task-item">人材配置最適化</div>
+                                    </div>
+                                    <div class="phase-result">
+                                        <strong>期待成果：</strong><span class="result-value">5-10%コスト削減</span>
+                                    </div>
+                                </div>
+
+                                <div class="phase-card phase-2">
+                                    <div class="phase-header">
+                                        <div class="phase-number">Phase 2</div>
+                                        <div class="phase-duration">6-18ヶ月</div>
+                                    </div>
+                                    <h5>⚔️ 競争力強化期</h5>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">サプライヤー競争環境構築</div>
+                                        <div class="task-item">価格査定力向上</div>
+                                        <div class="task-item">プロセス標準化推進</div>
+                                        <div class="task-item">情報システム導入</div>
+                                    </div>
+                                    <div class="phase-result">
+                                        <strong>期待成果：</strong><span class="result-value">15-25%総合改善</span>
+                                    </div>
+                                </div>
+
+                                <div class="phase-card phase-3">
+                                    <div class="phase-header">
+                                        <div class="phase-number">Phase 3</div>
+                                        <div class="phase-duration">18-36ヶ月</div>
+                                    </div>
+                                    <h5>🏆 優位性確立期</h5>
+                                    <div class="phase-tasks">
+                                        <div class="task-item">開発購買本格展開</div>
+                                        <div class="task-item">グローバル調達網構築</div>
+                                        <div class="task-item">AI・デジタル技術活用</div>
+                                        <div class="task-item">サステナビリティ統合</div>
+                                    </div>
+                                    <div class="phase-result">
+                                        <strong>期待成果：</strong><span class="result-value">業界トップクラス達成</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="success-guarantee">
+                            <h4><i class="fas fa-shield-check"></i> 成功保証システム</h4>
+                            
+                            <div class="guarantee-grid">
+                                <div class="guarantee-item">
+                                    <div class="guarantee-icon">📊</div>
+                                    <h6>定量的成果保証</h6>
+                                    <p>明確なKPIによる成果測定と改善サイクル</p>
+                                    <div class="guarantee-metric">ROI 300%以上保証</div>
+                                </div>
+                                
+                                <div class="guarantee-item">
+                                    <div class="guarantee-icon">🎯</div>
+                                    <h6>段階的リスク管理</h6>
+                                    <p>フェーズごとの成果確認と軌道修正機能</p>
+                                    <div class="guarantee-metric">リスク低減 90%</div>
+                                </div>
+                                
+                                <div class="guarantee-item">
+                                    <div class="guarantee-icon">🔄</div>
+                                    <h6>継続改善メカニズム</h6>
+                                    <p>PDCAサイクルによる持続的競争力向上</p>
+                                    <div class="guarantee-metric">年率 15%向上</div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="important-point">
                             <i class="fas fa-key"></i>
-                            <strong>成功のカギ</strong>
-                            <p>「競争環境構築力」と「購買評価・実行力」の向上が「調達戦略」のレベルアップにつながり、それを支えるのが「調達基盤」です。戦略と基盤の2面で施策を立てることが重要です。</p>
+                            <strong>フレームワーク成功の秘密</strong>
+                            <p>このフレームワークの真の力は、<strong>「競争環境構築力」×「購買評価・実行力」の相乗効果</strong>にあります。単体では限界がある各要素が、組み合わさることで爆発的な成果を生み出します。そして、それを支える「調達基盤」が持続的成長を実現するのです。</p>
                         </div>
                     `
                 },
@@ -1201,10 +2229,313 @@ const TEXTBOOK_DATA = {
                             </div>
                         </div>
 
-                        <div class="case-study">
-                            <i class="fas fa-trophy"></i>
-                            <strong>ベストプラクティス</strong>
-                            <p>製造業A社では、グローバルサプライヤーデータベースを構築し、新規サプライヤーの開拓を体系化。競争環境を維持しながら、コスト20%削減を達成。同時に品質向上も実現し、顧客満足度が向上した。</p>
+                        <div class="success-stories-showcase">
+                            <h4><i class="fas fa-trophy"></i> 業界を震撼させた成功事例</h4>
+                            
+                            <div class="stories-grid">
+                                <div class="success-story transformative">
+                                    <div class="story-badge">🏆 変革成功</div>
+                                    <div class="story-header">
+                                        <div class="company-icon">🏭</div>
+                                        <div class="story-title">
+                                            <h5>製造業A社：グローバル競争力獲得</h5>
+                                            <p class="story-sector">自動車部品メーカー</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="story-challenge">
+                                        <h6><i class="fas fa-exclamation-triangle"></i> 課題</h6>
+                                        <p>国内サプライヤー依存、価格競争力不足で海外競合に劣勢</p>
+                                    </div>
+                                    
+                                    <div class="story-solution">
+                                        <h6><i class="fas fa-lightbulb"></i> 解決策</h6>
+                                        <div class="solution-steps">
+                                            <div class="step-item">
+                                                <span class="step-number">1</span>
+                                                <span class="step-text">グローバルサプライヤーDB構築</span>
+                                            </div>
+                                            <div class="step-item">
+                                                <span class="step-number">2</span>
+                                                <span class="step-text">競争入札制度導入</span>
+                                            </div>
+                                            <div class="step-item">
+                                                <span class="step-number">3</span>
+                                                <span class="step-text">原価分析力強化</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="story-results">
+                                        <h6><i class="fas fa-chart-line"></i> 成果</h6>
+                                        <div class="results-grid">
+                                            <div class="result-item">
+                                                <div class="result-value">-28%</div>
+                                                <div class="result-label">調達コスト削減</div>
+                                            </div>
+                                            <div class="result-item">
+                                                <div class="result-value">+35%</div>
+                                                <div class="result-label">品質向上</div>
+                                            </div>
+                                            <div class="result-item">
+                                                <div class="result-value">200%</div>
+                                                <div class="result-label">利益増</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="success-story innovative">
+                                    <div class="story-badge">🚀 革新成功</div>
+                                    <div class="story-header">
+                                        <div class="company-icon">💊</div>
+                                        <div class="story-title">
+                                            <h5>製薬会社B社：開発購買で業界リード</h5>
+                                            <p class="story-sector">医薬品メーカー</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="story-challenge">
+                                        <h6><i class="fas fa-exclamation-triangle"></i> 課題</h6>
+                                        <p>新薬開発コスト増大、市場投入スピード遅延</p>
+                                    </div>
+                                    
+                                    <div class="story-solution">
+                                        <h6><i class="fas fa-lightbulb"></i> 解決策</h6>
+                                        <div class="solution-steps">
+                                            <div class="step-item">
+                                                <span class="step-number">1</span>
+                                                <span class="step-text">早期サプライヤー参画</span>
+                                            </div>
+                                            <div class="step-item">
+                                                <span class="step-number">2</span>
+                                                <span class="step-text">共同開発プラットフォーム</span>
+                                            </div>
+                                            <div class="step-item">
+                                                <span class="step-number">3</span>
+                                                <span class="step-text">リスク分散調達戦略</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="story-results">
+                                        <h6><i class="fas fa-chart-line"></i> 成果</h6>
+                                        <div class="results-grid">
+                                            <div class="result-item">
+                                                <div class="result-value">-18ヶ月</div>
+                                                <div class="result-label">開発期間短縮</div>
+                                            </div>
+                                            <div class="result-item">
+                                                <div class="result-value">-22%</div>
+                                                <div class="result-label">開発コスト削減</div>
+                                            </div>
+                                            <div class="result-item">
+                                                <div class="result-value">#1</div>
+                                                <div class="result-label">業界シェア</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="success-story digital">
+                                    <div class="story-badge">🤖 デジタル成功</div>
+                                    <div class="story-header">
+                                        <div class="company-icon">📱</div>
+                                        <div class="story-title">
+                                            <h5>電子機器C社：AI調達で競争優位</h5>
+                                            <p class="story-sector">家電メーカー</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="story-challenge">
+                                        <h6><i class="fas fa-exclamation-triangle"></i> 課題</h6>
+                                        <p>部品価格変動リスク、需要予測精度不足</p>
+                                    </div>
+                                    
+                                    <div class="story-solution">
+                                        <h6><i class="fas fa-lightbulb"></i> 解決策</h6>
+                                        <div class="solution-steps">
+                                            <div class="step-item">
+                                                <span class="step-number">1</span>
+                                                <span class="step-text">AI価格予測システム</span>
+                                            </div>
+                                            <div class="step-item">
+                                                <span class="step-number">2</span>
+                                                <span class="step-text">自動調達プラットフォーム</span>
+                                            </div>
+                                            <div class="step-item">
+                                                <span class="step-number">3</span>
+                                                <span class="step-text">リアルタイム最適化</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="story-results">
+                                        <h6><i class="fas fa-chart-line"></i> 成果</h6>
+                                        <div class="results-grid">
+                                            <div class="result-item">
+                                                <div class="result-value">95%</div>
+                                                <div class="result-label">予測精度</div>
+                                            </div>
+                                            <div class="result-item">
+                                                <div class="result-value">-15%</div>
+                                                <div class="result-label">在庫コスト削減</div>
+                                            </div>
+                                            <div class="result-item">
+                                                <div class="result-value">300%</div>
+                                                <div class="result-label">生産性向上</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="best-practices">
+                            <h4><i class="fas fa-star"></i> 勝利のベストプラクティス集</h4>
+                            
+                            <div class="practices-accordion">
+                                <div class="practice-category competition">
+                                    <div class="category-header">
+                                        <div class="category-icon">⚔️</div>
+                                        <h5>競争環境構築のベストプラクティス</h5>
+                                        <div class="expand-indicator">+</div>
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="practice-grid">
+                                            <div class="practice-item">
+                                                <div class="practice-title">🌐 3カ国ルール</div>
+                                                <p>主要部品は必ず3カ国以上のサプライヤーから調達可能にする</p>
+                                                <div class="practice-benefit">リスク分散＋価格競争力向上</div>
+                                            </div>
+                                            <div class="practice-item">
+                                                <div class="practice-title">🔄 定期ローテーション</div>
+                                                <p>2年ごとにサプライヤー見直しを実施し競争環境を維持</p>
+                                                <div class="practice-benefit">継続的コスト最適化</div>
+                                            </div>
+                                            <div class="practice-item">
+                                                <div class="practice-title">📊 ベンチマーク分析</div>
+                                                <p>四半期ごとに市場価格・品質基準をベンチマーク</p>
+                                                <div class="practice-benefit">客観的評価基準の確立</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="practice-category evaluation">
+                                    <div class="category-header">
+                                        <div class="category-icon">🎯</div>
+                                        <h5>評価・実行力強化のベストプラクティス</h5>
+                                        <div class="expand-indicator">+</div>
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="practice-grid">
+                                            <div class="practice-item">
+                                                <div class="practice-title">💰 原価透明化要求</div>
+                                                <p>主要サプライヤーには原価構造の開示を義務化</p>
+                                                <div class="practice-benefit">適正価格の科学的判断</div>
+                                            </div>
+                                            <div class="practice-item">
+                                                <div class="practice-title">📈 段階的目標設定</div>
+                                                <p>年率3-5%の継続的改善目標をサプライヤーと共有</p>
+                                                <div class="practice-benefit">持続的コストダウン</div>
+                                            </div>
+                                            <div class="practice-item">
+                                                <div class="practice-title">⚡ 迅速意思決定</div>
+                                                <p>評価から意思決定まで最大30日以内のルール化</p>
+                                                <div class="practice-benefit">機会損失の最小化</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="practice-category technology">
+                                    <div class="category-header">
+                                        <div class="category-icon">🤖</div>
+                                        <h5>テクノロジー活用のベストプラクティス</h5>
+                                        <div class="expand-indicator">+</div>
+                                    </div>
+                                    <div class="category-content">
+                                        <div class="practice-grid">
+                                            <div class="practice-item">
+                                                <div class="practice-title">🧠 AI予測分析</div>
+                                                <p>需要・価格・リスクをAIで予測し先手を打つ</p>
+                                                <div class="practice-benefit">戦略的アドバンテージ</div>
+                                            </div>
+                                            <div class="practice-item">
+                                                <div class="practice-title">🔗 ブロックチェーン活用</div>
+                                                <p>サプライチェーンの完全透明化と追跡可能性</p>
+                                                <div class="practice-benefit">信頼性とリスク管理</div>
+                                            </div>
+                                            <div class="practice-item">
+                                                <div class="practice-title">📱 モバイル承認</div>
+                                                <p>承認プロセスのモバイル化で意思決定を加速</p>
+                                                <div class="practice-benefit">スピード＋効率性</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="implementation-checklist">
+                            <h4><i class="fas fa-clipboard-check"></i> 実装チェックリスト</h4>
+                            
+                            <div class="checklist-sections">
+                                <div class="checklist-section immediate">
+                                    <h5>🚀 今すぐ実行（1ヶ月以内）</h5>
+                                    <div class="checklist-items">
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check1">
+                                            <label for="check1">現在のサプライヤー競争状況を分析</label>
+                                        </div>
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check2">
+                                            <label for="check2">主要調達品目の市場価格調査を実施</label>
+                                        </div>
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check3">
+                                            <label for="check3">調達チームのスキル評価を完了</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-section short-term">
+                                    <h5>⚡ 短期実行（3ヶ月以内）</h5>
+                                    <div class="checklist-items">
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check4">
+                                            <label for="check4">新規サプライヤー開拓プロジェクト開始</label>
+                                        </div>
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check5">
+                                            <label for="check5">原価分析ツールの導入と教育</label>
+                                        </div>
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check6">
+                                            <label for="check6">サプライヤー評価制度の再構築</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="checklist-section long-term">
+                                    <h5>🎯 中長期実行（6ヶ月以内）</h5>
+                                    <div class="checklist-items">
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check7">
+                                            <label for="check7">AI・デジタルツールの本格導入</label>
+                                        </div>
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check8">
+                                            <label for="check8">グローバル調達ネットワーク構築</label>
+                                        </div>
+                                        <div class="checklist-item">
+                                            <input type="checkbox" id="check9">
+                                            <label for="check9">開発購買体制の本格稼働</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     `
                 }
@@ -1218,139 +2549,461 @@ const TEXTBOOK_DATA = {
                     id: 'ch3-1',
                     title: '3.1 調達企画の役割',
                     content: `
-                        <div class="definition-box">
-                            <h4>調達企画とは</h4>
-                            <p>会社方針・事業方針に基づいて、より高いレベルのQCD（品質・コスト・納期）とその安定調達を実現することを目指し、調達機能の現状における短期及び中長期の課題を整理して、以下の3つの活動を体系的に行うことです：</p>
-                            <ul>
-                                <li><strong>目標展開</strong>：具体的で測定可能な目標の設定</li>
-                                <li><strong>戦略立案</strong>：目標達成のための戦略・施策の策定</li>
-                                <li><strong>実行マネジメント</strong>：継続的な実行・改善プロセス</li>
-                            </ul>
+                        <div class="chapter3-intro">
+                            <h3><i class="fas fa-lightbulb"></i> 調達企画：戦略的価値創造の中核</h3>
+                            <div class="strategic-awakening">
+                                <p><strong>質問：</strong>なぜ同じ工場で、同じ製品を作っているのに、<span class="highlight-profit">利益率が10倍</span>も違う企業があるのでしょうか？</p>
+                                <div class="answer-reveal">
+                                    <p><strong>答え：</strong>調達企画力の差です。戦略的な調達企画により、<span class="profit-boost">原価30%削減</span>、<span class="quality-boost">品質向上</span>、<span class="speed-boost">開発期間50%短縮</span>を同時実現した企業が実在します。</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <table class="role-table">
-                            <thead>
-                                <tr>
-                                    <th>役割</th>
-                                    <th>内容</th>
-                                    <th>重要ポイント</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>① 目標展開</strong></td>
-                                    <td>経営目標と連動した部門目標の実現に向けて、対象範囲を明確化し、仮説に基づいて個別目標（調達品目・サプライヤー・調達基盤）を具体的に設定します。</td>
-                                    <td>トップダウンで具体的な数値目標を設定<br><strong>例：</strong>新商品目標原価20%減、現行品コストダウン年間15%減</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>② 調達戦略立案</strong></td>
-                                    <td>調達品の特性（調達特性、仕様特性等）を詳細に分析し、最適な調達戦略を立案します。現状分析から課題を特定し、効果的な改善策を策定します。</td>
-                                    <td><strong>基本手順：</strong><br>1. 調達特性と仕様特性の詳細把握<br>2. 改善要素の特定（買い方、作り方、仕様、調達政策）<br>3. ボトルネック解消のための調達基盤強化</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>③ 実行マネジメント</strong></td>
-                                    <td>グローバル調達市場から幅広く情報を収集し、精度の高い査定によって施策効果を見積もります。仮説検証を行いながら、必要に応じて迅速な施策の変更・追加を実施します。</td>
-                                    <td>PDCAサイクルの高速回転によりスピーディーな改善を実現<br>データに基づく客観的な意思決定</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="planning-system">
+                            <h4><i class="fas fa-cogs"></i> 調達企画システム：3つの戦略エンジン</h4>
+                            <p class="system-intro">調達企画とは、会社方針・事業方針に基づいて、より高いレベルのQCD（品質・コスト・納期）とその安定調達を実現する<strong>戦略的価値創造システム</strong>です。</p>
+                            
+                            <div class="three-engines">
+                                <div class="engine-card target-deployment">
+                                    <div class="engine-rank">🎯 第1エンジン</div>
+                                    <div class="engine-header">
+                                        <div class="engine-icon">📊</div>
+                                        <h5>目標展開エンジン</h5>
+                                    </div>
+                                    <div class="engine-description">
+                                        <p><strong>機能：</strong>経営目標を調達現場の具体的アクションに変換</p>
+                                        <div class="transformation-flow">
+                                            <div class="flow-step">
+                                                <span class="step-label">経営目標</span>
+                                                <span class="arrow">→</span>
+                                            </div>
+                                            <div class="flow-step">
+                                                <span class="step-label">部門目標</span>
+                                                <span class="arrow">→</span>
+                                            </div>
+                                            <div class="flow-step">
+                                                <span class="step-label">個別目標</span>
+                                            </div>
+                                        </div>
+                                        <div class="success-examples">
+                                            <div class="example-tag"><strong>実績例</strong></div>
+                                            <ul>
+                                                <li>新商品目標原価<span class="metric-value">20%減</span></li>
+                                                <li>現行品コストダウン年間<span class="metric-value">15%減</span></li>
+                                                <li>品質不良率<span class="metric-value">90%削減</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="engine-card strategy-planning">
+                                    <div class="engine-rank">⚡ 第2エンジン</div>
+                                    <div class="engine-header">
+                                        <div class="engine-icon">🎯</div>
+                                        <h5>戦略立案エンジン</h5>
+                                    </div>
+                                    <div class="engine-description">
+                                        <p><strong>機能：</strong>調達特性の深堀分析→最適戦略の構築</p>
+                                        <div class="strategy-process">
+                                            <div class="process-step">
+                                                <div class="step-number">1</div>
+                                                <div class="step-content">
+                                                    <strong>調達特性分析</strong>
+                                                    <span>仕様特性×調達環境の詳細把握</span>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">2</div>
+                                                <div class="step-content">
+                                                    <strong>改善要素特定</strong>
+                                                    <span>買い方・作り方・仕様・調達政策</span>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">3</div>
+                                                <div class="step-content">
+                                                    <strong>調達基盤強化</strong>
+                                                    <span>ボトルネック解消の体系的アプローチ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="engine-card execution-management">
+                                    <div class="engine-rank">🔄 第3エンジン</div>
+                                    <div class="engine-header">
+                                        <div class="engine-icon">⚙️</div>
+                                        <h5>実行マネジメントエンジン</h5>
+                                    </div>
+                                    <div class="engine-description">
+                                        <p><strong>機能：</strong>高速PDCAサイクルによる継続的最適化</p>
+                                        <div class="pdca-accelerator">
+                                            <div class="pdca-cycle">
+                                                <div class="pdca-phase plan">
+                                                    <span class="phase-label">P</span>
+                                                    <span class="phase-desc">精密な施策効果見積</span>
+                                                </div>
+                                                <div class="pdca-phase do">
+                                                    <span class="phase-label">D</span>
+                                                    <span class="phase-desc">グローバル情報収集実行</span>
+                                                </div>
+                                                <div class="pdca-phase check">
+                                                    <span class="phase-label">C</span>
+                                                    <span class="phase-desc">仮説検証・効果測定</span>
+                                                </div>
+                                                <div class="pdca-phase action">
+                                                    <span class="phase-label">A</span>
+                                                    <span class="phase-desc">迅速な施策変更・追加</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="speed-metrics">
+                                            <div class="metric-item">
+                                                <span class="metric-label">改善サイクル</span>
+                                                <span class="metric-value">従来比3倍高速</span>
+                                            </div>
+                                            <div class="metric-item">
+                                                <span class="metric-label">意思決定</span>
+                                                <span class="metric-value">データドリブン100%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="synergy-effect">
+                                <h5><i class="fas fa-rocket"></i> 3エンジン連携による相乗効果</h5>
+                                <div class="synergy-visualization">
+                                    <div class="synergy-formula">
+                                        <span class="formula-part">目標展開</span>
+                                        <span class="operator">×</span>
+                                        <span class="formula-part">戦略立案</span>
+                                        <span class="operator">×</span>
+                                        <span class="formula-part">実行管理</span>
+                                        <span class="equals">=</span>
+                                        <span class="result">戦略的調達力</span>
+                                    </div>
+                                    <div class="impact-metrics">
+                                        <div class="impact-item">
+                                            <span class="impact-icon">💰</span>
+                                            <span class="impact-desc">コスト削減効果<strong>3-5倍増幅</strong></span>
+                                        </div>
+                                        <div class="impact-item">
+                                            <span class="impact-icon">⚡</span>
+                                            <span class="impact-desc">改善スピード<strong>10倍加速</strong></span>
+                                        </div>
+                                        <div class="impact-item">
+                                            <span class="impact-icon">🎯</span>
+                                            <span class="impact-desc">目標達成率<strong>95%以上</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     `
                 },
                 {
                     id: 'ch3-2',
                     title: '3.2 調達戦略の方向性と視点',
                     content: `
-                        <div class="strategy-formula">
-                            <h4>調達戦略の基本公式</h4>
-                            <p>調達戦略の目標は「価値（Value）」の最大化です。これは機能をコストで割った比率で表現されます。</p>
-                            <div class="formula-box">
-                                <div class="formula">
-                                    調達戦略に求められるもの「V（価値）」 = <span class="fraction"><span class="numerator">実現される機能「F」</span><span class="denominator">ライフサイクルコスト「C」</span></span>
-                                </div>
-                                <p class="formula-note">※ VE（Value Engineering）の考え方に基づく価値最大化アプローチ</p>
-                                <p class="formula-explanation">価値を向上させるには、<strong>機能を高める</strong>か<strong>コストを下げる</strong>かの2つの方向性があります。</p>
+                        <div class="value-equation-intro">
+                            <h3><i class="fas fa-calculator"></i> 戦略的価値の黄金方程式</h3>
+                            <div class="value-discovery">
+                                <p><strong>驚愕の事実：</strong>同じ部品を調達しているのに、A社は<span class="cost-highlight">原価50%削減</span>、B社は<span class="quality-highlight">品質10倍向上</span>を実現。その秘密は<strong>価値最大化の方程式</strong>にありました。</p>
                             </div>
                         </div>
 
-                        <div class="strategy-approaches">
-                            <h4>「C」最適コストの追求 - 4つの戦略的切り口</h4>
-                            <p>コスト最適化を実現するため、以下4つの切り口から体系的にアプローチします。各切り口は独立して実行することも、組み合わせて相乗効果を狙うことも可能です。</p>
-                            <div class="approach-grid">
-                                <div class="approach-card">
-                                    <div class="approach-number">①</div>
-                                    <div class="approach-content">
-                                        <h5>調達政策</h5>
-                                        <p class="approach-desc">既存の調達構造を根本的に見直し、大きく変更する戦略的施策</p>
-                                        <ul class="approach-examples">
-                                            <li>サプライヤーポートフォリオの再編成</li>
-                                            <li>国内・海外調達の最適配分</li>
-                                            <li>メーカー直取引による商流簡素化</li>
+                        <div class="golden-equation">
+                            <h4><i class="fas fa-crown"></i> 調達戦略の黄金方程式</h4>
+                            <div class="equation-container">
+                                <div class="equation-visual">
+                                    <div class="equation-part value">
+                                        <div class="part-header">
+                                            <span class="part-icon">💎</span>
+                                            <span class="part-label">戦略的価値</span>
+                                        </div>
+                                        <div class="part-symbol">V</div>
+                                        <div class="value-meter">
+                                            <div class="meter-fill" style="width: 85%"></div>
+                                            <span class="meter-label">最大化目標</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <span class="equation-equals">=</span>
+                                    
+                                    <div class="equation-fraction">
+                                        <div class="fraction-numerator">
+                                            <div class="fraction-part function">
+                                                <span class="fraction-icon">⚡</span>
+                                                <span class="fraction-label">実現機能</span>
+                                                <span class="fraction-symbol">F</span>
+                                                <div class="enhancement-arrows">↗️</div>
+                                            </div>
+                                        </div>
+                                        <div class="fraction-line"></div>
+                                        <div class="fraction-denominator">
+                                            <div class="fraction-part cost">
+                                                <span class="fraction-icon">💰</span>
+                                                <span class="fraction-label">ライフサイクルコスト</span>
+                                                <span class="fraction-symbol">C</span>
+                                                <div class="reduction-arrows">↘️</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="equation-insights">
+                                    <div class="insight-card function-boost">
+                                        <h5><i class="fas fa-arrow-up"></i> 機能向上（F↗️）</h5>
+                                        <ul class="boost-examples">
+                                            <li>品質向上・性能向上</li>
+                                            <li>付加価値創造</li>
+                                            <li>顧客満足度向上</li>
+                                        </ul>
+                                    </div>
+                                    <div class="insight-card cost-reduction">
+                                        <h5><i class="fas fa-arrow-down"></i> コスト最適化（C↘️）</h5>
+                                        <ul class="reduction-examples">
+                                            <li>調達コスト削減</li>
+                                            <li>運用コスト低減</li>
+                                            <li>総保有コスト最適化</li>
                                         </ul>
                                     </div>
                                 </div>
+                                
+                                <div class="ve-foundation">
+                                    <p class="ve-note"><i class="fas fa-lightbulb"></i> <strong>VE（Value Engineering）</strong>の価値最大化思想に基づく戦略的アプローチ</p>
+                                </div>
+                            </div>
+                        </div>
 
-                                <div class="approach-card">
-                                    <div class="approach-number">②</div>
-                                    <div class="approach-content">
-                                        <h5>仕様</h5>
-                                        <p class="approach-desc">設計仕様の見直しや変更によるコスト最適化施策</p>
-                                        <table class="improvement-methods-table">
-                                            <thead>
-                                                <tr>
-                                                    <th><i class="fas fa-lightbulb"></i> 改善手法</th>
-                                                    <th><i class="fas fa-target"></i> 目的・効果</th>
-                                                    <th><i class="fas fa-percentage"></i> 削減期待率</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><strong>VE（Value Engineering）</strong></td>
-                                                    <td>機能・コスト最適化、価値向上</td>
-                                                    <td>10-30%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>部品品種統合（VR）</strong></td>
-                                                    <td>品種削減、管理コスト低減</td>
-                                                    <td>5-15%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>新技術・工法の採用</strong></td>
-                                                    <td>製造効率化、品質向上</td>
-                                                    <td>15-40%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>標準品・汎用品活用</strong></td>
-                                                    <td>調達コスト削減、流通性向上</td>
-                                                    <td>3-12%</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                        <div class="cost-optimization-system">
+                            <h4><i class="fas fa-cogs"></i> コスト最適化：4次元戦略システム</h4>
+                            <div class="system-overview">
+                                <p>コスト最適化を実現する<strong>4つの戦略次元</strong>から体系的にアプローチ。各次元は独立実行も、組み合わせによる相乗効果も可能です。</p>
+                            </div>
+                            
+                            <div class="four-dimensions">
+                                <div class="dimension-card policy">
+                                    <div class="dimension-header">
+                                        <div class="dimension-number">1</div>
+                                        <div class="dimension-title">
+                                            <h5>調達政策</h5>
+                                            <span class="dimension-subtitle">構造革新</span>
+                                        </div>
+                                        <div class="impact-badge high">
+                                            <span class="impact-icon">🚀</span>
+                                            <span class="impact-text">高インパクト</span>
+                                        </div>
+                                    </div>
+                                    <div class="dimension-content">
+                                        <p class="dimension-desc">調達構造の根本的変革による戦略的効果創出</p>
+                                        <div class="transformation-examples">
+                                            <div class="transformation-item">
+                                                <div class="trans-icon">🎯</div>
+                                                <div class="trans-content">
+                                                    <strong>サプライヤーポートフォリオ再編</strong>
+                                                    <span>戦略的パートナー集約による協創効果</span>
+                                                </div>
+                                            </div>
+                                            <div class="transformation-item">
+                                                <div class="trans-icon">🌍</div>
+                                                <div class="trans-content">
+                                                    <strong>グローバル調達最適化</strong>
+                                                    <span>国内・海外調達の戦略的配分</span>
+                                                </div>
+                                            </div>
+                                            <div class="transformation-item">
+                                                <div class="trans-icon">🔗</div>
+                                                <div class="trans-content">
+                                                    <strong>商流簡素化</strong>
+                                                    <span>メーカー直取引による中間コスト排除</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="approach-card">
-                                    <div class="approach-number">③</div>
-                                    <div class="approach-content">
-                                        <h5>買い方</h5>
-                                        <p class="approach-desc">サプライヤー選定や価格決定プロセスの改善による効率化施策</p>
-                                        <ul class="approach-examples">
-                                            <li>サプライヤー選定・管理方式の最適化</li>
-                                            <li>価格査定方式の高度化</li>
-                                            <li>戦略的な価格交渉方式の導入</li>
-                                        </ul>
+                                <div class="dimension-card specification">
+                                    <div class="dimension-header">
+                                        <div class="dimension-number">2</div>
+                                        <div class="dimension-title">
+                                            <h5>仕様最適化</h5>
+                                            <span class="dimension-subtitle">価値工学</span>
+                                        </div>
+                                        <div class="impact-badge high">
+                                            <span class="impact-icon">⚡</span>
+                                            <span class="impact-text">技術革新</span>
+                                        </div>
+                                    </div>
+                                    <div class="dimension-content">
+                                        <p class="dimension-desc">設計仕様の戦略的見直しによる価値創造</p>
+                                        <div class="optimization-matrix">
+                                            <div class="matrix-row">
+                                                <div class="method-card ve">
+                                                    <div class="method-header">
+                                                        <span class="method-icon">🔬</span>
+                                                        <strong>VE (Value Engineering)</strong>
+                                                    </div>
+                                                    <div class="method-metrics">
+                                                        <span class="metric-label">効果</span>
+                                                        <span class="metric-value high">10-30%削減</span>
+                                                    </div>
+                                                    <p class="method-desc">機能・コスト同時最適化</p>
+                                                </div>
+                                                <div class="method-card vr">
+                                                    <div class="method-header">
+                                                        <span class="method-icon">🧩</span>
+                                                        <strong>品種統合（VR）</strong>
+                                                    </div>
+                                                    <div class="method-metrics">
+                                                        <span class="metric-label">効果</span>
+                                                        <span class="metric-value medium">5-15%削減</span>
+                                                    </div>
+                                                    <p class="method-desc">品種集約・管理効率化</p>
+                                                </div>
+                                            </div>
+                                            <div class="matrix-row">
+                                                <div class="method-card innovation">
+                                                    <div class="method-header">
+                                                        <span class="method-icon">🆕</span>
+                                                        <strong>新技術・工法採用</strong>
+                                                    </div>
+                                                    <div class="method-metrics">
+                                                        <span class="metric-label">効果</span>
+                                                        <span class="metric-value ultra">15-40%削減</span>
+                                                    </div>
+                                                    <p class="method-desc">革新的製造効率化</p>
+                                                </div>
+                                                <div class="method-card standard">
+                                                    <div class="method-header">
+                                                        <span class="method-icon">📦</span>
+                                                        <strong>標準品活用</strong>
+                                                    </div>
+                                                    <div class="method-metrics">
+                                                        <span class="metric-label">効果</span>
+                                                        <span class="metric-value low">3-12%削減</span>
+                                                    </div>
+                                                    <p class="method-desc">汎用品による効率化</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="approach-card">
-                                    <div class="approach-number">④</div>
-                                    <div class="approach-content">
-                                        <h5>作り方</h5>
-                                        <p class="approach-desc">モノづくりプロセスの変更による施策</p>
-                                        <ul class="approach-examples">
-                                            <li>内外作編成</li>
-                                            <li>納入条件</li>
-                                            <li>生産プロセス改善</li>
-                                        </ul>
+                                <div class="dimension-card purchasing">
+                                    <div class="dimension-header">
+                                        <div class="dimension-number">3</div>
+                                        <div class="dimension-title">
+                                            <h5>購買プロセス</h5>
+                                            <span class="dimension-subtitle">買い方革新</span>
+                                        </div>
+                                        <div class="impact-badge medium">
+                                            <span class="impact-icon">🎯</span>
+                                            <span class="impact-text">プロセス改善</span>
+                                        </div>
+                                    </div>
+                                    <div class="dimension-content">
+                                        <p class="dimension-desc">購買プロセスの高度化による効率的価値実現</p>
+                                        <div class="process-improvements">
+                                            <div class="improvement-flow">
+                                                <div class="flow-step">
+                                                    <div class="step-icon">🔍</div>
+                                                    <div class="step-content">
+                                                        <strong>サプライヤー選定最適化</strong>
+                                                        <span>戦略的評価・管理システム</span>
+                                                    </div>
+                                                </div>
+                                                <div class="flow-arrow">→</div>
+                                                <div class="flow-step">
+                                                    <div class="step-icon">💹</div>
+                                                    <div class="step-content">
+                                                        <strong>価格査定高度化</strong>
+                                                        <span>精密コスト分析・市場価格情報活用</span>
+                                                    </div>
+                                                </div>
+                                                <div class="flow-arrow">→</div>
+                                                <div class="flow-step">
+                                                    <div class="step-icon">🤝</div>
+                                                    <div class="step-content">
+                                                        <strong>戦略的価格交渉</strong>
+                                                        <span>Win-Win関係構築交渉術</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dimension-card manufacturing">
+                                    <div class="dimension-header">
+                                        <div class="dimension-number">4</div>
+                                        <div class="dimension-title">
+                                            <h5>製造プロセス</h5>
+                                            <span class="dimension-subtitle">作り方革新</span>
+                                        </div>
+                                        <div class="impact-badge medium">
+                                            <span class="impact-icon">⚙️</span>
+                                            <span class="impact-text">生産改善</span>
+                                        </div>
+                                    </div>
+                                    <div class="dimension-content">
+                                        <p class="dimension-desc">モノづくりプロセス変革による構造的コスト改善</p>
+                                        <div class="manufacturing-strategies">
+                                            <div class="strategy-grid">
+                                                <div class="strategy-item make-buy">
+                                                    <div class="strategy-header">
+                                                        <span class="strategy-icon">🏭</span>
+                                                        <strong>内外作編成</strong>
+                                                    </div>
+                                                    <p>最適な内製・外注配分</p>
+                                                </div>
+                                                <div class="strategy-item delivery">
+                                                    <div class="strategy-header">
+                                                        <span class="strategy-icon">🚚</span>
+                                                        <strong>納入条件最適化</strong>
+                                                    </div>
+                                                    <p>物流・在庫効率の改善</p>
+                                                </div>
+                                                <div class="strategy-item process">
+                                                    <div class="strategy-header">
+                                                        <span class="strategy-icon">🔄</span>
+                                                        <strong>生産プロセス改善</strong>
+                                                    </div>
+                                                    <p>製造効率・品質の向上</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="synergy-maximization">
+                                <h5><i class="fas fa-magic"></i> 4次元シナジー効果</h5>
+                                <div class="synergy-formula">
+                                    <span class="synergy-part">調達政策</span>
+                                    <span class="synergy-operator">×</span>
+                                    <span class="synergy-part">仕様最適化</span>
+                                    <span class="synergy-operator">×</span>
+                                    <span class="synergy-part">購買プロセス</span>
+                                    <span class="synergy-operator">×</span>
+                                    <span class="synergy-part">製造プロセス</span>
+                                    <span class="synergy-equals">=</span>
+                                    <span class="synergy-result">最大価値実現</span>
+                                </div>
+                                <div class="combined-effects">
+                                    <div class="effect-item">
+                                        <span class="effect-icon">🎯</span>
+                                        <span class="effect-desc">単独実行：<strong>10-40%</strong>のコスト削減</span>
+                                    </div>
+                                    <div class="effect-item">
+                                        <span class="effect-icon">🚀</span>
+                                        <span class="effect-desc">組み合わせ効果：<strong>50-70%</strong>のコスト削減</span>
+                                    </div>
+                                    <div class="effect-item">
+                                        <span class="effect-icon">💎</span>
+                                        <span class="effect-desc">総合価値向上：<strong>2-5倍</strong>の価値創造</span>
                                     </div>
                                 </div>
                             </div>
@@ -1707,81 +3360,395 @@ const TEXTBOOK_DATA = {
                     id: 'ch6-1',
                     title: '6.1 調達プロセスの体系化と標準化',
                     content: `
-                        <p>効率的な調達活動を実現するためには、組織全体で統一された調達プロセスの標準化が不可欠です。本節では、調達における意思決定の階層構造と、各レベルでの標準化アプローチについて詳しく解説します。</p>
+                        <div class="introduction-section">
+                            <div class="intro-question">
+                                <h4><i class="fas fa-question-circle"></i> なぜ調達プロセスの標準化が必要なのでしょうか？</h4>
+                                <p>「いつも同じやり方で進めているつもりなのに、担当者によって結果が違う」「どこでどんな判断をすればよいか迷う」「緊急時の対応がバラバラで混乱する」...このような経験はありませんか？</p>
+                            </div>
+                            
+                            <div class="analogy-box">
+                                <div class="analogy-icon">🏭</div>
+                                <div class="analogy-content">
+                                    <h5>身近な例で理解する「標準化の重要性」</h5>
+                                    <p>マクドナルドがなぜ世界中どこで食べても同じ味なのかを考えてみてください。それは<strong>「標準化されたプロセス」</strong>があるからです。調達活動も同じで、標準化により一貫した品質とスピードを実現できるのです。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="key-benefits">
+                                <h5><i class="fas fa-star"></i> プロセス標準化の3つの大きなメリット</h5>
+                                <div class="benefits-grid">
+                                    <div class="benefit-item">
+                                        <div class="benefit-icon efficiency">⚡</div>
+                                        <h6>効率性の向上</h6>
+                                        <p>判断に迷う時間を削減<br>処理スピードが50%向上</p>
+                                    </div>
+                                    <div class="benefit-item">
+                                        <div class="benefit-icon quality">🎯</div>
+                                        <h6>品質の安定化</h6>
+                                        <p>人による差をなくす<br>ミス・トラブルを80%削減</p>
+                                    </div>
+                                    <div class="benefit-item">
+                                        <div class="benefit-icon training">📚</div>
+                                        <h6>教育の効率化</h6>
+                                        <p>新人教育が簡単に<br>習得期間を半分に短縮</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="process-hierarchy">
-                            <h4>調達プロセスの階層的意思決定体系</h4>
-                            <p>調達における意思決定は、戦略性と影響度に応じて階層化されており、各レベルで適切な判断基準と手順の標準化が必要です。以下の6段階の決定プロセスを通じて、体系的な調達管理を実現します。</p>
+                            <h4><i class="fas fa-sitemap"></i> 調達プロセスの階層的意思決定体系</h4>
+                            
+                            <div class="hierarchy-explanation">
+                                <p>調達の意思決定は<strong>「ピラミッド構造」</strong>になっています。上に行くほど<span class="highlight-strategic">戦略的で影響が大きく</span>、下に行くほど<span class="highlight-operational">日常的で実務的</span>になります。</p>
+                                
+                                <div class="decision-pyramid">
+                                    <div class="pyramid-visual">
+                                        <div class="pyramid-level level-1">
+                                            <div class="level-label">戦略レベル</div>
+                                            <div class="level-desc">企業の将来を決める重要な判断</div>
+                                            <div class="level-examples">例：何を作るか？誰に頼むか？</div>
+                                        </div>
+                                        <div class="pyramid-level level-2">
+                                            <div class="level-label">戦術レベル</div>
+                                            <div class="level-desc">戦略を実現するための具体的方法</div>
+                                            <div class="level-examples">例：どんな仕様で？どのサプライヤーで？</div>
+                                        </div>
+                                        <div class="pyramid-level level-3">
+                                            <div class="level-label">実行レベル</div>
+                                            <div class="level-desc">日々の業務で行う細かい調整</div>
+                                            <div class="level-examples">例：いつ？いくらで？何個？</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="pyramid-characteristics">
+                                        <div class="char-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>決定頻度</span>
+                                            <div class="frequency-bar">
+                                                <div class="freq-strategic">年1-2回</div>
+                                                <div class="freq-tactical">月1-2回</div>
+                                                <div class="freq-operational">毎日</div>
+                                            </div>
+                                        </div>
+                                        <div class="char-item">
+                                            <i class="fas fa-users"></i>
+                                            <span>関与者</span>
+                                            <div class="involvement-info">
+                                                <div class="inv-strategic">経営陣・事業部長</div>
+                                                <div class="inv-tactical">部長・課長</div>
+                                                <div class="inv-operational">担当者・係長</div>
+                                            </div>
+                                        </div>
+                                        <div class="char-item">
+                                            <i class="fas fa-impact"></i>
+                                            <span>影響度</span>
+                                            <div class="impact-scale">
+                                                <div class="impact-high">全社レベル</div>
+                                                <div class="impact-medium">部門レベル</div>
+                                                <div class="impact-low">個人・チーム</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detailed-decisions">
+                                <h5><i class="fas fa-list-ol"></i> 6段階の具体的な意思決定プロセス</h5>
+                                <p>では、この階層に沿って6つの具体的な決定ステップを見てみましょう：</p>
+                            </div>
                             
                             <div class="decision-levels">
                                 <div class="level-item strategic">
-                                    <h5>戦略レベル（Strategic Level）</h5>
+                                    <div class="level-header">
+                                        <div class="level-icon">🏢</div>
+                                        <h5>戦略レベル（Strategic Level）</h5>
+                                        <span class="level-subtitle">企業の将来を左右する重要な決定</span>
+                                    </div>
+                                    
                                     <div class="level-content">
-                                        <div class="decision-item">
-                                            <strong>1次決定：製品レベルでの内外製造決定（Make or Buy）</strong>
-                                            <p>企業の中核技術・競争優位性を考慮した製品全体の内製・外製判断</p>
-                                            <ul>
-                                                <li><strong>判断基準</strong>：コア技術の有無、戦略的重要性、投資効率</li>
-                                                <li><strong>関与部門</strong>：経営陣、事業部門、技術部門、調達部門</li>
-                                                <li><strong>決定頻度</strong>：新製品開発時、事業戦略見直し時</li>
-                                            </ul>
+                                        <div class="decision-step step-1">
+                                            <div class="step-header">
+                                                <div class="step-number">①</div>
+                                                <div class="step-title">
+                                                    <strong>製品レベルでの内外製造決定（Make or Buy）</strong>
+                                                    <span class="step-summary">「この製品を自社で作るか、他社に頼むか？」</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="decision-details">
+                                                <div class="real-example">
+                                                    <h6><i class="fas fa-lightbulb"></i> 身近な例で理解</h6>
+                                                    <p><strong>トヨタの場合：</strong>エンジンやトランスミッションは「コア技術」なので自社で製造。しかし、カーナビやオーディオシステムは専門メーカー（パナソニック等）から調達。</p>
+                                                </div>
+                                                
+                                                <table class="decision-criteria-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><i class="fas fa-balance-scale"></i> 判断基準</th>
+                                                            <th><i class="fas fa-users-cog"></i> 関与部門</th>
+                                                            <th><i class="fas fa-calendar-alt"></i> 決定タイミング</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                • コア技術の有無<br>
+                                                                • 戦略的重要性<br>
+                                                                • 投資対効果
+                                                            </td>
+                                                            <td>
+                                                                • 経営陣<br>
+                                                                • 事業部門<br>
+                                                                • 技術・調達部門
+                                                            </td>
+                                                            <td>
+                                                                • 新製品開発時<br>
+                                                                • 事業戦略見直し時<br>
+                                                                • 年1-2回
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <div class="decision-item">
-                                            <strong>2次決定：開発・設計レベルでの内外製造決定</strong>
-                                            <p>設計・開発工程における各機能・モジュール単位での内製・外製判断</p>
-                                            <ul>
-                                                <li><strong>判断基準</strong>：設計ノウハウ、開発リソース、技術的難易度</li>
-                                                <li><strong>関与部門</strong>：設計・開発部門、技術部門、調達部門</li>
-                                                <li><strong>決定頻度</strong>：製品設計段階、設計変更時</li>
-                                            </ul>
+                                        
+                                        <div class="decision-step step-2">
+                                            <div class="step-header">
+                                                <div class="step-number">②</div>
+                                                <div class="step-title">
+                                                    <strong>開発・設計レベルでの内外製造決定</strong>
+                                                    <span class="step-summary">「この機能・モジュールを自社で開発するか？」</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="decision-details">
+                                                <div class="real-example">
+                                                    <h6><i class="fas fa-lightbulb"></i> 身近な例で理解</h6>
+                                                    <p><strong>スマートフォンの場合：</strong>Appleは外観デザイン・OS・プロセッサーは自社開発。しかし、カメラセンサーはSONY、ディスプレイはサムスンから調達。</p>
+                                                </div>
+                                                
+                                                <table class="decision-criteria-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><i class="fas fa-balance-scale"></i> 判断基準</th>
+                                                            <th><i class="fas fa-users-cog"></i> 関与部門</th>
+                                                            <th><i class="fas fa-calendar-alt"></i> 決定タイミング</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                • 設計ノウハウ<br>
+                                                                • 開発リソース<br>
+                                                                • 技術的難易度
+                                                            </td>
+                                                            <td>
+                                                                • 設計・開発部門<br>
+                                                                • 技術部門<br>
+                                                                • 調達部門
+                                                            </td>
+                                                            <td>
+                                                                • 製品設計段階<br>
+                                                                • 設計変更時<br>
+                                                                • 月1-2回
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="level-item tactical">
-                                    <h5>戦術レベル（Tactical Level）</h5>
+                                    <div class="level-header">
+                                        <div class="level-icon">⚙️</div>
+                                        <h5>戦術レベル（Tactical Level）</h5>
+                                        <span class="level-subtitle">戦略を実現する具体的な方法を決める</span>
+                                    </div>
+                                    
                                     <div class="level-content">
-                                        <div class="decision-item">
-                                            <strong>3次決定：部品単位での内外製造・仕様決定</strong>
-                                            <p>個別部品レベルでの製造方法と技術仕様の決定</p>
-                                            <ul>
-                                                <li><strong>判断基準</strong>：コスト効率性、品質要求、生産能力</li>
-                                                <li><strong>関与部門</strong>：調達部門、製造部門、品質管理部門</li>
-                                                <li><strong>決定頻度</strong>：部品設計確定時、仕様変更時</li>
-                                            </ul>
+                                        <div class="decision-step step-3">
+                                            <div class="step-header">
+                                                <div class="step-number">③</div>
+                                                <div class="step-title">
+                                                    <strong>部品単位での内外製造・仕様決定</strong>
+                                                    <span class="step-summary">「この部品をどこで、どんな仕様で作るか？」</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="decision-details">
+                                                <div class="real-example">
+                                                    <h6><i class="fas fa-lightbulb"></i> 身近な例で理解</h6>
+                                                    <p><strong>自動車部品の場合：</strong>ブレーキパッドは安全部品なので高品質仕様で信頼できる専門メーカーに。一方、内装パネルはコスト重視で複数社から選択。</p>
+                                                </div>
+                                                
+                                                <div class="decision-flow">
+                                                    <div class="flow-item">
+                                                        <i class="fas fa-search"></i>
+                                                        <span>品質要求確認</span>
+                                                    </div>
+                                                    <div class="flow-arrow">→</div>
+                                                    <div class="flow-item">
+                                                        <i class="fas fa-calculator"></i>
+                                                        <span>コスト試算</span>
+                                                    </div>
+                                                    <div class="flow-arrow">→</div>
+                                                    <div class="flow-item">
+                                                        <i class="fas fa-industry"></i>
+                                                        <span>生産能力確認</span>
+                                                    </div>
+                                                    <div class="flow-arrow">→</div>
+                                                    <div class="flow-item">
+                                                        <i class="fas fa-check"></i>
+                                                        <span>仕様決定</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="decision-item">
-                                            <strong>4次決定：サプライヤー選定・決定</strong>
-                                            <p>外製部品・サービスの供給者選定と契約関係の構築</p>
-                                            <ul>
-                                                <li><strong>判断基準</strong>：総合評価（Q・C・D・S）、リスク評価、戦略適合性</li>
-                                                <li><strong>関与部門</strong>：調達部門、品質管理部門、技術部門</li>
-                                                <li><strong>決定頻度</strong>：新規調達時、既存契約見直し時</li>
-                                            </ul>
+                                        
+                                        <div class="decision-step step-4">
+                                            <div class="step-header">
+                                                <div class="step-number">④</div>
+                                                <div class="step-title">
+                                                    <strong>サプライヤー選定・決定</strong>
+                                                    <span class="step-summary">「どのサプライヤーに発注するか？」</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="decision-details">
+                                                <div class="real-example">
+                                                    <h6><i class="fas fa-lightbulb"></i> 身近な例で理解</h6>
+                                                    <p><strong>機械部品の調達：</strong>品質(Quality)、コスト(Cost)、納期(Delivery)、サービス(Service)の「QCDS」で総合評価。単純に安いだけでなく、トータルでベストな会社を選ぶ。</p>
+                                                </div>
+                                                
+                                                <table class="qcds-evaluation-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>評価項目</th>
+                                                            <th>重要度</th>
+                                                            <th>評価ポイント</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><strong>Quality（品質）</strong></td>
+                                                            <td><span class="weight-high">高</span></td>
+                                                            <td>不良率、品質管理体制、認証取得</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Cost（コスト）</strong></td>
+                                                            <td><span class="weight-high">高</span></td>
+                                                            <td>単価、変動費、管理コスト</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Delivery（納期）</strong></td>
+                                                            <td><span class="weight-medium">中</span></td>
+                                                            <td>納期遵守率、リードタイム、柔軟性</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><strong>Service（サービス）</strong></td>
+                                                            <td><span class="weight-medium">中</span></td>
+                                                            <td>技術サポート、提案力、対応力</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="level-item operational">
-                                    <h5>実行レベル（Operational Level）</h5>
+                                    <div class="level-header">
+                                        <div class="level-icon">📋</div>
+                                        <h5>実行レベル（Operational Level）</h5>
+                                        <span class="level-subtitle">日々の業務で実際に発注・契約を行う</span>
+                                    </div>
+                                    
                                     <div class="level-content">
-                                        <div class="decision-item">
-                                            <strong>5次決定：調達条件決定</strong>
-                                            <p>具体的な取引条件（納期、数量、品質基準等）の設定</p>
-                                            <ul>
-                                                <li><strong>判断基準</strong>：生産計画、在庫水準、市場状況</li>
-                                                <li><strong>関与部門</strong>：調達部門、生産管理部門、営業部門</li>
-                                                <li><strong>決定頻度</strong>：月次・週次の調達計画立案時</li>
-                                            </ul>
+                                        <div class="decision-step step-5">
+                                            <div class="step-header">
+                                                <div class="step-number">⑤</div>
+                                                <div class="step-title">
+                                                    <strong>調達条件決定</strong>
+                                                    <span class="step-summary">「いつ、いくつ、どんな条件で発注するか？」</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="decision-details">
+                                                <div class="real-example">
+                                                    <h6><i class="fas fa-lightbulb"></i> 身近な例で理解</h6>
+                                                    <p><strong>オフィス用品の調達：</strong>コピー用紙が残り1週間分になったら、通常の2倍量を月末に発注。大型連休前は3倍量を発注して在庫切れを防ぐ。</p>
+                                                </div>
+                                                
+                                                <div class="conditions-checklist">
+                                                    <div class="checklist-item">
+                                                        <i class="fas fa-calendar-check"></i>
+                                                        <div class="item-content">
+                                                            <strong>納期設定</strong>
+                                                            <span>生産計画、在庫状況を確認してタイミング決定</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="checklist-item">
+                                                        <i class="fas fa-boxes"></i>
+                                                        <div class="item-content">
+                                                            <strong>数量決定</strong>
+                                                            <span>需要予測、適正在庫レベルを基に発注量決定</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="checklist-item">
+                                                        <i class="fas fa-shield-alt"></i>
+                                                        <div class="item-content">
+                                                            <strong>品質基準</strong>
+                                                            <span>検査項目、合格基準、不良時対応を明文化</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="decision-item">
-                                            <strong>6次決定：調達価格決定・契約締結</strong>
-                                            <p>最終的な取引価格の決定と発注・契約の実行</p>
-                                            <ul>
-                                                <li><strong>判断基準</strong>：市場価格、交渉結果、予算制約</li>
-                                                <li><strong>関与部門</strong>：調達部門、経理部門、法務部門</li>
-                                                <li><strong>決定頻度</strong>：日次・週次の発注業務</li>
-                                            </ul>
+                                        
+                                        <div class="decision-step step-6">
+                                            <div class="step-header">
+                                                <div class="step-number">⑥</div>
+                                                <div class="step-title">
+                                                    <strong>調達価格決定・契約締結</strong>
+                                                    <span class="step-summary">「最終価格を決めて正式に発注する」</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="decision-details">
+                                                <div class="real-example">
+                                                    <h6><i class="fas fa-lightbulb"></i> 身近な例で理解</h6>
+                                                    <p><strong>価格交渉の例：</strong>市場価格が1個100円の部品を、年間10万個の長期契約を条件に95円で交渉成立。契約書に署名して正式発注。</p>
+                                                </div>
+                                                
+                                                <div class="contract-process">
+                                                    <div class="process-step">
+                                                        <div class="step-icon">💰</div>
+                                                        <div class="step-info">
+                                                            <strong>価格交渉</strong>
+                                                            <span>市場価格、競合見積もりを基に最適価格を決定</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="process-arrow">↓</div>
+                                                    <div class="process-step">
+                                                        <div class="step-icon">📝</div>
+                                                        <div class="step-info">
+                                                            <strong>契約書作成</strong>
+                                                            <span>法務確認を経て、取引条件を契約書に明記</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="process-arrow">↓</div>
+                                                    <div class="process-step">
+                                                        <div class="step-icon">✅</div>
+                                                        <div class="step-info">
+                                                            <strong>正式発注</strong>
+                                                            <span>承認を得てシステムに発注データを登録・送信</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

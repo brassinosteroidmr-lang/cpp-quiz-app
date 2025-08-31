@@ -2405,6 +2405,1752 @@ body {
     }
 }
 
+/* =================================
+   第3章用スタイル
+   ================================= */
+
+/* Chapter 3 Introduction */
+.chapter3-intro {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+}
+
+.chapter3-intro h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.strategic-awakening {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.answer-reveal {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    border-left: 4px solid #ffd700;
+}
+
+.highlight-profit, .profit-boost {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.quality-boost, .speed-boost {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* Planning System */
+.planning-system {
+    margin: 40px 0;
+}
+
+.system-intro {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #374151;
+}
+
+.three-engines {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.engine-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    position: relative;
+    border-left: 5px solid;
+    transition: all 0.3s ease;
+}
+
+.engine-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.engine-card.target-deployment {
+    border-left-color: #059669;
+}
+
+.engine-card.strategy-planning {
+    border-left-color: #2563eb;
+}
+
+.engine-card.execution-management {
+    border-left-color: #7c3aed;
+}
+
+.engine-rank {
+    position: absolute;
+    top: -10px;
+    right: 15px;
+    background: #1e40af;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.engine-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.engine-icon {
+    font-size: 2em;
+    margin-right: 15px;
+}
+
+.engine-header h5 {
+    flex: 1;
+    margin: 0;
+    color: #333;
+}
+
+.transformation-flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.flow-step {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.step-label {
+    background: #f3f4f6;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #374151;
+}
+
+.arrow {
+    font-size: 1.2em;
+    color: #059669;
+    font-weight: bold;
+}
+
+.success-examples {
+    margin-top: 20px;
+}
+
+.example-tag {
+    background: #fbbf24;
+    color: #78350f;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.success-examples ul {
+    list-style: none;
+    padding: 0;
+}
+
+.success-examples li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.success-examples li:last-child {
+    border-bottom: none;
+}
+
+.metric-value {
+    color: #dc2626;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Strategy Process */
+.strategy-process {
+    margin: 20px 0;
+}
+
+.process-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 10px;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    background: #2563eb;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.step-content strong {
+    color: #374151;
+    font-size: 1em;
+}
+
+.step-content span {
+    color: #6b7280;
+    font-size: 0.9em;
+}
+
+/* PDCA Accelerator */
+.pdca-accelerator {
+    margin: 20px 0;
+}
+
+.pdca-cycle {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.pdca-phase {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: #f3f4f6;
+    border-radius: 8px;
+}
+
+.phase-label {
+    width: 25px;
+    height: 25px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.phase-desc {
+    font-size: 0.9em;
+    color: #374151;
+}
+
+.speed-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.metric-item {
+    text-align: center;
+    padding: 10px;
+    background: #ecfdf5;
+    border-radius: 8px;
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.8em;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.speed-metrics .metric-value {
+    display: block;
+    font-weight: bold;
+    color: #059669;
+}
+
+/* Synergy Effect */
+.synergy-effect {
+    margin-top: 40px;
+    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.synergy-effect h5 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #78350f;
+}
+
+.synergy-visualization {
+    text-align: center;
+}
+
+.synergy-formula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.formula-part {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #374151;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.operator, .equals {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #78350f;
+}
+
+.result {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+}
+
+.impact-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.impact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.impact-icon {
+    font-size: 1.5em;
+}
+
+.impact-desc {
+    font-size: 0.9em;
+    color: #374151;
+}
+
+/* Value Equation Intro */
+.value-equation-intro {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    color: #78350f;
+}
+
+.value-equation-intro h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #78350f;
+}
+
+.value-discovery {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.cost-highlight, .quality-highlight {
+    background: white;
+    color: #dc2626;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* Golden Equation */
+.golden-equation {
+    margin: 40px 0;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.golden-equation h4 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #78350f;
+}
+
+.equation-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.equation-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.equation-part {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    min-width: 150px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.part-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.part-icon {
+    font-size: 1.5em;
+}
+
+.part-label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #78350f;
+}
+
+.part-symbol {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #92400e;
+    margin: 10px 0;
+}
+
+.value-meter {
+    background: #f3f4f6;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #059669);
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+.meter-label {
+    font-size: 0.8em;
+    color: #6b7280;
+    margin-top: 5px;
+    display: block;
+}
+
+.equation-equals {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #78350f;
+}
+
+.equation-fraction {
+    background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.fraction-numerator, .fraction-denominator {
+    padding: 15px;
+}
+
+.fraction-line {
+    height: 2px;
+    background: #0369a1;
+    margin: 10px 0;
+}
+
+.fraction-part {
+    text-align: center;
+}
+
+.fraction-icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.fraction-label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #0369a1;
+}
+
+.fraction-symbol {
+    font-size: 2em;
+    font-weight: bold;
+    color: #0369a1;
+    margin: 5px 0;
+    display: block;
+}
+
+.enhancement-arrows, .reduction-arrows {
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+.equation-insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.insight-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    border-left: 4px solid;
+}
+
+.insight-card.function-boost {
+    border-left-color: #10b981;
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+}
+
+.insight-card.cost-reduction {
+    border-left-color: #dc2626;
+    background: linear-gradient(135deg, #fef2f2, #fecaca);
+}
+
+.insight-card h5 {
+    margin-bottom: 15px;
+    color: #374151;
+}
+
+.boost-examples, .reduction-examples {
+    list-style: none;
+    padding: 0;
+}
+
+.boost-examples li, .reduction-examples li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    color: #6b7280;
+}
+
+.boost-examples li:last-child, .reduction-examples li:last-child {
+    border-bottom: none;
+}
+
+.ve-foundation {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.ve-note {
+    margin: 0;
+    color: #78350f;
+    font-weight: 600;
+}
+
+/* Cost Optimization System */
+.cost-optimization-system {
+    margin: 40px 0;
+}
+
+.system-overview {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.system-overview p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #374151;
+}
+
+.four-dimensions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.dimension-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.dimension-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.dimension-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.dimension-number {
+    width: 40px;
+    height: 40px;
+    background: #1e40af;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.dimension-title {
+    flex: 1;
+}
+
+.dimension-title h5 {
+    margin: 0 0 5px 0;
+    color: #374151;
+}
+
+.dimension-subtitle {
+    font-size: 0.9em;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.impact-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.impact-badge.high {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.impact-badge.medium {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.dimension-desc {
+    margin-bottom: 20px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* Transformation Examples */
+.transformation-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.transformation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 10px;
+}
+
+.trans-icon {
+    font-size: 1.5em;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.trans-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.trans-content strong {
+    color: #374151;
+}
+
+.trans-content span {
+    font-size: 0.9em;
+    color: #6b7280;
+}
+
+/* Optimization Matrix */
+.optimization-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.matrix-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.method-card {
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 15px;
+    border-left: 3px solid;
+}
+
+.method-card.ve {
+    border-left-color: #10b981;
+}
+
+.method-card.vr {
+    border-left-color: #3b82f6;
+}
+
+.method-card.innovation {
+    border-left-color: #8b5cf6;
+}
+
+.method-card.standard {
+    border-left-color: #f59e0b;
+}
+
+.method-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.method-icon {
+    font-size: 1.2em;
+}
+
+.method-metrics {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.optimization-matrix .metric-label {
+    font-size: 0.8em;
+    color: #6b7280;
+}
+
+.optimization-matrix .metric-value {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.optimization-matrix .metric-value.high {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.optimization-matrix .metric-value.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.optimization-matrix .metric-value.ultra {
+    background: #ede9fe;
+    color: #6b21a8;
+}
+
+.optimization-matrix .metric-value.low {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.method-desc {
+    font-size: 0.9em;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Process Improvements */
+.improvement-flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.improvement-flow .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.improvement-flow .step-icon {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #3b82f6;
+}
+
+.improvement-flow .step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.improvement-flow .step-content strong {
+    color: #374151;
+    font-size: 0.9em;
+}
+
+.improvement-flow .step-content span {
+    color: #6b7280;
+    font-size: 0.8em;
+}
+
+.flow-arrow {
+    font-size: 1.2em;
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+/* Manufacturing Strategies */
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.strategy-item {
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.strategy-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.strategy-icon {
+    font-size: 1.2em;
+}
+
+.strategy-header strong {
+    color: #374151;
+    font-size: 0.9em;
+}
+
+.strategy-item p {
+    margin: 0;
+    font-size: 0.8em;
+    color: #6b7280;
+}
+
+/* Synergy Maximization */
+.synergy-maximization {
+    margin-top: 40px;
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.synergy-maximization h5 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #166534;
+}
+
+.synergy-maximization .synergy-formula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.synergy-part {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.synergy-operator, .synergy-equals {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #166534;
+}
+
+.synergy-result {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.combined-effects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.effect-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.effect-icon {
+    font-size: 1.3em;
+}
+
+.effect-desc {
+    font-size: 0.9em;
+    color: #374151;
+}
+
+/* Responsive Design for Chapter 3 */
+@media (max-width: 768px) {
+    .three-engines {
+        grid-template-columns: 1fr;
+    }
+    
+    .equation-visual {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .four-dimensions {
+        grid-template-columns: 1fr;
+    }
+    
+    .matrix-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .strategy-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .improvement-flow {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .flow-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .transformation-flow {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .synergy-formula, .synergy-maximization .synergy-formula {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .engine-card, .dimension-card {
+        padding: 20px 15px;
+    }
+    
+    .golden-equation {
+        padding: 20px 15px;
+    }
+    
+    .equation-part, .equation-fraction {
+        min-width: 120px;
+        padding: 15px;
+    }
+    
+    .part-symbol, .fraction-symbol {
+        font-size: 2em;
+    }
+    
+    .equation-equals {
+        font-size: 2em;
+    }
+}
+
+/* =================================
+   第6章専用の改善されたスタイル
+   ================================= */
+
+/* 導入セクションの改善 */
+.introduction-section {
+    margin: 2rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.intro-question {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 5px solid #2563eb;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.1);
+}
+
+.intro-question h4 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.intro-question i {
+    color: #3b82f6;
+    font-size: 1.1rem;
+}
+
+.intro-question p {
+    color: #1e3a8a;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* アナロジーボックスの改善 */
+.analogy-box {
+    display: flex;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 5px solid #f59e0b;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+}
+
+.analogy-icon {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    color: #d97706;
+}
+
+.analogy-content h5 {
+    color: #92400e;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.analogy-content p {
+    color: #78350f;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* キーベネフィットの改善 */
+.key-benefits {
+    margin: 2rem 0;
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.key-benefits h5 {
+    color: #059669;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+}
+
+.benefit-icon.efficiency {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.benefit-icon.quality {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.benefit-icon.training {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.benefit-item h6 {
+    color: #1f2937;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.benefit-item p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* プロセス階層の改善 */
+.process-hierarchy {
+    margin: 3rem 0;
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.process-hierarchy h4 {
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* 階層説明の改善 */
+.hierarchy-explanation {
+    margin: 2rem 0;
+}
+
+.hierarchy-explanation p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    color: #374151;
+    margin-bottom: 2rem;
+}
+
+.highlight-strategic {
+    background: linear-gradient(135deg, #fde047, #facc15);
+    color: #713f12;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.highlight-operational {
+    background: linear-gradient(135deg, #86efac, #4ade80);
+    color: #14532d;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* 決定ピラミッドの改善 */
+.decision-pyramid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    align-items: start;
+}
+
+.pyramid-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.pyramid-level {
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.pyramid-level:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.pyramid-level.level-1 {
+    background: linear-gradient(135deg, #fde047 0%, #facc15 100%);
+    width: 100%;
+    color: #713f12;
+}
+
+.pyramid-level.level-2 {
+    background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+    width: 85%;
+    margin: 0 auto;
+    color: white;
+}
+
+.pyramid-level.level-3 {
+    background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+    width: 70%;
+    margin: 0 auto;
+    color: white;
+}
+
+.level-label {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.level-desc {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.level-examples {
+    font-size: 0.8rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* ピラミッド特性の改善 */
+.pyramid-characteristics {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.char-item {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.char-item i {
+    color: #3b82f6;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.char-item span {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1rem;
+    color: #1f2937;
+    font-size: 1rem;
+}
+
+.frequency-bar, .involvement-info, .impact-scale {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.frequency-bar div, .involvement-info div, .impact-scale div {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.freq-strategic, .inv-strategic, .impact-high {
+    background: linear-gradient(135deg, #fde047, #facc15);
+    color: #713f12;
+}
+
+.freq-tactical, .inv-tactical, .impact-medium {
+    background: linear-gradient(135deg, #22d3ee, #06b6d4);
+    color: white;
+}
+
+.freq-operational, .inv-operational, .impact-low {
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+    color: white;
+}
+
+/* レベルアイテムの改善 */
+.level-item {
+    margin: 2rem 0;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.level-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border-bottom: 1px solid #d1d5db;
+}
+
+.level-icon {
+    font-size: 2rem;
+    color: #374151;
+}
+
+.level-item h5 {
+    flex: 1;
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.2rem;
+}
+
+.level-subtitle {
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 0.3rem;
+}
+
+.level-content {
+    padding: 2rem;
+}
+
+/* 決定ステップの改善 */
+.decision-step {
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+}
+
+.step-number {
+    background: white;
+    color: #2563eb;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.step-title {
+    flex: 1;
+}
+
+.step-title strong {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.step-summary {
+    display: block;
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.decision-details {
+    padding: 1.5rem;
+}
+
+/* リアル事例ボックスの改善 */
+.real-example {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #10b981;
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.1);
+}
+
+.real-example h6 {
+    color: #065f46;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.real-example i {
+    color: #10b981;
+}
+
+.real-example p {
+    color: #047857;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 決定フローの改善 */
+.decision-flow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 10px;
+}
+
+.flow-item {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+    min-width: 140px;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.flow-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.flow-item i {
+    font-size: 1.1rem;
+}
+
+.flow-arrow {
+    font-size: 1.5rem;
+    color: #6366f1;
+    font-weight: bold;
+}
+
+/* 条件チェックリストの改善 */
+.conditions-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #fef9e7 0%, #fef3c7 100%);
+    border-radius: 10px;
+    border-left: 4px solid #f59e0b;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.1);
+}
+
+.checklist-item i {
+    color: #d97706;
+    font-size: 1.3rem;
+    margin-top: 0.2rem;
+}
+
+.item-content strong {
+    display: block;
+    color: #92400e;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
+
+.item-content span {
+    color: #78350f;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* 契約プロセスの改善 */
+.contract-process {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    align-items: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.process-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    min-width: 320px;
+    border: 1px solid #e5e7eb;
+}
+
+.step-icon {
+    font-size: 1.8rem;
+    width: 3.5rem;
+    text-align: center;
+    color: #3b82f6;
+}
+
+.step-info strong {
+    display: block;
+    color: #1f2937;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
+
+.step-info span {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.process-arrow {
+    font-size: 2rem;
+    color: #3b82f6;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+/* 標準化要素の改善 */
+.standardization-elements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.element-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    border-left: 4px solid #8b5cf6;
+    border: 1px solid #e5e7eb;
+}
+
+.element-item h5 {
+    color: #7c3aed;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.element-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.element-item li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.element-item li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: bold;
+}
+
+.element-item li:last-child {
+    border-bottom: none;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .decision-pyramid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .decision-flow {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .flow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+    }
+    
+    .process-step {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .standardization-elements {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .analogy-box {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .analogy-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .level-header {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .step-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
 /* ダークモード対応 */
 @media (prefers-color-scheme: dark) {
     .app-container.dark-mode {
