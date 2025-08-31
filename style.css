@@ -1106,6 +1106,130 @@ body {
     }
 }
 
+/* =================================
+   サプライヤー分類マトリックススタイル
+   ================================= */
+
+.supplier-classification-matrix {
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--gray-200);
+}
+
+.supplier-classification-matrix h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+/* サプライヤー分類の象限別スタイル */
+.strategic-partners {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    border-left: 4px solid #2e7d32;
+}
+
+.key-suppliers {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-right: 4px solid #1976d2;
+}
+
+.operational-suppliers {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    border-left: 4px solid #d32f2f;
+}
+
+.transactional-suppliers {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-right: 4px solid #f57c00;
+}
+
+/* サプライヤー分類のアイコン色 */
+.strategic-partners .quadrant-header i {
+    color: #2e7d32;
+}
+
+.key-suppliers .quadrant-header i {
+    color: #1976d2;
+}
+
+.operational-suppliers .quadrant-header i {
+    color: #d32f2f;
+}
+
+.transactional-suppliers .quadrant-header i {
+    color: #f57c00;
+}
+
+/* サプライヤー分類の戦略タグ */
+.strategy-tag.strategic-partner {
+    background: #2e7d32;
+    color: var(--white);
+}
+
+.strategy-tag.key-supplier {
+    background: #1976d2;
+    color: var(--white);
+}
+
+.strategy-tag.operational {
+    background: #d32f2f;
+    color: var(--white);
+}
+
+.strategy-tag.transactional {
+    background: #f57c00;
+    color: var(--white);
+}
+
+/* 特徴・アプローチセクション */
+.characteristics-section {
+    margin-bottom: 1rem;
+}
+
+.feature-desc {
+    font-size: 0.85rem;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.feature-list {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+}
+
+.feature-list li {
+    margin-bottom: 0.3rem;
+}
+
+.strategy-section {
+    margin-top: auto;
+}
+
+.approach-list {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    margin: 0.5rem 0 0 0;
+    padding-left: 1rem;
+}
+
+.approach-list li {
+    margin-bottom: 0.2rem;
+}
+
+.quadrant-header small {
+    color: var(--gray-500);
+    font-size: 0.7rem;
+    font-weight: normal;
+    font-style: italic;
+}
+
 .important-point {
     background: linear-gradient(135deg, #fff3e0, #ffe0b2);
     border-left: 4px solid var(--secondary);
@@ -1936,6 +2060,348 @@ body {
         width: 60px;
         height: 60px;
         font-size: 1.5rem;
+    }
+}
+
+/* =================================
+   新しい教育用表スタイル
+   ================================= */
+
+/* 調達機能表 */
+.procurement-functions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: var(--white);
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid var(--gray-300);
+}
+
+.procurement-functions-table thead {
+    background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+    color: var(--white);
+}
+
+.procurement-functions-table thead th {
+    padding: 1.2rem 1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: left;
+    border-bottom: 2px solid #1565c0;
+    border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.procurement-functions-table thead th:last-child {
+    border-right: none;
+}
+
+.procurement-functions-table .sourcing-row {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+    border-left: 4px solid #4caf50;
+}
+
+.procurement-functions-table .purchasing-row {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    border-left: 4px solid #2196f3;
+}
+
+.procurement-functions-table tbody td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200);
+    vertical-align: top;
+    line-height: 1.6;
+}
+
+.procurement-functions-table tbody td:last-child {
+    border-right: none;
+}
+
+/* 機能バッジ */
+.feature-badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 0.1rem 0.2rem 0.1rem 0;
+    color: var(--white);
+}
+
+.feature-badge.strategic {
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+}
+
+.feature-badge.long-term {
+    background: linear-gradient(135deg, #2196f3, #1976d2);
+}
+
+.feature-badge.operational {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.feature-badge.execution {
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+}
+
+/* 詳細例表（detail-examples-table） */
+.detail-examples-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--white);
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border: 1px solid var(--gray-200);
+    font-size: 0.9rem;
+}
+
+.detail-examples-table thead {
+    background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);
+    color: var(--white);
+}
+
+.detail-examples-table thead th {
+    padding: 0.8rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-align: left;
+    border-bottom: 2px solid #37474f;
+    border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.detail-examples-table thead th:last-child {
+    border-right: none;
+}
+
+.detail-examples-table tbody tr {
+    transition: all var(--transition-fast);
+}
+
+.detail-examples-table tbody tr:nth-child(even) {
+    background: var(--gray-50);
+}
+
+.detail-examples-table tbody tr:hover {
+    background: #e8f4fd;
+    transform: scale(1.002);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.detail-examples-table tbody td {
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200);
+    vertical-align: top;
+    line-height: 1.5;
+}
+
+.detail-examples-table tbody td:last-child {
+    border-right: none;
+}
+
+.detail-examples-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* アイコン付きヘッダーのスタイル */
+.detail-examples-table th i {
+    margin-right: 0.4rem;
+    font-size: 0.9rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .procurement-functions-table,
+    .detail-examples-table {
+        font-size: 0.8rem;
+    }
+    
+    .procurement-functions-table th,
+    .procurement-functions-table td,
+    .detail-examples-table th,
+    .detail-examples-table td {
+        padding: 0.6rem 0.4rem;
+    }
+    
+    .feature-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+}
+
+/* =================================
+   追加の教育用表スタイル
+   ================================= */
+
+/* PDCA詳細表 */
+.pdca-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--white);
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border: 1px solid var(--gray-200);
+    font-size: 0.85rem;
+}
+
+.pdca-details-table thead {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+    color: var(--white);
+}
+
+.pdca-details-table thead th {
+    padding: 0.8rem 0.6rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-align: left;
+    border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.pdca-details-table tbody tr:nth-child(even) {
+    background: var(--gray-50);
+}
+
+.pdca-details-table tbody tr:hover {
+    background: #e8f5e8;
+}
+
+.pdca-details-table tbody td {
+    padding: 0.7rem 0.6rem;
+    border-bottom: 1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200);
+    vertical-align: top;
+    line-height: 1.4;
+}
+
+/* 改善手法表 */
+.improvement-methods-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--white);
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    border: 1px solid var(--gray-200);
+}
+
+.improvement-methods-table thead {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: var(--white);
+}
+
+.improvement-methods-table thead th {
+    padding: 1rem 0.8rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.improvement-methods-table tbody tr:hover {
+    background: #fff3e0;
+    transform: scale(1.001);
+}
+
+.improvement-methods-table tbody td {
+    padding: 0.9rem 0.8rem;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+    line-height: 1.5;
+}
+
+/* ネストした情報表 */
+.nested-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.5rem 0;
+    background: rgba(255,255,255,0.9);
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 0.8rem;
+}
+
+.nested-info-table thead {
+    background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);
+    color: var(--white);
+}
+
+.nested-info-table thead th {
+    padding: 0.6rem 0.5rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: left;
+}
+
+.nested-info-table tbody tr:nth-child(even) {
+    background: rgba(245,245,245,0.5);
+}
+
+.nested-info-table tbody td {
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(224,224,224,0.5);
+    vertical-align: top;
+    line-height: 1.4;
+}
+
+/* 目的タグ */
+.purpose-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.purpose-tag {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--white);
+    text-align: center;
+}
+
+.purpose-tag.primary {
+    background: linear-gradient(135deg, #2196f3, #1976d2);
+}
+
+.purpose-tag.secondary {
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+}
+
+.purpose-tag.accent {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .pdca-details-table,
+    .improvement-methods-table,
+    .nested-info-table {
+        font-size: 0.75rem;
+    }
+    
+    .pdca-details-table th,
+    .pdca-details-table td,
+    .improvement-methods-table th,
+    .improvement-methods-table td,
+    .nested-info-table th,
+    .nested-info-table td {
+        padding: 0.5rem 0.3rem;
+    }
+    
+    .purpose-tags {
+        gap: 0.2rem;
+    }
+    
+    .purpose-tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
     }
 }
 

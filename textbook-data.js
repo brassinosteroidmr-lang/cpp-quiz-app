@@ -53,22 +53,41 @@ const TEXTBOOK_DATA = {
                             <div class="terminology-note">
                                 <p><em>※ソーシングは「戦略的調達」、パーチェシングは「実務的調達」と理解すると分かりやすいでしょう。</em></p>
                             </div>
-                            <ul>
-                                <li><strong>🔹 ソーシング（Sourcing）</strong>
-                                    <ul>
-                                        <li>調達品の仕様決定への参画</li>
-                                        <li>最適なサプライヤーの選定と価格交渉</li>
-                                        <li>長期的な戦略的パートナーシップの構築</li>
-                                    </ul>
-                                </li>
-                                <li><strong>🔹 パーチェシング（Purchasing）</strong>
-                                    <ul>
-                                        <li>正確な発注業務の実行</li>
-                                        <li>納期スケジュールの管理</li>
-                                        <li>商品の受入れ・品質検収業務</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <table class="procurement-functions-table">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fas fa-cog"></i> 業務領域</th>
+                                        <th><i class="fas fa-tasks"></i> 主な機能・業務</th>
+                                        <th><i class="fas fa-target"></i> 特徴</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="sourcing-row">
+                                        <td><strong>🔹 ソーシング<br>（Sourcing）</strong></td>
+                                        <td>
+                                            • 調達品の仕様決定への参画<br>
+                                            • 最適なサプライヤーの選定と価格交渉<br>
+                                            • 長期的な戦略的パートナーシップの構築
+                                        </td>
+                                        <td>
+                                            <span class="feature-badge strategic">戦略的調達</span><br>
+                                            <span class="feature-badge long-term">長期視点</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="purchasing-row">
+                                        <td><strong>🔹 パーチェシング<br>（Purchasing）</strong></td>
+                                        <td>
+                                            • 正確な発注業務の実行<br>
+                                            • 納期スケジュールの管理<br>
+                                            • 商品の受入れ・品質検収業務
+                                        </td>
+                                        <td>
+                                            <span class="feature-badge operational">実務的調達</span><br>
+                                            <span class="feature-badge execution">実行重視</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <h4>調達機能の3つの主要領域</h4>
@@ -163,12 +182,32 @@ const TEXTBOOK_DATA = {
                                             <td class="definition-cell">
                                                 <div class="definition-content">
                                                     <p><strong>製品の構成要素</strong></p>
-                                                    <ul class="examples-list">
-                                                        <li>原材料（鋼材、樹脂など）</li>
-                                                        <li>電子部品（IC、コネクタ）</li>
-                                                        <li>機構部品（ギア、ベアリング）</li>
-                                                        <li>包装材料</li>
-                                                    </ul>
+                                                    <table class="detail-examples-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><i class="fas fa-tag"></i> 分類</th>
+                                                                <th><i class="fas fa-list-ul"></i> 具体例</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><strong>原材料</strong></td>
+                                                                <td>鋼材、樹脂、アルミニウム、木材</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>電子部品</strong></td>
+                                                                <td>IC、コネクタ、センサー、基板</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>機構部品</strong></td>
+                                                                <td>ギア、ベアリング、モーター、バネ</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>包装材料</strong></td>
+                                                                <td>段ボール、フィルム、緩衝材、ラベル</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </td>
                                             <td class="department-cell">
@@ -252,12 +291,32 @@ const TEXTBOOK_DATA = {
                                             <td class="definition-cell">
                                                 <div class="definition-content">
                                                     <p><strong>OEM・ODM製品</strong></p>
-                                                    <ul class="examples-list">
-                                                        <li>OEM製品（相手先ブランド製造）</li>
-                                                        <li>ODM製品（設計込み製造）</li>
-                                                        <li>完成品仕入れ</li>
-                                                        <li>プライベートブランド品</li>
-                                                    </ul>
+                                                    <table class="detail-examples-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><i class="fas fa-industry"></i> 製品タイプ</th>
+                                                                <th><i class="fas fa-info-circle"></i> 特徴・説明</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><strong>OEM製品</strong></td>
+                                                                <td>相手先ブランド名での製造・供給</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>ODM製品</strong></td>
+                                                                <td>設計込みでの製造・開発</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>完成品仕入れ</strong></td>
+                                                                <td>他社製完成品の仕入れ・販売</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>PB品</strong></td>
+                                                                <td>プライベートブランド商品</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </td>
                                             <td class="department-cell">
@@ -296,12 +355,32 @@ const TEXTBOOK_DATA = {
                                             <td class="definition-cell">
                                                 <div class="definition-content">
                                                     <p><strong>保守・修理用部品</strong></p>
-                                                    <ul class="examples-list">
-                                                        <li>交換用部品・コンポーネント</li>
-                                                        <li>消耗品・メンテナンス部材</li>
-                                                        <li>修理用工具・治具</li>
-                                                        <li>アップグレード部品</li>
-                                                    </ul>
+                                                    <table class="detail-examples-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><i class="fas fa-wrench"></i> サービス種類</th>
+                                                                <th><i class="fas fa-clock"></i> 用途・目的</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><strong>交換用部品</strong></td>
+                                                                <td>故障時の緊急交換・修理対応</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>消耗品</strong></td>
+                                                                <td>定期メンテナンス・予防保全</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>修理用工具</strong></td>
+                                                                <td>保守作業用の専用治具・工具</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><strong>アップグレード品</strong></td>
+                                                                <td>性能向上・機能拡張用部品</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </td>
                                             <td class="department-cell">
@@ -1215,12 +1294,37 @@ const TEXTBOOK_DATA = {
                                     <div class="approach-content">
                                         <h5>仕様</h5>
                                         <p class="approach-desc">設計仕様の見直しや変更によるコスト最適化施策</p>
-                                        <ul class="approach-examples">
-                                            <li>VE（Value Engineering）による機能・コスト最適化</li>
-                                            <li>部品品種統合（VR: Variety Reduction）</li>
-                                            <li>新技術・工法の採用による効率化</li>
-                                            <li>標準品・汎用品の積極活用</li>
-                                        </ul>
+                                        <table class="improvement-methods-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fas fa-lightbulb"></i> 改善手法</th>
+                                                    <th><i class="fas fa-target"></i> 目的・効果</th>
+                                                    <th><i class="fas fa-percentage"></i> 削減期待率</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>VE（Value Engineering）</strong></td>
+                                                    <td>機能・コスト最適化、価値向上</td>
+                                                    <td>10-30%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>部品品種統合（VR）</strong></td>
+                                                    <td>品種削減、管理コスト低減</td>
+                                                    <td>5-15%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>新技術・工法の採用</strong></td>
+                                                    <td>製造効率化、品質向上</td>
+                                                    <td>15-40%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>標準品・汎用品活用</strong></td>
+                                                    <td>調達コスト削減、流通性向上</td>
+                                                    <td>3-12%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
@@ -1384,48 +1488,148 @@ const TEXTBOOK_DATA = {
                                     <div class="pdca-letter">P</div>
                                     <div class="pdca-content">
                                         <h5>Plan（計画フェーズ）</h5>
-                                        <ul>
-                                            <li><strong>戦略目標の設定</strong>：コスト削減率、品質向上目標、納期短縮目標など</li>
-                                            <li><strong>調達戦略の立案</strong>：ソーシング戦略、サプライヤー戦略、リスク管理戦略</li>
-                                            <li><strong>具体的施策計画</strong>：年間調達計画、予算計画、プロジェクト計画の策定</li>
-                                            <li><strong>KPI・指標設定</strong>：測定可能な成果指標とモニタリング体制の構築</li>
-                                        </ul>
+                                        <table class="pdca-details-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fas fa-bullseye"></i> 主要活動</th>
+                                                    <th><i class="fas fa-list-alt"></i> 具体的内容</th>
+                                                    <th><i class="fas fa-clock"></i> 期間</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>戦略目標の設定</strong></td>
+                                                    <td>コスト削減率、品質向上目標、納期短縮目標の明確化</td>
+                                                    <td>年初・四半期</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>調達戦略の立案</strong></td>
+                                                    <td>ソーシング戦略、サプライヤー戦略、リスク管理戦略</td>
+                                                    <td>中期計画</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>具体的施策計画</strong></td>
+                                                    <td>年間調達計画、予算計画、プロジェクト計画の策定</td>
+                                                    <td>年間計画</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>KPI・指標設定</strong></td>
+                                                    <td>測定可能な成果指標とモニタリング体制の構築</td>
+                                                    <td>継続</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="pdca-item do">
                                     <div class="pdca-letter">D</div>
                                     <div class="pdca-content">
                                         <h5>Do（実行フェーズ）</h5>
-                                        <ul>
-                                            <li><strong>戦略的施策の実行</strong>：サプライヤー開発、交渉、契約締結の実施</li>
-                                            <li><strong>日常的調達業務</strong>：発注管理、納期管理、品質管理の継続実行</li>
-                                            <li><strong>データ収集・蓄積</strong>：実績データ、市場情報、パフォーマンスデータの体系的収集</li>
-                                            <li><strong>プロセス標準化</strong>：ベストプラクティスの展開と業務手順の標準化</li>
-                                        </ul>
+                                        <table class="pdca-details-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fas fa-play"></i> 実行活動</th>
+                                                    <th><i class="fas fa-cogs"></i> 具体的業務</th>
+                                                    <th><i class="fas fa-users"></i> 関与者</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>戦略的施策の実行</strong></td>
+                                                    <td>サプライヤー開発、価格交渉、契約締結</td>
+                                                    <td>調達企画チーム</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>日常的調達業務</strong></td>
+                                                    <td>発注管理、納期管理、品質管理</td>
+                                                    <td>調達実務担当</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>データ収集・蓄積</strong></td>
+                                                    <td>実績データ、市場情報、パフォーマンスデータ収集</td>
+                                                    <td>全調達メンバー</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>プロセス標準化</strong></td>
+                                                    <td>ベストプラクティス展開、業務手順標準化</td>
+                                                    <td>プロセス改善チーム</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="pdca-item check">
                                     <div class="pdca-letter">C</div>
                                     <div class="pdca-content">
                                         <h5>Check（評価・検証フェーズ）</h5>
-                                        <ul>
-                                            <li><strong>実績測定・分析</strong>：KPI達成状況、コスト削減効果、品質向上効果の定量評価</li>
-                                            <li><strong>多角的な分析評価</strong>：財務的効果、戦略的効果、リスク影響度の総合評価</li>
-                                            <li><strong>課題・問題の抽出</strong>：目標未達要因、プロセス上の問題点の特定</li>
-                                            <li><strong>成功要因の分析</strong>：好成果要因の特定と横展開可能性の検討</li>
-                                        </ul>
+                                        <table class="pdca-details-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fas fa-chart-line"></i> 評価活動</th>
+                                                    <th><i class="fas fa-search"></i> 分析内容</th>
+                                                    <th><i class="fas fa-clipboard-check"></i> 成果物</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>実績測定・分析</strong></td>
+                                                    <td>KPI達成状況、コスト削減効果、品質向上効果</td>
+                                                    <td>定量評価レポート</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>多角的な分析評価</strong></td>
+                                                    <td>財務的効果、戦略的効果、リスク影響度</td>
+                                                    <td>総合評価書</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>課題・問題の抽出</strong></td>
+                                                    <td>目標未達要因、プロセス上の問題点</td>
+                                                    <td>課題特定リスト</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>成功要因の分析</strong></td>
+                                                    <td>好成果要因の特定と横展開可能性</td>
+                                                    <td>成功パターン集</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="pdca-item action">
                                     <div class="pdca-letter">A</div>
                                     <div class="pdca-content">
                                         <h5>Action（改善・標準化フェーズ）</h5>
-                                        <ul>
-                                            <li><strong>改善策の立案・実行</strong>：問題解決策の策定と実装</li>
-                                            <li><strong>成功事例の標準化</strong>：ベストプラクティスのマニュアル化と組織展開</li>
-                                            <li><strong>次期計画への反映</strong>：学習成果を次期戦略・計画に組み込み</li>
-                                            <li><strong>組織学習の促進</strong>：知識・ノウハウの組織内共有と人材育成</li>
-                                        </ul>
+                                        <table class="pdca-details-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fas fa-tools"></i> 改善活動</th>
+                                                    <th><i class="fas fa-tasks"></i> 実装内容</th>
+                                                    <th><i class="fas fa-forward"></i> 次ステップ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>改善策の立案・実行</strong></td>
+                                                    <td>問題解決策の策定と実装</td>
+                                                    <td>効果測定・検証</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>成功事例の標準化</strong></td>
+                                                    <td>ベストプラクティスのマニュアル化・展開</td>
+                                                    <td>組織全体への浸透</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>次期計画への反映</strong></td>
+                                                    <td>学習成果を次期戦略・計画に組み込み</td>
+                                                    <td>新PDCAサイクル開始</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>組織学習の促進</strong></td>
+                                                    <td>知識・ノウハウの組織内共有と人材育成</td>
+                                                    <td>継続的能力向上</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -1726,20 +1930,43 @@ const TEXTBOOK_DATA = {
                                     <tr>
                                         <td><strong>①CR推進管理情報</strong><br><small>Cost Reduction Management</small></td>
                                         <td>
-                                            <ul>
-                                                <li>CR実績データ・削減金額</li>
-                                                <li>CR視点表・分析結果</li>
-                                                <li>CRアクションプラン</li>
-                                                <li>交渉戦略メモ・結果記録</li>
-                                                <li>ベンチマークデータ</li>
-                                            </ul>
+                                            <table class="nested-info-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th><i class="fas fa-file-alt"></i> 情報項目</th>
+                                                        <th><i class="fas fa-info-circle"></i> 詳細内容</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>CR実績データ</strong></td>
+                                                        <td>月次・年次の削減金額、削減率、達成状況</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>CR視点表</strong></td>
+                                                        <td>分析結果、改善ポイント、効果測定</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>アクションプラン</strong></td>
+                                                        <td>具体的施策計画、スケジュール、責任者</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>交渉戦略</strong></td>
+                                                        <td>戦略メモ、交渉結果、教訓・ノウハウ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>ベンチマーク</strong></td>
+                                                        <td>市場価格、競合情報、目標値設定</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </td>
                                         <td>
-                                            <ul>
-                                                <li>コスト削減活動の推進・管理</li>
-                                                <li>目標達成度の測定・評価</li>
-                                                <li>改善施策の立案・実行</li>
-                                            </ul>
+                                            <div class="purpose-tags">
+                                                <span class="purpose-tag primary">コスト削減活動の推進・管理</span>
+                                                <span class="purpose-tag secondary">目標達成度の測定・評価</span>
+                                                <span class="purpose-tag accent">改善施策の立案・実行</span>
+                                            </div>
                                         </td>
                                         <td>月次<br>週次</td>
                                     </tr>
