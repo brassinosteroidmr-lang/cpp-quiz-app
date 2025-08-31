@@ -541,32 +541,58 @@ const TEXTBOOK_DATA = [
                     
                     <div style="background: linear-gradient(to right, #e3f2fd, #bbdefb, #90caf9); padding: 20px; border-radius: 10px; margin: 20px 0;">
                         <h5 style="text-align: center; margin-bottom: 15px;">🎯 成長ロードマップ：調達担当者から調達リーダーまでの道のり</h5>
-                        <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
-                            <tr style="background: #1976d2; color: white;">
-                                <th style="padding: 15px; text-align: center; width: 20%;">ステップ</th>
-                                <th style="padding: 15px; text-align: center; width: 20%;">期間・レベル</th>
-                                <th style="padding: 15px; text-align: center; width: 30%;">主な目標</th>
-                                <th style="padding: 15px; text-align: center; width: 30%;">期待される成果</th>
-                            </tr>
-                            <tr style="border-bottom: 2px solid #e0e0e0;">
-                                <td style="padding: 15px; text-align: center; font-weight: bold; background: #fff3e0;">🌱 Step 1<br>調達担当者</td>
-                                <td style="padding: 15px; text-align: center;">新人〜3年目<br>(約2-3年)</td>
-                                <td style="padding: 15px;">調達の基本業務を確実に遂行</td>
-                                <td style="padding: 15px;">ミスなく業務遂行<br>年3%以上のコスト削減</td>
-                            </tr>
-                            <tr style="border-bottom: 2px solid #e0e0e0;">
-                                <td style="padding: 15px; text-align: center; font-weight: bold; background: #f3e5f5;">🚀 Step 2<br>調達エキスパート</td>
-                                <td style="padding: 15px; text-align: center;">4〜8年目<br>(約3-5年)</td>
-                                <td style="padding: 15px;">戦略的な視点で調達業務を企画・実行</td>
-                                <td style="padding: 15px;">戦略的成果創出<br>部門間連携成功<br>後輩指導</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 15px; text-align: center; font-weight: bold; background: #e8f5e8;">👑 Step 3<br>調達リーダー</td>
-                                <td style="padding: 15px; text-align: center;">9年目以上<br>(5年以上の継続成長)</td>
-                                <td style="padding: 15px;">組織全体の調達機能を変革し競争力向上に貢献</td>
-                                <td style="padding: 15px;">組織変革<br>事業成果<br>業界での認知</td>
-                            </tr>
-                        </table>
+                        
+                        <!-- 成長ステップフローチャート -->
+                        <div style="display: flex; justify-content: center; margin: 20px 0;">
+                            <svg width="800" height="250" viewBox="0 0 800 250">
+                                <!-- ステップ1: 調達担当者 -->
+                                <rect x="50" y="50" width="180" height="120" fill="#4CAF50" stroke="#2E7D32" stroke-width="3" rx="15"/>
+                                <text x="140" y="75" text-anchor="middle" fill="white" font-weight="bold" font-size="14">🌱 Step 1</text>
+                                <text x="140" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="12">調達担当者</text>
+                                <text x="140" y="115" text-anchor="middle" fill="white" font-size="10">新人〜3年目 (約2-3年)</text>
+                                <text x="140" y="135" text-anchor="middle" fill="white" font-size="9">基本業務を確実に遂行</text>
+                                <text x="140" y="150" text-anchor="middle" fill="white" font-size="9">年3%以上のコスト削減</text>
+                                
+                                <!-- 矢印 1 -->
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#1976D2"/>
+                                    </marker>
+                                </defs>
+                                <path d="M240 110 L290 110" stroke="#1976D2" stroke-width="4" marker-end="url(#arrowhead)"/>
+                                <text x="265" y="100" text-anchor="middle" fill="#1976D2" font-size="12" font-weight="bold">成長</text>
+                                
+                                <!-- ステップ2: 調達エキスパート -->
+                                <rect x="300" y="50" width="180" height="120" fill="#2196F3" stroke="#0D47A1" stroke-width="3" rx="15"/>
+                                <text x="390" y="75" text-anchor="middle" fill="white" font-weight="bold" font-size="14">🚀 Step 2</text>
+                                <text x="390" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="11">調達エキスパート</text>
+                                <text x="390" y="115" text-anchor="middle" fill="white" font-size="10">4〜8年目 (約3-5年)</text>
+                                <text x="390" y="135" text-anchor="middle" fill="white" font-size="9">戦略的な視点で企画・実行</text>
+                                <text x="390" y="150" text-anchor="middle" fill="white" font-size="9">部門間連携・後輩指導</text>
+                                
+                                <!-- 矢印 2 -->
+                                <path d="M490 110 L540 110" stroke="#1976D2" stroke-width="4" marker-end="url(#arrowhead)"/>
+                                <text x="515" y="100" text-anchor="middle" fill="#1976D2" font-size="12" font-weight="bold">発展</text>
+                                
+                                <!-- ステップ3: 調達リーダー -->
+                                <rect x="550" y="50" width="180" height="120" fill="#FF9800" stroke="#E65100" stroke-width="3" rx="15"/>
+                                <text x="640" y="75" text-anchor="middle" fill="white" font-weight="bold" font-size="14">👑 Step 3</text>
+                                <text x="640" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="12">調達リーダー</text>
+                                <text x="640" y="115" text-anchor="middle" fill="white" font-size="10">9年目以上 (5年以上継続)</text>
+                                <text x="640" y="135" text-anchor="middle" fill="white" font-size="9">組織変革・競争力向上</text>
+                                <text x="640" y="150" text-anchor="middle" fill="white" font-size="9">事業成果・業界認知</text>
+                                
+                                <!-- スキルレベルメーター -->
+                                <rect x="50" y="200" width="680" height="30" fill="#E0E0E0" rx="15"/>
+                                <rect x="50" y="200" width="180" height="30" fill="#4CAF50" rx="15"/>
+                                <rect x="230" y="200" width="250" height="30" fill="#2196F3" rx="15"/>
+                                <rect x="480" y="200" width="250" height="30" fill="#FF9800" rx="15"/>
+                                <text x="390" y="185" text-anchor="middle" fill="#666" font-size="12" font-weight="bold">📈 スキル・経験レベル進行度</text>
+                                <text x="140" y="220" text-anchor="middle" fill="white" font-size="11" font-weight="bold">基礎レベル</text>
+                                <text x="355" y="220" text-anchor="middle" fill="white" font-size="11" font-weight="bold">応用レベル</text>
+                                <text x="605" y="220" text-anchor="middle" fill="white" font-size="11" font-weight="bold">戦略レベル</text>
+                            </svg>
+                        </div>
                     </div>
                     
                     <h5>ステップ1：調達担当者（新人〜3年目）</h5>
@@ -612,39 +638,62 @@ const TEXTBOOK_DATA = [
                     <p>調達のプロとして活躍するには、以下の4つのスキル分野をバランス良く身につける必要があります。各スキルは段階的に高度化していき、最終的には戦略レベルまで使いこなせるようになります。</p>
                     
                     <div style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 25px; border-radius: 15px; margin: 20px 0;">
-                        <h5 style="text-align: center; margin-bottom: 20px; color: #495057;">💪 スキル習得レベル一覧表</h5>
-                        <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                            <tr style="background: linear-gradient(to right, #6c757d, #495057); color: white;">
-                                <th style="padding: 15px; width: 25%;">スキル分野</th>
-                                <th style="padding: 15px; width: 25%;">基礎レベル</th>
-                                <th style="padding: 15px; width: 25%;">応用レベル</th>
-                                <th style="padding: 15px; width: 25%;">戦略レベル</th>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #e9ecef;">
-                                <td style="padding: 15px; font-weight: bold; background: #fff3cd;">🎯 サプライヤー<br>選定力</td>
-                                <td style="padding: 15px;">ネットや展示会で候補探し<br>基本的な比較</td>
-                                <td style="padding: 15px;">品質・コスト・納期・サービス<br>総合評価でベストパートナー選定</td>
-                                <td style="padding: 15px;">市場全体分析<br>将来性考慮した長期戦略構築</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #e9ecef;">
-                                <td style="padding: 15px; font-weight: bold; background: #d1ecf1;">💰 コスト<br>削減力</td>
-                                <td style="padding: 15px;">相見積もり取得<br>基本的な価格交渉</td>
-                                <td style="padding: 15px;">原価詳細分析<br>根拠に基づく効果的交渉</td>
-                                <td style="padding: 15px;">市場価格動向予測<br>中長期コスト最適化戦略</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #e9ecef;">
-                                <td style="padding: 15px; font-weight: bold; background: #d4edda;">🤝 関係<br>構築力</td>
-                                <td style="padding: 15px;">定期的コミュニケーション<br>信頼関係構築</td>
-                                <td style="padding: 15px;">サプライヤー課題理解<br>共同改善プロジェクト推進</td>
-                                <td style="padding: 15px;">技術開発・人材交流含む<br>戦略的パートナーシップ</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 15px; font-weight: bold; background: #f8d7da;">⚠️ リスク<br>管理力</td>
-                                <td style="padding: 15px;">日常的な品質・納期問題<br>迅速発見・対処</td>
-                                <td style="padding: 15px;">財務・操業リスク定期チェック<br>予防策実施</td>
-                                <td style="padding: 15px;">地政学・気候変動含む<br>包括的リスク管理体制</td>
-                            </tr>
-                        </table>
+                        <h5 style="text-align: center; margin-bottom: 20px; color: #495057;">💪 4つのコアスキル レーダーチャート</h5>
+                        
+                        <!-- 4スキルレーダーチャート -->
+                        <div style="display: flex; justify-content: center; margin: 20px 0;">
+                            <svg width="600" height="500" viewBox="0 0 600 500">
+                                <!-- 背景グリッド円 -->
+                                <circle cx="300" cy="250" r="150" fill="none" stroke="#E0E0E0" stroke-width="2"/>
+                                <circle cx="300" cy="250" r="100" fill="none" stroke="#E0E0E0" stroke-width="1"/>
+                                <circle cx="300" cy="250" r="50" fill="none" stroke="#E0E0E0" stroke-width="1"/>
+                                
+                                <!-- 軸ライン -->
+                                <line x1="300" y1="100" x2="300" y2="400" stroke="#BDBDBD" stroke-width="1"/>
+                                <line x1="150" y1="250" x2="450" y2="250" stroke="#BDBDBD" stroke-width="1"/>
+                                <line x1="193.8" y1="143.8" x2="406.2" y2="356.2" stroke="#BDBDBD" stroke-width="1"/>
+                                <line x1="406.2" y1="143.8" x2="193.8" y2="356.2" stroke="#BDBDBD" stroke-width="1"/>
+                                
+                                <!-- スキル軸と値 -->
+                                <!-- サプライヤー選定力 (上) -->
+                                <text x="300" y="85" text-anchor="middle" fill="#FF9800" font-size="14" font-weight="bold">🎯 サプライヤー選定力</text>
+                                <circle cx="300" cy="130" r="8" fill="#FF9800"/>
+                                <text x="300" y="120" text-anchor="middle" fill="#333" font-size="12">戦略レベル 85%</text>
+                                
+                                <!-- コスト削減力 (右) -->
+                                <text x="480" y="255" text-anchor="middle" fill="#4CAF50" font-size="14" font-weight="bold">💰 コスト削減力</text>
+                                <circle cx="420" cy="250" r="8" fill="#4CAF50"/>
+                                <text x="430" y="235" text-anchor="start" fill="#333" font-size="12">戦略レベル 90%</text>
+                                
+                                <!-- 関係構築力 (下) -->
+                                <text x="300" y="425" text-anchor="middle" fill="#2196F3" font-size="14" font-weight="bold">🤝 関係構築力</text>
+                                <circle cx="300" cy="370" r="8" fill="#2196F3"/>
+                                <text x="300" y="385" text-anchor="middle" fill="#333" font-size="12">戦略レベル 75%</text>
+                                
+                                <!-- リスク管理力 (左) -->
+                                <text x="120" y="255" text-anchor="middle" fill="#F44336" font-size="14" font-weight="bold">⚠️ リスク管理力</text>
+                                <circle cx="180" cy="250" r="8" fill="#F44336"/>
+                                <text x="170" y="235" text-anchor="end" fill="#333" font-size="12">戦略レベル 80%</text>
+                                
+                                <!-- スキル成長エリア -->
+                                <polygon points="300,130 420,250 300,370 180,250" 
+                                         fill="rgba(76, 175, 80, 0.2)" 
+                                         stroke="#4CAF50" 
+                                         stroke-width="3"/>
+                                
+                                <!-- 中央ラベル -->
+                                <rect x="250" y="235" width="100" height="30" fill="rgba(255,255,255,0.9)" stroke="#666" stroke-width="1" rx="15"/>
+                                <text x="300" y="250" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">総合スキルレベル</text>
+                                <text x="300" y="265" text-anchor="middle" fill="#4CAF50" font-size="14" font-weight="bold">82.5%</text>
+                                
+                                <!-- レベル表示 -->
+                                <rect x="50" y="450" width="500" height="40" fill="#F5F5F5" stroke="#DDD" stroke-width="1" rx="10"/>
+                                <text x="300" y="465" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">📊 スキルレベル指標</text>
+                                <text x="120" y="480" text-anchor="middle" fill="#666" font-size="11">基礎 (0-40%)</text>
+                                <text x="300" y="480" text-anchor="middle" fill="#666" font-size="11">応用 (40-70%)</text>
+                                <text x="480" y="480" text-anchor="middle" fill="#4CAF50" font-size="11" font-weight="bold">戦略 (70-100%)</text>
+                            </svg>
+                        </div>
                         
                         <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border-radius: 8px;">
                             <h6 style="margin-bottom: 10px; color: #0066cc;">📈 各スキルの成果指標例：</h6>
@@ -709,53 +758,67 @@ const TEXTBOOK_DATA = [
                     <p>調達のプロになるためには、「知識」「実践スキル」「人間力」の3つの能力をバランス良く身につけることが重要です。この3つの能力について、具体的に何を学び、どう身につければよいかを説明します。</p>
                     
                     <div style="background: linear-gradient(45deg, #f5f7fa, #c3cfe2); padding: 25px; border-radius: 15px; margin: 20px 0;">
-                        <h5 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">🎯 3つの能力タイプ習得ガイド</h5>
+                        <h5 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">🎯 3つの能力タイプバランス図表</h5>
                         
-                        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-                            <div style="flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <h6 style="color: #e74c3c; text-align: center; margin-bottom: 15px;">📚 能力タイプ1：基礎知識</h6>
-                                <p style="font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 10px;">頭で理解する力</p>
-                                <div style="background: #fdedec; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
-                                    <strong>習得内容：</strong><br>
-                                    • 調達の基本ルール<br>
-                                    • ビジネス基本知識<br>
-                                    • 法律・規制理解
-                                </div>
-                                <div style="background: #eaf2f8; padding: 8px; border-radius: 4px;">
-                                    <strong>習得方法：</strong> 研修・資格勉強・指導<br>
-                                    <strong>証明：</strong> 資格取得・テスト合格
-                                </div>
-                            </div>
-                            
-                            <div style="flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <h6 style="color: #3498db; text-align: center; margin-bottom: 15px;">⚙️ 能力タイプ2：実践スキル</h6>
-                                <p style="font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 10px;">実際にできる力</p>
-                                <div style="background: #ebf3fd; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
-                                    <strong>習得内容：</strong><br>
-                                    • 分析・企画力<br>
-                                    • コミュニケーション・交渉力<br>
-                                    • ITツール活用力
-                                </div>
-                                <div style="background: #eaf2f8; padding: 8px; border-radius: 4px;">
-                                    <strong>習得方法：</strong> 実務・プロジェクト参加<br>
-                                    <strong>証明：</strong> 問題解決・業務効率化
-                                </div>
-                            </div>
-                            
-                            <div style="flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <h6 style="color: #27ae60; text-align: center; margin-bottom: 15px;">💖 能力タイプ3：人間力・マインド</h6>
-                                <p style="font-weight: bold; color: #2c3e50; text-align: center; margin-bottom: 10px;">信頼される力</p>
-                                <div style="background: #eafaf1; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
-                                    <strong>習得内容：</strong><br>
-                                    • リーダーシップ・影響力<br>
-                                    • 誠実さ・プロ意識<br>
-                                    • 学習・成長姿勢
-                                </div>
-                                <div style="background: #eaf2f8; padding: 8px; border-radius: 4px;">
-                                    <strong>習得方法：</strong> 指導・フィードバック・経験<br>
-                                    <strong>証明：</strong> 信頼・貢献・成長支援
-                                </div>
-                            </div>
+                        <!-- 3能力バランスチャート -->
+                        <div style="display: flex; justify-content: center; margin: 20px 0;">
+                            <svg width="500" height="450" viewBox="0 0 500 450">
+                                <!-- 背景の三角形フレーム -->
+                                <polygon points="250,60 100,320 400,320" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="3"/>
+                                
+                                <!-- 内部グリッドライン -->
+                                <line x1="175" y1="190" x2="325" y2="190" stroke="#E9ECEF" stroke-width="1"/>
+                                <line x1="200" y1="260" x2="300" y2="260" stroke="#E9ECEF" stroke-width="1"/>
+                                
+                                <!-- 能力1: 基礎知識 (上頂点) -->
+                                <circle cx="250" cy="80" r="40" fill="#E74C3C" stroke="#C0392B" stroke-width="4"/>
+                                <text x="250" y="75" text-anchor="middle" fill="white" font-weight="bold" font-size="18">📚</text>
+                                <text x="250" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="12">基礎知識</text>
+                                <text x="250" y="40" text-anchor="middle" fill="#E74C3C" font-size="14" font-weight="bold">頭で理解する力</text>
+                                
+                                <!-- 能力2: 実践スキル (左下頂点) -->
+                                <circle cx="120" cy="300" r="40" fill="#3498DB" stroke="#2980B9" stroke-width="4"/>
+                                <text x="120" y="295" text-anchor="middle" fill="white" font-weight="bold" font-size="18">⚙️</text>
+                                <text x="120" y="310" text-anchor="middle" fill="white" font-weight="bold" font-size="11">実践スキル</text>
+                                <text x="70" y="350" text-anchor="middle" fill="#3498DB" font-size="14" font-weight="bold">実際にできる力</text>
+                                
+                                <!-- 能力3: 人間力 (右下頂点) -->
+                                <circle cx="380" cy="300" r="40" fill="#27AE60" stroke="#229954" stroke-width="4"/>
+                                <text x="380" y="295" text-anchor="middle" fill="white" font-weight="bold" font-size="18">💖</text>
+                                <text x="380" y="310" text-anchor="middle" fill="white" font-weight="bold" font-size="12">人間力</text>
+                                <text x="430" y="350" text-anchor="middle" fill="#27AE60" font-size="14" font-weight="bold">信頼される力</text>
+                                
+                                <!-- バランス目標エリア -->
+                                <polygon points="250,140 160,260 340,260" 
+                                         fill="rgba(52, 152, 219, 0.3)" 
+                                         stroke="#3498DB" 
+                                         stroke-width="2" 
+                                         stroke-dasharray="5,5"/>
+                                
+                                <!-- 理想バランスポイント -->
+                                <circle cx="250" cy="220" r="12" fill="#F39C12" stroke="#D68910" stroke-width="3"/>
+                                <text x="250" y="225" text-anchor="middle" fill="white" font-weight="bold" font-size="10">理想</text>
+                                
+                                <!-- バランス接続線 -->
+                                <line x1="250" y1="120" x2="160" y2="260" stroke="#9B59B6" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+                                <line x1="160" y1="260" x2="340" y2="260" stroke="#9B59B6" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+                                <line x1="340" y1="260" x2="250" y2="120" stroke="#9B59B6" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+                                
+                                <!-- 中央説明ボックス -->
+                                <rect x="200" y="200" width="100" height="40" fill="rgba(255,255,255,0.95)" stroke="#F39C12" stroke-width="2" rx="8"/>
+                                <text x="250" y="215" text-anchor="middle" fill="#D68910" font-size="11" font-weight="bold">バランス重要</text>
+                                <text x="250" y="230" text-anchor="middle" fill="#666" font-size="10">3つ全て必要</text>
+                                
+                                <!-- レベル表示 -->
+                                <rect x="50" y="380" width="400" height="60" fill="#ECF0F1" stroke="#BDC3C7" stroke-width="2" rx="10"/>
+                                <text x="250" y="395" text-anchor="middle" fill="#2C3E50" font-size="12" font-weight="bold">📊 各能力の習得方法と証明</text>
+                                <text x="120" y="410" text-anchor="middle" fill="#E74C3C" font-size="10" font-weight="bold">研修・資格勉強</text>
+                                <text x="120" y="425" text-anchor="middle" fill="#666" font-size="9">資格取得・合格</text>
+                                <text x="250" y="410" text-anchor="middle" fill="#3498DB" font-size="10" font-weight="bold">実務・経験</text>
+                                <text x="250" y="425" text-anchor="middle" fill="#666" font-size="9">問題解決・効率化</text>
+                                <text x="380" y="410" text-anchor="middle" fill="#27AE60" font-size="10" font-weight="bold">指導・交流</text>
+                                <text x="380" y="425" text-anchor="middle" fill="#666" font-size="9">信頼・成長支援</text>
+                            </svg>
                         </div>
                         
                         <div style="background: #fff; padding: 15px; border-radius: 10px; border-left: 5px solid #f39c12;">
@@ -852,19 +915,72 @@ const TEXTBOOK_DATA = [
                     <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 30px; border-radius: 20px; margin: 20px 0; color: white;">
                         <h5 style="text-align: center; margin-bottom: 25px; color: white;">🎯 PDCAサイクルによる継続的成長モデル</h5>
                         
-                        <div style="position: relative; display: flex; justify-content: center; margin-bottom: 25px;">
-                            <div style="background: rgba(255,255,255,0.1); border-radius: 50%; width: 300px; height: 300px; position: relative; border: 3px solid rgba(255,255,255,0.3);">
-                                <!-- PDCA Circle Visualization -->
-                                <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">P<br>計画</div>
-                                <div style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); background: #3498db; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">D<br>実行</div>
-                                <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #f39c12; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">C<br>評価</div>
-                                <div style="position: absolute; top: 50%; left: 20px; transform: translateY(-50%); background: #27ae60; color: white; padding: 15px; border-radius: 50%; width: 60px; height: 60px; text-align: center; line-height: 30px; font-weight: bold;">A<br>改善</div>
-                                <!-- Arrows -->
-                                <div style="position: absolute; top: 35%; right: 35%; font-size: 24px; color: rgba(255,255,255,0.8);">→</div>
-                                <div style="position: absolute; bottom: 35%; right: 35%; font-size: 24px; color: rgba(255,255,255,0.8); transform: rotate(90deg);">→</div>
-                                <div style="position: absolute; bottom: 35%; left: 35%; font-size: 24px; color: rgba(255,255,255,0.8); transform: rotate(180deg);">→</div>
-                                <div style="position: absolute; top: 35%; left: 35%; font-size: 24px; color: rgba(255,255,255,0.8); transform: rotate(270deg);">→</div>
-                            </div>
+                        <!-- PDCA円形サイクル図 -->
+                        <div style="display: flex; justify-content: center; margin: 20px 0;">
+                            <svg width="450" height="450" viewBox="0 0 450 450">
+                                <!-- 外側のメイン円 -->
+                                <circle cx="225" cy="225" r="180" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
+                                
+                                <!-- Plan セクター (12時から3時方向) -->
+                                <path d="M 225 225 L 225 45 A 180 180 0 0 1 405 225 Z" fill="#E74C3C" fill-opacity="0.85" stroke="white" stroke-width="4"/>
+                                <text x="315" y="135" text-anchor="middle" fill="white" font-weight="bold" font-size="24">P</text>
+                                <text x="315" y="155" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Plan</text>
+                                <text x="315" y="170" text-anchor="middle" fill="white" font-size="12">計画・目標設定</text>
+                                
+                                <!-- Do セクター (3時から6時方向) -->
+                                <path d="M 225 225 L 405 225 A 180 180 0 0 1 225 405 Z" fill="#3498DB" fill-opacity="0.85" stroke="white" stroke-width="4"/>
+                                <text x="315" y="315" text-anchor="middle" fill="white" font-weight="bold" font-size="24">D</text>
+                                <text x="315" y="335" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Do</text>
+                                <text x="315" y="350" text-anchor="middle" fill="white" font-size="12">実行・学習</text>
+                                
+                                <!-- Check セクター (6時から9時方向) -->
+                                <path d="M 225 225 L 225 405 A 180 180 0 0 1 45 225 Z" fill="#F39C12" fill-opacity="0.85" stroke="white" stroke-width="4"/>
+                                <text x="135" y="315" text-anchor="middle" fill="white" font-weight="bold" font-size="24">C</text>
+                                <text x="135" y="335" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Check</text>
+                                <text x="135" y="350" text-anchor="middle" fill="white" font-size="12">評価・確認</text>
+                                
+                                <!-- Action セクター (9時から12時方向) -->
+                                <path d="M 225 225 L 45 225 A 180 180 0 0 1 225 45 Z" fill="#27AE60" fill-opacity="0.85" stroke="white" stroke-width="4"/>
+                                <text x="135" y="135" text-anchor="middle" fill="white" font-weight="bold" font-size="24">A</text>
+                                <text x="135" y="155" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Action</text>
+                                <text x="135" y="170" text-anchor="middle" fill="white" font-size="12">改善・次サイクル</text>
+                                
+                                <!-- 内側の円 -->
+                                <circle cx="225" cy="225" r="90" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="3"/>
+                                <text x="225" y="215" text-anchor="middle" fill="white" font-weight="bold" font-size="16">継続的成長</text>
+                                <text x="225" y="235" text-anchor="middle" fill="white" font-weight="bold" font-size="14">サイクル</text>
+                                <text x="225" y="250" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="12">3-6ヶ月周期</text>
+                                
+                                <!-- 回転矢印 -->
+                                <defs>
+                                    <marker id="pdca-arrow" markerWidth="15" markerHeight="15" refX="10" refY="7.5" orient="auto">
+                                        <path d="M2,2 L2,13 L13,7.5 Z" fill="white" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                    </marker>
+                                </defs>
+                                
+                                <!-- 外側矢印 - 時計回りの流れを示す -->
+                                <path d="M 315 90 A 200 200 0 0 1 360 315" fill="none" stroke="white" stroke-width="4" marker-end="url(#pdca-arrow)" opacity="0.9"/>
+                                <path d="M 360 315 A 200 200 0 0 1 135 360" fill="none" stroke="white" stroke-width="4" marker-end="url(#pdca-arrow)" opacity="0.9"/>
+                                <path d="M 135 360 A 200 200 0 0 1 90 135" fill="none" stroke="white" stroke-width="4" marker-end="url(#pdca-arrow)" opacity="0.9"/>
+                                <path d="M 90 135 A 200 200 0 0 1 315 90" fill="none" stroke="white" stroke-width="4" marker-end="url(#pdca-arrow)" opacity="0.9"/>
+                                
+                                <!-- 各段階の詳細アイコン -->
+                                <circle cx="315" cy="90" r="15" fill="white" stroke="#E74C3C" stroke-width="3"/>
+                                <text x="315" y="95" text-anchor="middle" fill="#E74C3C" font-size="14" font-weight="bold">📋</text>
+                                
+                                <circle cx="360" cy="315" r="15" fill="white" stroke="#3498DB" stroke-width="3"/>
+                                <text x="360" y="320" text-anchor="middle" fill="#3498DB" font-size="14" font-weight="bold">🚀</text>
+                                
+                                <circle cx="135" cy="360" r="15" fill="white" stroke="#F39C12" stroke-width="3"/>
+                                <text x="135" y="365" text-anchor="middle" fill="#F39C12" font-size="14" font-weight="bold">📊</text>
+                                
+                                <circle cx="90" cy="135" r="15" fill="white" stroke="#27AE60" stroke-width="3"/>
+                                <text x="90" y="140" text-anchor="middle" fill="#27AE60" font-size="14" font-weight="bold">🔧</text>
+                                
+                                <!-- 成功指標 -->
+                                <rect x="125" y="20" width="200" height="25" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2" rx="12"/>
+                                <text x="225" y="37" text-anchor="middle" fill="#2C3E50" font-size="12" font-weight="bold">🎯 成功の鍵：継続性と客観的評価</text>
+                            </svg>
                         </div>
                         
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
