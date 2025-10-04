@@ -13,6 +13,7 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="exam-mode.css">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -95,11 +96,97 @@
                         <div class="mode-grid">
                             <div class="mode-card" data-mode="practice">
                                 <div class="mode-icon">
-                                    <i class="fas fa-play"></i>
+                                    <i class="fas fa-book-reader"></i>
                                 </div>
-                                <h3>クイズを開始</h3>
-                                <p>CPPの問題に挑戦</p>
+                                <h3>📚 練習問題</h3>
+                                <p>章ごとの基本問題で学習</p>
+                                <div class="mode-stats">
+                                    <span>10問・5分</span>
+                                </div>
                                 <button class="mode-btn">開始</button>
+                            </div>
+                            
+                            <div class="mode-card" data-mode="review">
+                                <div class="mode-icon">
+                                    <i class="fas fa-redo"></i>
+                                </div>
+                                <h3>🔄 復習モード</h3>
+                                <p>間違えた問題を重点復習</p>
+                                <div class="mode-stats">
+                                    <span>全問・10分</span>
+                                </div>
+                                <button class="mode-btn">開始</button>
+                            </div>
+                            
+                            <div class="mode-card" data-mode="exam">
+                                <div class="mode-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h3>📝 模擬試験</h3>
+                                <p>本番形式の試験対策</p>
+                                <div class="mode-stats">
+                                    <span>50問・30分</span>
+                                </div>
+                                <button class="mode-btn">開始</button>
+                            </div>
+                            
+                            <div class="mode-card" data-mode="speedRun">
+                                <div class="mode-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h3>⚡ スピードラン</h3>
+                                <p>制限時間内にできるだけ多く</p>
+                                <div class="mode-stats">
+                                    <span>無制限・3分</span>
+                                </div>
+                                <button class="mode-btn">開始</button>
+                            </div>
+                            
+                            <div class="mode-card" data-mode="adaptive">
+                                <div class="mode-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3>🎯 アダプティブ学習</h3>
+                                <p>間違えた分野を重点的に</p>
+                                <div class="mode-stats">
+                                    <span>20問・15分</span>
+                                </div>
+                                <button class="mode-btn">開始</button>
+                            </div>
+                            
+                            <div class="mode-card" data-mode="battle">
+                                <div class="mode-icon">
+                                    <i class="fas fa-sword-fight"></i>
+                                </div>
+                                <h3>⚔️ クイズバトル</h3>
+                                <p>他ユーザーと対戦形式</p>
+                                <div class="mode-stats">
+                                    <span>5問・1分</span>
+                                </div>
+                                <button class="mode-btn">準備中</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 統計情報パネル -->
+                        <div class="quiz-stats-panel">
+                            <h3><i class="fas fa-chart-bar"></i> あなたの学習状況</h3>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-label">総問題数</span>
+                                    <span class="stat-value" id="total-questions">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">正答率</span>
+                                    <span class="stat-value" id="accuracy-rate">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">学習日数</span>
+                                    <span class="stat-value" id="study-days">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">苦手分野</span>
+                                    <span class="stat-value" id="weak-category">-</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -129,6 +216,10 @@
     <!-- JavaScript -->
     <script src="textbook-data.js"></script>
     <script src="quiz-data.js"></script>
+    <script src="enhanced-quiz-data.js"></script>
+    <script src="integrated-quiz-system.js"></script>
+    <script src="smart-quiz-algorithm.js"></script>
+    <script src="exam-mode.js"></script>
     <script src="icon-generator.js"></script>
     <script src="script.js"></script>
 </body>
