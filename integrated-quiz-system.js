@@ -69,14 +69,14 @@ const ENHANCED_QUIZ_MODES = {
         showExplanation: false,
         allowRetry: false
     },
-    battle: {
-        name: '⚔️ クイズバトル',
-        description: '他ユーザーと対戦形式',
-        timeLimit: 60, // 1分
-        questionCount: 5,
+    category: {
+        name: '📂 分野別トレーニング',
+        description: '特定分野を集中的に学習',
+        timeLimit: 600, // 10分
+        questionCount: 20,
         randomize: true,
-        showExplanation: false,
-        allowRetry: false
+        showExplanation: true,
+        allowRetry: true
     },
     speedRun: {
         name: '⚡ スピードラン',

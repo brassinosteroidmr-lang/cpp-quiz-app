@@ -119,7 +119,11 @@ class MockExamSystem {
         // クイズモード選択画面を非表示
         const quizModes = document.querySelector('.quiz-modes');
         if (quizModes) quizModes.style.display = 'none';
-        
+
+        // 通常のクイズコンテナを非表示
+        const quizContainer = document.querySelector('.quiz-container');
+        if (quizContainer) quizContainer.style.display = 'none';
+
         // 模擬試験UI要素を作成
         const examContainer = this.createExamContainer();
         const quizSection = document.querySelector('.quiz-section');
@@ -713,18 +717,22 @@ class MockExamSystem {
     
     backToMenu() {
         this.resetExam();
-        
+
         // 試験コンテナを削除
         const examContainer = document.querySelector('.exam-container');
         if (examContainer) {
             examContainer.remove();
         }
-        
+
         // クイズモード選択画面を表示
         const quizModes = document.querySelector('.quiz-modes');
         if (quizModes) {
             quizModes.style.display = 'block';
         }
+
+        // 通常のクイズコンテナを非表示に戻す（念のため）
+        const quizContainer = document.querySelector('.quiz-container');
+        if (quizContainer) quizContainer.style.display = 'none';
     }
     
     resetExam() {
