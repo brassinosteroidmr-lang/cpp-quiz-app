@@ -92,11 +92,7 @@ class ProcurementMasterApp {
 
         // デフォルトプレイヤーデータ
         return {
-            level: 1,
-            exp: 0,
-            rank: '新人',
             completedScenarios: [],
-            achievements: [],
             totalScore: 0,
             questionsAnswered: 0,
             correctAnswers: 0
@@ -110,67 +106,19 @@ class ProcurementMasterApp {
     resetPlayerData() {
         if (confirm('本当に進捗をリセットしますか？この操作は取り消せません。')) {
             localStorage.removeItem('procurementMasterPlayer');
+            localStorage.removeItem('examProgress');
             this.player = this.loadPlayerData();
-            this.updatePlayerUI();
+            if (this.examMode) {
+                this.examMode.examProgress = this.examMode.loadExamProgress();
+            }
             alert('進捗をリセットしました');
             this.showScreen('title');
         }
     }
 
-    // ========================================
-    // 経験値・レベルシステム
-    // ========================================
-    getExpRequired(level) {
-        return Math.floor(100 * Math.pow(1.5, level - 1));
-    }
-
-    addExp(amount) {
-        this.player.exp += amount;
-
-        // レベルアップチェック
-        while (this.player.exp >= this.getExpRequired(this.player.level)) {
-            this.player.exp -= this.getExpRequired(this.player.level);
-            this.player.level++;
-            this.onLevelUp();
-        }
-
-        this.updatePlayerUI();
-        this.savePlayerData();
-    }
-
-    onLevelUp() {
-        // 役職更新
-        if (this.player.level >= 10) {
-            this.player.rank = '部長';
-        } else if (this.player.level >= 6) {
-            this.player.rank = '課長';
-        } else if (this.player.level >= 3) {
-            this.player.rank = '主任';
-        }
-
-        // レベルアップ通知
-        setTimeout(() => {
-            alert(`レベルアップ！\nレベル ${this.player.level} になりました！\n役職: ${this.player.rank}`);
-        }, 500);
-    }
-
-    // ========================================
-    // UI更新
-    // ========================================
-    updatePlayerUI() {
-        document.getElementById('player-level').textContent = this.player.level;
-        document.getElementById('player-rank').textContent = this.player.rank;
-
-        const expRequired = this.getExpRequired(this.player.level);
-        const expPercent = (this.player.exp / expRequired) * 100;
-
-        document.getElementById('exp-bar-fill').style.width = `${expPercent}%`;
-        document.getElementById('exp-text').textContent = `${this.player.exp} / ${expRequired}`;
-    }
-
     updateContinueButton() {
         const continueBtn = document.getElementById('continue-game');
-        if (this.player.level > 1 || this.player.completedScenarios.length > 0) {
+        if (this.player.completedScenarios.length > 0 || this.player.questionsAnswered > 0) {
             continueBtn.style.display = 'flex';
         } else {
             continueBtn.style.display = 'none';
@@ -209,19 +157,11 @@ class ProcurementMasterApp {
         });
 
         // ヘッダーボタン
-        document.getElementById('profile-btn').addEventListener('click', () => {
-            this.showProfile();
-        });
-
         document.getElementById('menu-btn').addEventListener('click', () => {
             this.showMenu();
         });
 
         // モーダルクローズ
-        document.getElementById('close-profile').addEventListener('click', () => {
-            this.hideOverlay('profile');
-        });
-
         document.getElementById('close-menu').addEventListener('click', () => {
             this.hideOverlay('menu');
         });
@@ -256,7 +196,6 @@ class ProcurementMasterApp {
     // ========================================
     startGame() {
         this.showScreen('main');
-        this.updatePlayerUI();
 
         // モード選択画面を表示
         if (this.examMode) {
@@ -281,46 +220,37 @@ class ProcurementMasterApp {
         container.innerHTML = '';
 
         SCENARIOS.forEach(scenario => {
-            const isLocked = scenario.requiredLevel > this.player.level;
             const isCompleted = this.player.completedScenarios.includes(scenario.id);
 
             const card = document.createElement('div');
-            card.className = `scenario-card ${isLocked ? 'locked' : ''}`;
+            card.className = 'scenario-card';
 
-            if (isLocked) {
-                card.innerHTML = `
-                    <div class="scenario-lock-icon">🔒</div>
-                    <h4 class="scenario-card-title">${scenario.title}</h4>
-                    <p class="scenario-card-description">レベル${scenario.requiredLevel}で解放</p>
-                `;
-            } else {
-                const stars = '★'.repeat(scenario.difficulty) + '☆'.repeat(5 - scenario.difficulty);
+            const stars = '★'.repeat(scenario.difficulty) + '☆'.repeat(5 - scenario.difficulty);
 
-                card.innerHTML = `
-                    <div class="scenario-card-header">
-                        <div class="scenario-difficulty" title="難易度 ${scenario.difficulty}/5">
-                            ${stars}
-                        </div>
-                        ${isCompleted ? '<span style="color: var(--success-color);">✓ 完了</span>' : ''}
+            card.innerHTML = `
+                <div class="scenario-card-header">
+                    <div class="scenario-difficulty" title="難易度 ${scenario.difficulty}/5">
+                        ${stars}
                     </div>
-                    <h4 class="scenario-card-title">${scenario.title}</h4>
-                    <p class="scenario-card-description">${scenario.description}</p>
-                    <div class="scenario-card-meta">
-                        <div class="meta-item">
-                            <span>📁</span>
-                            <span>${scenario.category}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span>⏱️</span>
-                            <span>${scenario.estimatedTime}</span>
-                        </div>
+                    ${isCompleted ? '<span style="color: var(--success-color);">✓ 完了</span>' : ''}
+                </div>
+                <h4 class="scenario-card-title">${scenario.title}</h4>
+                <p class="scenario-card-description">${scenario.description}</p>
+                <div class="scenario-card-meta">
+                    <div class="meta-item">
+                        <span>📁</span>
+                        <span>${scenario.category}</span>
                     </div>
-                `;
+                    <div class="meta-item">
+                        <span>⏱️</span>
+                        <span>${scenario.estimatedTime}</span>
+                    </div>
+                </div>
+            `;
 
-                card.addEventListener('click', () => {
-                    this.startScenario(scenario.id);
-                });
-            }
+            card.addEventListener('click', () => {
+                this.startScenario(scenario.id);
+            });
 
             container.appendChild(card);
         });
@@ -591,10 +521,6 @@ class ProcurementMasterApp {
             this.player.completedScenarios.push(this.currentScenario.id);
         }
 
-        // スコアに応じて経験値を付与
-        const expGained = Math.max(20, this.currentScore * 2);
-        this.addExp(expGained);
-
         this.player.totalScore += this.currentScore;
         this.savePlayerData();
 
@@ -602,54 +528,25 @@ class ProcurementMasterApp {
         this.showOverlay('result');
 
         const resultContent = document.getElementById('result-content');
+        const correctCount = this.scenarioProgress.questionResults.filter(r => r.correct).length;
+        const totalQuestions = this.scenarioProgress.questionResults.length;
+        const accuracy = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
+
         resultContent.innerHTML = `
             <div class="result-stats">
                 <div class="result-stat">
                     <span class="result-stat-label">獲得スコア</span>
                     <span class="result-stat-value">${this.currentScore}</span>
                 </div>
+                ${totalQuestions > 0 ? `
                 <div class="result-stat">
-                    <span class="result-stat-label">獲得経験値</span>
-                    <span class="result-stat-value">+${expGained}</span>
+                    <span class="result-stat-label">正答率</span>
+                    <span class="result-stat-value">${accuracy}%</span>
                 </div>
+                ` : ''}
             </div>
             <div class="story-text">${this.currentStage.text}</div>
         `;
-    }
-
-    // ========================================
-    // プロフィール表示
-    // ========================================
-    showProfile() {
-        this.showOverlay('profile');
-
-        document.getElementById('profile-level').textContent = this.player.level;
-        document.getElementById('profile-rank').textContent = this.player.rank;
-        document.getElementById('profile-exp').textContent = this.player.exp;
-        document.getElementById('profile-completed').textContent = this.player.completedScenarios.length;
-
-        // 実績バッジ表示
-        const achievementsContainer = document.getElementById('achievements-container');
-        achievementsContainer.innerHTML = '';
-
-        const achievements = [
-            { id: 'first_scenario', icon: '🎯', name: '初陣', condition: () => this.player.completedScenarios.length >= 1 },
-            { id: 'level_5', icon: '⭐', name: 'Lv5達成', condition: () => this.player.level >= 5 },
-            { id: 'level_10', icon: '🌟', name: 'Lv10達成', condition: () => this.player.level >= 10 },
-            { id: 'all_scenarios', icon: '🏆', name: '全制覇', condition: () => this.player.completedScenarios.length >= SCENARIOS.length },
-            { id: 'perfect_score', icon: '💯', name: '満点', condition: () => this.currentScore >= 100 },
-            { id: 'master', icon: '👑', name: 'マスター', condition: () => this.player.rank === '部長' }
-        ];
-
-        achievements.forEach(achievement => {
-            const badge = document.createElement('div');
-            badge.className = `achievement-badge ${achievement.condition() ? 'unlocked' : ''}`;
-            badge.innerHTML = `
-                <div class="achievement-icon">${achievement.condition() ? achievement.icon : '🔒'}</div>
-                <div class="achievement-name">${achievement.name}</div>
-            `;
-            achievementsContainer.appendChild(badge);
-        });
     }
 
     // ========================================
@@ -657,6 +554,45 @@ class ProcurementMasterApp {
     // ========================================
     showMenu() {
         this.showOverlay('menu');
+        this.updateLearningStats();
+    }
+
+    updateLearningStats() {
+        const container = document.getElementById('learning-stats-content');
+
+        // 全体の正答率を計算
+        const overallAccuracy = this.player.questionsAnswered > 0
+            ? Math.round((this.player.correctAnswers / this.player.questionsAnswered) * 100)
+            : 0;
+
+        // 試験対策モードの進捗を計算
+        let totalExamQuestions = 0;
+        let attemptedExamQuestions = 0;
+        if (this.examMode && this.examMode.examProgress) {
+            for (let ch in this.examMode.examProgress) {
+                totalExamQuestions += this.examMode.examProgress[ch].totalQuestions;
+                attemptedExamQuestions += this.examMode.examProgress[ch].attempted;
+            }
+        }
+
+        container.innerHTML = `
+            <div class="stat-card">
+                <span class="stat-card-label">解答済み問題</span>
+                <span class="stat-card-value">${this.player.questionsAnswered}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">全体正答率</span>
+                <span class="stat-card-value">${overallAccuracy}%</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">完了シナリオ</span>
+                <span class="stat-card-value">${this.player.completedScenarios.length}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-card-label">学習進捗</span>
+                <span class="stat-card-value">${totalExamQuestions > 0 ? Math.round((attemptedExamQuestions / totalExamQuestions) * 100) : 0}%</span>
+            </div>
+        `;
     }
 }
 

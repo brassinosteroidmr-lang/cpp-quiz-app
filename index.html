@@ -52,33 +52,11 @@
                     <h2 class="app-title">調達マスター</h2>
                 </div>
                 <div class="header-right">
-                    <button id="profile-btn" class="btn btn-icon-only">
-                        <span>👤</span>
-                    </button>
                     <button id="menu-btn" class="btn btn-icon-only">
                         <span>☰</span>
                     </button>
                 </div>
             </header>
-
-            <!-- プレイヤー情報バー -->
-            <div class="player-info-bar">
-                <div class="info-item">
-                    <span class="info-label">レベル</span>
-                    <span id="player-level" class="info-value">1</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">役職</span>
-                    <span id="player-rank" class="info-value">新人</span>
-                </div>
-                <div class="info-item exp-bar-container">
-                    <span class="info-label">経験値</span>
-                    <div class="exp-bar">
-                        <div id="exp-bar-fill" class="exp-bar-fill" style="width: 0%"></div>
-                    </div>
-                    <span id="exp-text" class="exp-text">0 / 100</span>
-                </div>
-            </div>
 
             <!-- メインコンテンツ -->
             <main class="main-content">
@@ -167,42 +145,6 @@
             </main>
         </div>
 
-        <!-- プロフィール画面 -->
-        <div id="profile-screen" class="screen overlay-screen">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>プレイヤープロフィール</h3>
-                    <button id="close-profile" class="btn btn-close">×</button>
-                </div>
-                <div class="modal-body">
-                    <div class="profile-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">レベル</span>
-                            <span id="profile-level" class="stat-value">1</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">役職</span>
-                            <span id="profile-rank" class="stat-value">新人</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">経験値</span>
-                            <span id="profile-exp" class="stat-value">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">完了ミッション</span>
-                            <span id="profile-completed" class="stat-value">0</span>
-                        </div>
-                    </div>
-                    <div class="achievements">
-                        <h4>実績バッジ</h4>
-                        <div id="achievements-container" class="achievements-grid">
-                            <!-- 実績バッジが動的に追加されます -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- メニュー画面 -->
         <div id="menu-screen" class="screen overlay-screen">
             <div class="modal-content">
@@ -211,18 +153,21 @@
                     <button id="close-menu" class="btn btn-close">×</button>
                 </div>
                 <div class="modal-body">
+                    <div class="learning-stats">
+                        <h4>📊 学習統計</h4>
+                        <div id="learning-stats-content" class="stats-grid">
+                            <!-- 統計情報が動的に追加されます -->
+                        </div>
+                    </div>
                     <div class="menu-options">
                         <button id="reset-progress" class="btn btn-secondary btn-full-width">
                             <span>進捗をリセット</span>
                         </button>
-                        <button id="about-app" class="btn btn-secondary btn-full-width">
-                            <span>アプリについて</span>
-                        </button>
                     </div>
                     <div class="menu-info">
                         <p><strong>調達マスターへの道</strong></p>
-                        <p>Version 1.0.0</p>
-                        <p>CPP b級試験対応 実務シミュレーション型学習アプリ</p>
+                        <p>Version 2.0.0</p>
+                        <p>CPP b級試験対応 学習アプリ</p>
                     </div>
                 </div>
             </div>

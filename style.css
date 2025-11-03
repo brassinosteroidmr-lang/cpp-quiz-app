@@ -200,60 +200,6 @@ body {
 }
 
 /* ========================================
-   プレイヤー情報バー
-   ======================================== */
-
-.player-info-bar {
-    background-color: var(--surface-color);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    gap: var(--spacing-lg);
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.info-item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.info-label {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-}
-
-.info-value {
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.exp-bar-container {
-    flex: 1;
-    min-width: 200px;
-}
-
-.exp-bar {
-    height: 8px;
-    background-color: var(--border-color);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 0 var(--spacing-sm);
-}
-
-.exp-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-    transition: width var(--transition-normal);
-}
-
-.exp-text {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
-/* ========================================
    メインコンテンツ
    ======================================== */
 
@@ -563,77 +509,46 @@ body {
 }
 
 /* ========================================
-   プロフィール画面
+   メニュー画面
    ======================================== */
 
-.profile-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+.learning-stats {
     margin-bottom: var(--spacing-xl);
 }
 
-.stat-item {
+.learning-stats h4 {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-card {
     background-color: var(--background-color);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
     text-align: center;
 }
 
-.stat-label {
+.stat-card-label {
     display: block;
     font-size: 0.875rem;
     color: var(--text-secondary);
     margin-bottom: var(--spacing-xs);
 }
 
-.stat-value {
+.stat-card-value {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--primary-color);
 }
-
-.achievements h4 {
-    margin-bottom: var(--spacing-md);
-}
-
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: var(--spacing-md);
-}
-
-.achievement-badge {
-    background-color: var(--background-color);
-    padding: var(--spacing-md);
-    border-radius: var(--radius-md);
-    text-align: center;
-    transition: all var(--transition-fast);
-}
-
-.achievement-badge.unlocked {
-    background-color: rgba(37, 99, 235, 0.1);
-    border: 2px solid var(--primary-color);
-}
-
-.achievement-badge:hover {
-    transform: scale(1.05);
-}
-
-.achievement-icon {
-    font-size: 2rem;
-    margin-bottom: var(--spacing-xs);
-}
-
-.achievement-name {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
-/* ========================================
-   メニュー画面
-   ======================================== */
 
 .menu-options {
     display: flex;
@@ -772,19 +687,6 @@ body {
     }
 
     .scenarios-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .player-info-bar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .exp-bar-container {
-        width: 100%;
-    }
-
-    .profile-stats {
         grid-template-columns: 1fr;
     }
 

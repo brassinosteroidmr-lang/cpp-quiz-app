@@ -331,9 +331,10 @@ class ExamMode {
         // 進捗を更新
         this.updateChapterProgress(this.currentChapter, correctCount, totalCount);
 
-        // 経験値を付与
-        const expGained = correctCount * 10;
-        this.app.addExp(expGained);
+        // プレイヤーデータを更新
+        this.app.player.questionsAnswered += totalCount;
+        this.app.player.correctAnswers += correctCount;
+        this.app.savePlayerData();
 
         this.showResultScreen();
 
@@ -354,15 +355,14 @@ class ExamMode {
                     <span class="exam-result-stat-label">不正解数</span>
                 </div>
                 <div class="exam-result-stat">
-                    <span class="exam-result-stat-value">+${expGained}</span>
-                    <span class="exam-result-stat-label">獲得経験値</span>
+                    <span class="exam-result-stat-value">${Math.floor(elapsedTime / 60)}:${(elapsedTime % 60).toString().padStart(2, '0')}</span>
+                    <span class="exam-result-stat-label">所要時間</span>
                 </div>
             </div>
 
             <div class="exam-result-details">
                 <h4 style="margin-bottom: 1rem; font-size: 1.125rem;">📊 詳細な分析</h4>
                 <p style="line-height: 1.8; color: var(--text-secondary);">
-                    所要時間: ${Math.floor(elapsedTime / 60)}分${elapsedTime % 60}秒<br>
                     正答率: ${score}%<br>
                     ${this.getAdvice(score)}
                 </p>
