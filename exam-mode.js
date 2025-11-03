@@ -195,10 +195,24 @@ class ExamMode {
 
         container.innerHTML = '';
 
-        // 問題文
+        // 問題文を構造化して表示
+        const { instruction, mainQuestion } = this.parseQuestion(question.question);
+
+        // 指示文（あれば）
+        if (instruction) {
+            const instructionDiv = document.createElement('div');
+            instructionDiv.className = 'exam-question-instruction';
+            instructionDiv.textContent = instruction;
+            container.appendChild(instructionDiv);
+        }
+
+        // 問題本文
         const questionText = document.createElement('div');
         questionText.className = 'exam-question-text';
-        questionText.textContent = question.question;
+        const questionMain = document.createElement('div');
+        questionMain.className = 'exam-question-main';
+        questionMain.textContent = mainQuestion;
+        questionText.appendChild(questionMain);
         container.appendChild(questionText);
 
         // 選択肢
@@ -206,6 +220,11 @@ class ExamMode {
         optionsContainer.className = 'exam-options';
 
         question.options.forEach((option, index) => {
+            // 空の選択肢はスキップ
+            if (option.includes('（選択肢なし）')) {
+                return;
+            }
+
             const optionBtn = document.createElement('button');
             optionBtn.className = 'exam-option';
             optionBtn.innerHTML = `
@@ -224,6 +243,26 @@ class ExamMode {
     }
 
     // ========================================
+    // 問題文を解析して指示文と本文に分離
+    // ========================================
+    parseQuestion(questionText) {
+        // 「次の〜」で始まる指示文と本文を分離
+        const lines = questionText.split('\n');
+        let instruction = '';
+        let mainQuestion = '';
+
+        // 最初の「次の〜」を指示文とする
+        if (lines[0].startsWith('次の')) {
+            instruction = lines[0];
+            mainQuestion = lines.slice(1).join('\n').trim();
+        } else {
+            mainQuestion = questionText;
+        }
+
+        return { instruction, mainQuestion };
+    }
+
+    // ========================================
     // 回答選択
     // ========================================
     selectAnswer(selectedIndex) {
@@ -238,7 +277,7 @@ class ExamMode {
             isCorrect: isCorrect
         });
 
-        // 全ての選択肢を無効化
+        // 全ての選択肢を無効化してマーク
         const options = document.querySelectorAll('.exam-option');
         options.forEach((option, index) => {
             option.classList.add('disabled');
@@ -250,73 +289,70 @@ class ExamMode {
             }
         });
 
-        // 正解・不正解の判定を表示
-        this.showJudgement(isCorrect);
-
-        // 解説を表示
+        // 少し待ってから解説モーダルを表示
         setTimeout(() => {
-            this.showExplanation(question);
-            // 次へボタンを表示
-            setTimeout(() => {
-                this.showNextButton();
-            }, 300);
-        }, 800);
+            this.showExplanationModal(question, selectedIndex, isCorrect);
+        }, 600);
     }
 
     // ========================================
-    // 正解・不正解の判定表示
+    // 解説モーダル表示
     // ========================================
-    showJudgement(isCorrect) {
-        const container = document.getElementById('exam-question-content');
+    showExplanationModal(question, selectedIndex, isCorrect) {
+        const modal = document.getElementById('explanation-modal');
+        const header = document.getElementById('explanation-header');
+        const icon = document.getElementById('explanation-icon');
+        const title = document.getElementById('explanation-title');
+        const answersSection = document.getElementById('explanation-answers');
+        const explanationText = document.getElementById('explanation-text');
+        const nextBtn = document.getElementById('explanation-next-btn');
 
-        const judgement = document.createElement('div');
-        judgement.className = isCorrect ? 'exam-judgement correct-judgement' : 'exam-judgement incorrect-judgement';
-        judgement.innerHTML = isCorrect
-            ? '<span class="judgement-icon">✓</span><span class="judgement-text">正解！</span>'
-            : '<span class="judgement-icon">✗</span><span class="judgement-text">不正解</span>';
+        // ヘッダーの設定
+        header.className = `explanation-modal-header ${isCorrect ? 'correct' : 'incorrect'}`;
+        icon.textContent = isCorrect ? '✓' : '✗';
+        title.textContent = isCorrect ? '正解！' : '不正解';
 
-        container.appendChild(judgement);
-    }
+        // 回答情報の設定
+        const correctAnswerText = question.options[question.correct];
+        const yourAnswerText = question.options[selectedIndex];
 
-    // ========================================
-    // 解説表示
-    // ========================================
-    showExplanation(question) {
-        const container = document.getElementById('exam-question-content');
-
-        const explanationDiv = document.createElement('div');
-        explanationDiv.className = 'exam-explanation';
-        explanationDiv.innerHTML = `
-            <h4>📖 詳しい解説</h4>
-            <div class="exam-explanation-content">${question.explanation}</div>
+        answersSection.innerHTML = `
+            ${!isCorrect ? `
+                <div style="margin-bottom: var(--spacing-md);">
+                    <span class="explanation-answer-label">あなたの回答</span>
+                    <div class="explanation-answer-value your-answer">${selectedIndex + 1}. ${yourAnswerText}</div>
+                </div>
+            ` : ''}
+            <div>
+                <span class="explanation-answer-label">正解</span>
+                <div class="explanation-answer-value correct-answer">${question.correct + 1}. ${correctAnswerText}</div>
+            </div>
         `;
 
-        container.appendChild(explanationDiv);
-    }
+        // 解説の設定
+        explanationText.textContent = question.explanation;
 
-    // ========================================
-    // 次へボタン
-    // ========================================
-    showNextButton() {
-        const container = document.getElementById('exam-question-content');
-
-        const nextBtn = document.createElement('button');
-        nextBtn.className = 'btn btn-primary btn-full-width exam-next-button';
-
+        // 次へボタンの設定
         if (this.currentQuestionIndex < this.currentQuestions.length - 1) {
             nextBtn.textContent = '次の問題へ →';
-            nextBtn.addEventListener('click', () => {
+            nextBtn.onclick = () => {
+                modal.classList.remove('active');
                 this.currentQuestionIndex++;
                 this.renderQuestion();
-            });
+            };
         } else {
             nextBtn.textContent = '結果を見る';
-            nextBtn.addEventListener('click', () => {
+            nextBtn.onclick = () => {
+                modal.classList.remove('active');
                 this.showResults();
-            });
+            };
         }
 
-        container.appendChild(nextBtn);
+        // モーダルを表示
+        modal.classList.add('active');
+
+        // モーダル背景クリックで閉じないようにする
+        // （明示的に次へボタンを押す必要がある）
     }
 
     // ========================================
