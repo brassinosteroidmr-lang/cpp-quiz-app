@@ -226,7 +226,7 @@ class ExamMode {
         if (instruction) {
             const instructionDiv = document.createElement('div');
             instructionDiv.className = 'exam-question-instruction';
-            instructionDiv.textContent = instruction;
+            instructionDiv.innerHTML = this.highlightQuestionText(instruction);
             container.appendChild(instructionDiv);
         }
 
@@ -235,7 +235,7 @@ class ExamMode {
         questionText.className = 'exam-question-text';
         const questionMain = document.createElement('div');
         questionMain.className = 'exam-question-main';
-        questionMain.textContent = mainQuestion;
+        questionMain.innerHTML = this.highlightQuestionText(mainQuestion);
         questionText.appendChild(questionMain);
         container.appendChild(questionText);
 
@@ -277,7 +277,7 @@ class ExamMode {
         if (instruction) {
             const instructionDiv = document.createElement('div');
             instructionDiv.className = 'exam-question-instruction';
-            instructionDiv.textContent = instruction;
+            instructionDiv.innerHTML = this.highlightQuestionText(instruction);
             container.appendChild(instructionDiv);
         }
 
@@ -286,7 +286,7 @@ class ExamMode {
         questionText.className = 'exam-question-text';
         const questionMain = document.createElement('div');
         questionMain.className = 'exam-question-main';
-        questionMain.textContent = mainQuestion;
+        questionMain.innerHTML = this.highlightQuestionText(mainQuestion);
         questionText.appendChild(questionMain);
         container.appendChild(questionText);
 
@@ -297,14 +297,18 @@ class ExamMode {
         // ユーザーの回答を保存するオブジェクト
         this.currentFillInAnswers = {};
 
+        // 空欄番号のマッピング
+        const blankNumberMap = { '①': 1, '②': 2, '③': 3, '④': 4, '⑤': 5, '⑥': 6 };
+
         // 各空欄に対してセレクトボックスを作成
         question.blanks.forEach((blank) => {
             const blankItem = document.createElement('div');
             blankItem.className = 'fill-in-blank-item';
+            blankItem.setAttribute('data-blank-number', blankNumberMap[blank.id] || 1);
 
             const label = document.createElement('label');
             label.className = 'fill-in-blank-label';
-            label.textContent = `空欄 ${blank.id}`;
+            label.innerHTML = `空欄 <span class="blank-marker blank-marker-${blankNumberMap[blank.id] || 1}">${blank.id}</span>`;
             blankItem.appendChild(label);
 
             const select = document.createElement('select');
@@ -443,6 +447,74 @@ class ExamMode {
         }
 
         return { instruction, mainQuestion };
+    }
+
+    // ========================================
+    // 問題文をハイライト処理
+    // ========================================
+    highlightQuestionText(text) {
+        if (!text) return '';
+
+        // 空欄マーカーを色付きで強調（［①］→<span class="blank-marker blank-marker-1">①</span>）
+        const blankMarkers = {
+            '①': 1, '②': 2, '③': 3, '④': 4, '⑤': 5, '⑥': 6,
+            '⑦': 7, '⑧': 8, '⑨': 9, '⑩': 10
+        };
+
+        let highlighted = text;
+
+        // 空欄マーカーの置換
+        for (const [marker, num] of Object.entries(blankMarkers)) {
+            const regex = new RegExp(`［\\s*${marker}\\s*］`, 'g');
+            highlighted = highlighted.replace(
+                regex,
+                `<span class="blank-marker blank-marker-${num}">${marker}</span>`
+            );
+        }
+
+        // 重要キーワードのハイライト
+        const emphasisKeywords = [
+            '最も適切な', '最も適切', '最適な', '最も重要な', '最も',
+            '正しいもの', '適切なもの'
+        ];
+
+        const negativeKeywords = [
+            '誤っている', '誤って', '適切でない', '不適切', '間違って',
+            '正しくない', '該当しない'
+        ];
+
+        const allKeywords = [
+            'すべて', '全て', 'すべての', '全ての'
+        ];
+
+        // ネガティブキーワード（赤）
+        negativeKeywords.forEach(keyword => {
+            const regex = new RegExp(keyword, 'g');
+            highlighted = highlighted.replace(
+                regex,
+                `<span class="keyword-negative">${keyword}</span>`
+            );
+        });
+
+        // 強調キーワード（青）
+        emphasisKeywords.forEach(keyword => {
+            const regex = new RegExp(keyword, 'g');
+            highlighted = highlighted.replace(
+                regex,
+                `<span class="keyword-emphasis">${keyword}</span>`
+            );
+        });
+
+        // 全てキーワード（下線）
+        allKeywords.forEach(keyword => {
+            const regex = new RegExp(keyword, 'g');
+            highlighted = highlighted.replace(
+                regex,
+                `<span class="keyword-all">${keyword}</span>`
+            );
+        });
+
+        return highlighted;
     }
 
     // ========================================

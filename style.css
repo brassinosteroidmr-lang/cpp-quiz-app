@@ -1314,14 +1314,131 @@ body {
     cursor: not-allowed;
 }
 
+/* 空欄マーカーの色分け */
 .blank-marker {
     display: inline-block;
-    background-color: rgba(37, 99, 235, 0.1);
-    color: var(--primary-color);
-    padding: 0.2em 0.5em;
+    padding: 0.25em 0.6em;
     border-radius: var(--radius-sm);
     font-weight: 700;
-    margin: 0 0.2em;
+    margin: 0 0.15em;
+    border: 2px solid;
+}
+
+.blank-marker-1 {
+    background-color: rgba(37, 99, 235, 0.12);
+    color: #1e40af;
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+.blank-marker-2 {
+    background-color: rgba(249, 115, 22, 0.12);
+    color: #c2410c;
+    border-color: rgba(249, 115, 22, 0.3);
+}
+
+.blank-marker-3 {
+    background-color: rgba(16, 185, 129, 0.12);
+    color: #047857;
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.blank-marker-4 {
+    background-color: rgba(168, 85, 247, 0.12);
+    color: #7c3aed;
+    border-color: rgba(168, 85, 247, 0.3);
+}
+
+.blank-marker-5 {
+    background-color: rgba(236, 72, 153, 0.12);
+    color: #be185d;
+    border-color: rgba(236, 72, 153, 0.3);
+}
+
+.blank-marker-6 {
+    background-color: rgba(14, 165, 233, 0.12);
+    color: #0369a1;
+    border-color: rgba(14, 165, 233, 0.3);
+}
+
+/* 選択肢との色連携 */
+.fill-in-blank-item[data-blank-number="1"] .fill-in-blank-select {
+    border-color: rgba(37, 99, 235, 0.4);
+}
+
+.fill-in-blank-item[data-blank-number="2"] .fill-in-blank-select {
+    border-color: rgba(249, 115, 22, 0.4);
+}
+
+.fill-in-blank-item[data-blank-number="3"] .fill-in-blank-select {
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.fill-in-blank-item[data-blank-number="4"] .fill-in-blank-select {
+    border-color: rgba(168, 85, 247, 0.4);
+}
+
+.fill-in-blank-item[data-blank-number="5"] .fill-in-blank-select {
+    border-color: rgba(236, 72, 153, 0.4);
+}
+
+.fill-in-blank-item[data-blank-number="6"] .fill-in-blank-select {
+    border-color: rgba(14, 165, 233, 0.4);
+}
+
+/* 重要キーワードのハイライト */
+.keyword-emphasis {
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: rgba(37, 99, 235, 0.08);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
+
+.keyword-negative {
+    font-weight: 700;
+    color: #dc2626;
+    background-color: rgba(239, 68, 68, 0.08);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
+
+.keyword-all {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--primary-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+}
+
+/* 問題文の見やすさ改善 */
+.exam-question-text {
+    line-height: 2.0 !important;
+    font-size: 1.125rem !important;
+    letter-spacing: 0.02em;
+}
+
+.exam-question-instruction {
+    line-height: 1.9 !important;
+    font-size: 1.05rem !important;
+    padding: var(--spacing-lg) !important;
+    margin-bottom: var(--spacing-lg) !important;
+}
+
+.exam-question-main {
+    line-height: 2.0 !important;
+    padding: var(--spacing-lg);
+    background-color: var(--surface-color);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--primary-color);
+}
+
+/* 段落の余白 */
+.exam-question-main p {
+    margin-bottom: var(--spacing-md);
+}
+
+.exam-question-main p:last-child {
+    margin-bottom: 0;
 }
 
 /* ========================================
