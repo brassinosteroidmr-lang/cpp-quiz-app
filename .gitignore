@@ -1,0 +1,17 @@
+# Development files
+build-exam-questions-v2.html
+convert-questions-v2.js
+convert-questions.js
+extract-json.js
+test-fill-in-blanks.js
+test.html
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

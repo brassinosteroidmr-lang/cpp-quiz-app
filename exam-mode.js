@@ -63,6 +63,12 @@ class ExamMode {
 
         // デフォルト
         const progress = {};
+
+        if (typeof EXAM_QUESTIONS === 'undefined') {
+            console.error('EXAM_QUESTIONS is undefined!');
+            return {};
+        }
+
         for (let ch in EXAM_QUESTIONS) {
             progress[ch] = {
                 attempted: 0,
@@ -189,12 +195,30 @@ class ExamMode {
         const question = this.currentQuestions[this.currentQuestionIndex];
         const container = document.getElementById('exam-question-content');
 
+        // 画面を一番上にスムーズスクロール
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
         // 進捗更新
         document.getElementById('exam-progress-text').textContent =
             `問題 ${this.currentQuestionIndex + 1} / ${this.currentQuestions.length}`;
 
         container.innerHTML = '';
 
+        // 問題タイプに応じて表示を分ける
+        if (question.type === 'fill-in-blanks') {
+            this.renderFillInBlanksQuestion(question, container);
+        } else {
+            this.renderMultipleChoiceQuestion(question, container);
+        }
+    }
+
+    // ========================================
+    // 4択問題の表示
+    // ========================================
+    renderMultipleChoiceQuestion(question, container) {
         // 問題文を構造化して表示
         const { instruction, mainQuestion } = this.parseQuestion(question.question);
 
@@ -240,6 +264,165 @@ class ExamMode {
         });
 
         container.appendChild(optionsContainer);
+    }
+
+    // ========================================
+    // 穴埋め問題の表示
+    // ========================================
+    renderFillInBlanksQuestion(question, container) {
+        // 問題文を構造化して表示
+        const { instruction, mainQuestion } = this.parseQuestion(question.question);
+
+        // 指示文（あれば）
+        if (instruction) {
+            const instructionDiv = document.createElement('div');
+            instructionDiv.className = 'exam-question-instruction';
+            instructionDiv.textContent = instruction;
+            container.appendChild(instructionDiv);
+        }
+
+        // 問題本文
+        const questionText = document.createElement('div');
+        questionText.className = 'exam-question-text';
+        const questionMain = document.createElement('div');
+        questionMain.className = 'exam-question-main';
+        questionMain.textContent = mainQuestion;
+        questionText.appendChild(questionMain);
+        container.appendChild(questionText);
+
+        // 穴埋め選択肢コンテナ
+        const blanksContainer = document.createElement('div');
+        blanksContainer.className = 'fill-in-blanks-container';
+
+        // ユーザーの回答を保存するオブジェクト
+        this.currentFillInAnswers = {};
+
+        // 各空欄に対してセレクトボックスを作成
+        question.blanks.forEach((blank) => {
+            const blankItem = document.createElement('div');
+            blankItem.className = 'fill-in-blank-item';
+
+            const label = document.createElement('label');
+            label.className = 'fill-in-blank-label';
+            label.textContent = `空欄 ${blank.id}`;
+            blankItem.appendChild(label);
+
+            const select = document.createElement('select');
+            select.className = 'fill-in-blank-select';
+            select.dataset.blankId = blank.id;
+
+            // デフォルトオプション
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = '--- 選択してください ---';
+            select.appendChild(defaultOption);
+
+            // 選択肢を追加
+            question.options.forEach((option) => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                select.appendChild(optionElement);
+            });
+
+            // 選択変更時のイベント
+            select.addEventListener('change', () => {
+                this.currentFillInAnswers[blank.id] = select.value;
+                this.checkFillInBlanksComplete();
+            });
+
+            blankItem.appendChild(select);
+            blanksContainer.appendChild(blankItem);
+        });
+
+        container.appendChild(blanksContainer);
+
+        // 回答ボタン
+        const submitBtn = document.createElement('button');
+        submitBtn.className = 'btn btn-primary fill-in-blanks-submit';
+        submitBtn.textContent = '回答する';
+        submitBtn.disabled = true;
+        submitBtn.id = 'fill-in-blanks-submit-btn';
+
+        submitBtn.addEventListener('click', () => {
+            this.submitFillInBlanks(question);
+        });
+
+        container.appendChild(submitBtn);
+    }
+
+    // ========================================
+    // 穴埋め問題：すべて選択されたかチェック
+    // ========================================
+    checkFillInBlanksComplete() {
+        const question = this.currentQuestions[this.currentQuestionIndex];
+        const submitBtn = document.getElementById('fill-in-blanks-submit-btn');
+
+        if (!submitBtn) return;
+
+        // すべての空欄が埋まっているかチェック
+        const allFilled = question.blanks.every(blank => {
+            const answer = this.currentFillInAnswers[blank.id];
+            return answer && answer.trim() !== '';
+        });
+
+        submitBtn.disabled = !allFilled;
+    }
+
+    // ========================================
+    // 穴埋め問題：回答を提出
+    // ========================================
+    submitFillInBlanks(question) {
+        // すべてのセレクトボックスを無効化
+        document.querySelectorAll('.fill-in-blank-select').forEach(select => {
+            select.disabled = true;
+        });
+
+        // 回答ボタンを無効化
+        const submitBtn = document.getElementById('fill-in-blanks-submit-btn');
+        submitBtn.disabled = true;
+
+        // 判定
+        const results = {};
+        let correctCount = 0;
+
+        question.blanks.forEach(blank => {
+            const userAnswer = this.currentFillInAnswers[blank.id];
+            const isCorrect = userAnswer === blank.correctAnswer;
+
+            results[blank.id] = {
+                userAnswer,
+                correctAnswer: blank.correctAnswer,
+                isCorrect
+            };
+
+            if (isCorrect) {
+                correctCount++;
+            }
+
+            // セレクトボックスに正誤を表示
+            const select = document.querySelector(`[data-blank-id="${blank.id}"]`);
+            if (select) {
+                select.classList.add(isCorrect ? 'correct' : 'incorrect');
+            }
+        });
+
+        // 全問正解かどうか
+        const allCorrect = correctCount === question.blanks.length;
+
+        // 回答を記録
+        this.userAnswers.push({
+            questionId: question.id,
+            fillInResults: results,
+            correctCount,
+            totalCount: question.blanks.length,
+            isCorrect: allCorrect
+        });
+
+        // 少し待ってから解説モーダルを表示
+        setTimeout(() => {
+            this.showFillInBlanksExplanation(question, results, allCorrect);
+        }, 600);
     }
 
     // ========================================
@@ -296,7 +479,73 @@ class ExamMode {
     }
 
     // ========================================
-    // 解説モーダル表示
+    // 穴埋め問題：解説モーダル表示
+    // ========================================
+    showFillInBlanksExplanation(question, results, allCorrect) {
+        const modal = document.getElementById('explanation-modal');
+        const header = document.getElementById('explanation-header');
+        const icon = document.getElementById('explanation-icon');
+        const title = document.getElementById('explanation-title');
+        const answersSection = document.getElementById('explanation-answers');
+        const explanationText = document.getElementById('explanation-text');
+        const nextBtn = document.getElementById('explanation-next-btn');
+
+        // ヘッダーの設定
+        header.className = `explanation-modal-header ${allCorrect ? 'correct' : 'incorrect'}`;
+        icon.textContent = allCorrect ? '✓' : '✗';
+        title.textContent = allCorrect ? '全問正解！' : '一部不正解';
+
+        // 回答情報の設定（各空欄ごと）
+        let answersHTML = '';
+
+        question.blanks.forEach(blank => {
+            const result = results[blank.id];
+            const isCorrect = result.isCorrect;
+            const statusIcon = isCorrect ? '✓' : '✗';
+            const statusClass = isCorrect ? 'correct-answer' : 'your-answer';
+
+            answersHTML += `
+                <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-sm); background-color: ${isCorrect ? 'rgba(16, 185, 129, 0.05)' : 'rgba(239, 68, 68, 0.05)'}; border-radius: var(--radius-sm);">
+                    <span class="explanation-answer-label">${statusIcon} 空欄 ${blank.id}</span>
+                    ${!isCorrect ? `
+                        <div class="explanation-answer-value your-answer" style="font-size: 0.95rem; margin-top: 0.25rem;">
+                            あなたの回答: ${result.userAnswer}
+                        </div>
+                    ` : ''}
+                    <div class="explanation-answer-value ${statusClass}" style="font-size: 0.95rem; margin-top: 0.25rem;">
+                        正解: ${result.correctAnswer}
+                    </div>
+                </div>
+            `;
+        });
+
+        answersSection.innerHTML = answersHTML;
+
+        // 解説の設定
+        explanationText.textContent = question.explanation;
+
+        // 次へボタンの設定
+        if (this.currentQuestionIndex < this.currentQuestions.length - 1) {
+            nextBtn.textContent = '次の問題へ →';
+            nextBtn.onclick = () => {
+                modal.classList.remove('active');
+                this.currentQuestionIndex++;
+                this.renderQuestion();
+            };
+        } else {
+            nextBtn.textContent = '結果を見る';
+            nextBtn.onclick = () => {
+                modal.classList.remove('active');
+                this.showResults();
+            };
+        }
+
+        // モーダルを表示
+        modal.classList.add('active');
+    }
+
+    // ========================================
+    // 解説モーダル表示（4択問題用）
     // ========================================
     showExplanationModal(question, selectedIndex, isCorrect) {
         const modal = document.getElementById('explanation-modal');

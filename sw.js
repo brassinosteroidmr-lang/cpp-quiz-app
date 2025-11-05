@@ -1,7 +1,7 @@
 // 調達マスターへの道 - Service Worker
 // PWAオフライン対応
 
-const CACHE_NAME = 'procurement-master-v5';
+const CACHE_NAME = 'procurement-master-v6';
 const urlsToCache = [
     './',
     './index.html',
@@ -9,7 +9,7 @@ const urlsToCache = [
     './app.js',
     './scenarios.js',
     './questions-data.js',
-    './exam-questions.js',
+    './exam-questions-v2.js',
     './exam-mode.js',
     './manifest.json',
     './icon.svg'

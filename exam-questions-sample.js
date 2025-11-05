@@ -1,6 +1,5 @@
-// サンプルデータ（穴埋め問題のプロトタイプ）
-
-const EXAM_QUESTIONS_SAMPLE = {
+// テスト用サンプルデータ（穴埋め問題のプロトタイプ）
+const EXAM_QUESTIONS = {
     ch1: [
         // 穴埋め問題の例
         {
@@ -56,6 +55,21 @@ const EXAM_QUESTIONS_SAMPLE = {
     ]
 };
 
-const CHAPTER_INFO_SAMPLE = {
+const CHAPTER_INFO = {
     ch1: { title: '第1章：経営に貢献する調達を目指して', number: 1 }
 };
+
+// 章IDから問題を取得するヘルパー関数
+function getQuestionsByChapter(chapterId) {
+    return EXAM_QUESTIONS[chapterId] || [];
+}
+
+// ランダムにシャッフル
+function shuffleQuestions(questions) {
+    const shuffled = [...questions];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}

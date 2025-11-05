@@ -1242,6 +1242,89 @@ body {
 }
 
 /* ========================================
+   穴埋め問題
+   ======================================== */
+
+.fill-in-blanks-container {
+    background-color: var(--background-color);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary-color);
+}
+
+.fill-in-blank-item {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--surface-color);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-color);
+}
+
+.fill-in-blank-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
+
+.fill-in-blank-select {
+    width: 100%;
+    padding: var(--spacing-md);
+    font-size: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--surface-color);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.fill-in-blank-select:hover {
+    border-color: var(--primary-color);
+}
+
+.fill-in-blank-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.fill-in-blank-select.correct {
+    border-color: var(--success-color);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.fill-in-blank-select.incorrect {
+    border-color: var(--danger-color);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.fill-in-blank-select:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.fill-in-blanks-submit {
+    margin-top: var(--spacing-xl);
+    width: 100%;
+}
+
+.fill-in-blanks-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.blank-marker {
+    display: inline-block;
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    padding: 0.2em 0.5em;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    margin: 0 0.2em;
+}
+
+/* ========================================
    ユーティリティ
    ======================================== */
 
