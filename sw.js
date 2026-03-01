@@ -1,16 +1,12 @@
-// 調達マスターへの道 - Service Worker
+// CPP B級 学習アプリ - Service Worker
 // PWAオフライン対応
 
-const CACHE_NAME = 'procurement-master-v6';
+const CACHE_NAME = 'cpp-b-v1';
 const urlsToCache = [
     './',
     './index.html',
-    './style.css',
-    './app.js',
-    './scenarios.js',
     './questions-data.js',
-    './exam-questions-v2.js',
-    './exam-mode.js',
+    './textbook-data.js',
     './manifest.json',
     './icon.svg'
 ];
@@ -24,6 +20,7 @@ self.addEventListener('install', event => {
                 return cache.addAll(urlsToCache);
             })
     );
+    self.skipWaiting();
 });
 
 // フェッチ時のキャッシュ戦略（Cache First）
@@ -73,6 +70,6 @@ self.addEventListener('activate', event => {
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim())
     );
 });
