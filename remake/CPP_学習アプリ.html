@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>CPP B級 学習アプリ</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-light: #dbeafe;
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --danger: #dc2626;
+  --danger-light: #fee2e2;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+}
+.app { max-width: 640px; margin: 0 auto; padding: 0 16px 100px; }
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--primary);
+  color: white;
+  padding: 12px 16px;
+  margin: 0 -16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header h1 { font-size: 16px; font-weight: 700; }
+.header-right { display: flex; gap: 8px; align-items: center; }
+.header-btn {
+  background: rgba(255,255,255,0.2); border: none; color: white;
+  padding: 6px 12px; border-radius: 8px; font-size: 13px; cursor: pointer;
+}
+.header-btn:hover { background: rgba(255,255,255,0.3); }
+/* Navigation */
+.nav {
+  display: flex; gap: 4px; padding: 12px 0; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-btn {
+  flex-shrink: 0;
+  padding: 8px 16px; border-radius: 20px;
+  border: 2px solid var(--border); background: white;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-btn.active {
+  background: var(--primary); color: white; border-color: var(--primary);
+}
+/* Cards */
+.card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 20px; margin-bottom: 12px;
+}
+.card-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+/* Stats grid */
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.stat-box {
+  background: var(--bg); border-radius: 8px; padding: 12px; text-align: center;
+}
+.stat-value { font-size: 24px; font-weight: 800; }
+.stat-label { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+/* Progress bar */
+.progress-bar {
+  height: 8px; background: var(--border); border-radius: 4px;
+  overflow: hidden; margin: 8px 0;
+}
+.progress-fill {
+  height: 100%; border-radius: 4px; transition: width 0.5s ease;
+}
+/* Section cards for dashboard */
+.section-card {
+  background: var(--bg); border-radius: 8px; padding: 12px;
+  margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+}
+.section-card:hover { background: var(--primary-light); }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.section-name { font-size: 14px; font-weight: 600; }
+.section-score { font-size: 14px; font-weight: 700; }
+/* Quiz mode */
+.quiz-info {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; font-size: 13px; color: var(--text-light);
+}
+.quiz-question {
+  font-size: 16px; font-weight: 600; line-height: 1.6;
+  margin: 12px 0 16px;
+}
+.difficulty { display: inline-block; margin-left: 8px; }
+.diff-1 { color: var(--success); }
+.diff-2 { color: var(--warning); }
+.diff-3 { color: var(--danger); }
+.choice-btn {
+  display: block; width: 100%; text-align: left;
+  padding: 14px 16px; margin-bottom: 8px;
+  border: 2px solid var(--border); border-radius: 10px;
+  background: white; font-size: 14px; line-height: 1.5;
+  cursor: pointer; transition: all 0.2s;
+}
+.choice-btn:hover:not(.answered) { border-color: var(--primary); background: var(--primary-light); }
+.choice-btn.correct { border-color: var(--success); background: var(--success-light); }
+.choice-btn.wrong { border-color: var(--danger); background: var(--danger-light); }
+.choice-btn.answered { cursor: default; }
+.choice-btn.show-correct { border-color: var(--success); background: var(--success-light); opacity: 0.7; }
+.explanation {
+  background: #f0f9ff; border-left: 4px solid var(--primary);
+  padding: 12px 16px; margin-top: 12px; border-radius: 0 8px 8px 0;
+  font-size: 13px; line-height: 1.7;
+}
+.next-btn {
+  display: block; width: 100%; padding: 14px;
+  background: var(--primary); color: white; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  cursor: pointer; margin-top: 16px;
+}
+.next-btn:hover { opacity: 0.9; }
+/* Setup */
+.setup-section { margin-bottom: 16px; }
+.setup-label { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.toggle-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.toggle-btn {
+  padding: 8px 14px; border: 2px solid var(--border);
+  border-radius: 8px; background: white; font-size: 13px;
+  cursor: pointer; transition: all 0.2s;
+}
+.toggle-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.count-display {
+  text-align: center; padding: 12px;
+  font-size: 13px; color: var(--text-light);
+  margin: 12px 0;
+}
+.count-display strong { font-size: 20px; color: var(--text); display: block; }
+.start-btn {
+  display: block; width: 100%; padding: 16px;
+  background: var(--primary); color: white; border: none;
+  border-radius: 10px; font-size: 16px; font-weight: 700;
+  cursor: pointer;
+}
+.start-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+/* Results */
+.result-big {
+  text-align: center; padding: 20px 0;
+}
+.result-score { font-size: 48px; font-weight: 800; }
+.result-label { font-size: 14px; color: var(--text-light); }
+.result-bar { max-width: 300px; margin: 12px auto; }
+.result-sections { margin-top: 16px; }
+.result-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.review-btn {
+  display: block; width: 100%; padding: 14px;
+  background: white; color: var(--primary); border: 2px solid var(--primary);
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  cursor: pointer; margin-top: 12px;
+}
+/* Timer */
+.timer {
+  font-size: 14px; font-weight: 700; color: white;
+  background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 6px;
+}
+/* Flashcard */
+.flashcard-container { perspective: 1000px; margin: 16px 0; }
+.flashcard {
+  width: 100%; min-height: 200px;
+  position: relative; cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute; top: 0; left: 0; width: 100%; min-height: 200px;
+  backface-visibility: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; border-radius: var(--radius);
+  box-shadow: var(--shadow); text-align: center;
+}
+.flashcard-front { background: white; }
+.flashcard-back {
+  background: var(--primary-light); transform: rotateY(180deg);
+}
+.flashcard-text { font-size: 16px; line-height: 1.7; font-weight: 600; }
+.flashcard-section { font-size: 12px; color: var(--text-light); margin-bottom: 8px; }
+.flashcard-actions {
+  display: flex; gap: 8px; margin-top: 12px;
+}
+.fc-btn {
+  flex: 1; padding: 12px; border: none; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.fc-btn.know { background: var(--success-light); color: var(--success); }
+.fc-btn.dont-know { background: var(--danger-light); color: var(--danger); }
+.fc-btn.skip { background: var(--bg); color: var(--text-light); }
+/* Weak points */
+.weak-item {
+  padding: 10px 12px; background: var(--danger-light);
+  border-radius: 8px; margin-bottom: 6px; font-size: 13px;
+}
+.weak-item .q-num { font-weight: 700; color: var(--danger); }
+/* Hidden */
+.hidden { display: none !important; }
+/* Responsive */
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .quiz-question { font-size: 15px; }
+}
+/* Quick quiz banner */
+.quick-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white; border-radius: var(--radius); padding: 16px;
+  margin-bottom: 12px; cursor: pointer;
+}
+.quick-banner h3 { font-size: 15px; margin-bottom: 4px; }
+.quick-banner p { font-size: 12px; opacity: 0.85; }
+/* Mode badge */
+.mode-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: 11px; font-weight: 700; margin-right: 6px;
+}
+.badge-quiz { background: var(--primary-light); color: var(--primary); }
+.badge-review { background: var(--warning-light); color: var(--warning); }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+// === DATA ===
+</script>
+<script id="question-data">
+</script>
+<script>
+// Questions will be loaded here
+let QUESTIONS = [];
+
+// === STATE ===
+const STATE = {
+  view: 'home', // home, setup, quiz, result, review, flashcard-setup, flashcard
+  history: [], // answered questions [{qId, chosen, correct}]
+  currentQuiz: { questions: [], index: 0, answers: [], startTime: 0 },
+  flashcard: { cards: [], index: 0, known: 0, unknown: 0 },
+};
+
+// === STORAGE ===
+function loadHistory() {
+  try {
+    const d = localStorage.getItem('cpp_history');
+    if (d) STATE.history = JSON.parse(d);
+  } catch(e) {}
+}
+function saveHistory() {
+  try {
+    localStorage.setItem('cpp_history', JSON.stringify(STATE.history));
+  } catch(e) {}
+}
+
+// === HELPERS ===
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function diffStars(d) {
+  return d === 1 ? '★' : d === 2 ? '★★' : '★★★';
+}
+function diffClass(d) {
+  return 'diff-' + d;
+}
+function getSections() {
+  return [
+    { id: 1, name: '専門領域調達', target: 50 },
+    { id: 2, name: 'ビジネスファンダメンタルズ', target: 50 },
+    { id: 3, name: 'CRのための関連知識', target: 50 },
+    { id: 4, name: 'マネジメント手法', target: 50 },
+  ];
+}
+function getSectionStats(sectionId) {
+  const attempts = STATE.history.filter(h => {
+    const q = QUESTIONS.find(qq => qq.id === h.qId);
+    return q && q.sectionId === sectionId;
+  });
+  // Get latest attempt per question
+  const latest = {};
+  attempts.forEach(a => { latest[a.qId] = a; });
+  const vals = Object.values(latest);
+  const correct = vals.filter(v => v.correct).length;
+  const total = vals.length;
+  return { correct, total, rate: total > 0 ? Math.round(correct / total * 100) : 0 };
+}
+function getOverallStats() {
+  const latest = {};
+  STATE.history.forEach(a => { latest[a.qId] = a; });
+  const vals = Object.values(latest);
+  const correct = vals.filter(v => v.correct).length;
+  return {
+    attempted: vals.length,
+    correct,
+    total: QUESTIONS.length,
+    rate: vals.length > 0 ? Math.round(correct / vals.length * 100) : 0,
+  };
+}
+function getWeakQuestions() {
+  const latest = {};
+  STATE.history.forEach(a => { latest[a.qId] = a; });
+  return Object.values(latest).filter(v => !v.correct).map(v => v.qId);
+}
+function formatTime(ms) {
+  const s = Math.floor(ms / 1000);
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+// === RENDER ===
+function render() {
+  const app = document.getElementById('app');
+  switch(STATE.view) {
+    case 'home': app.innerHTML = renderHome(); break;
+    case 'setup': app.innerHTML = renderSetup(); break;
+    case 'quiz': app.innerHTML = renderQuiz(); break;
+    case 'result': app.innerHTML = renderResult(); break;
+    case 'review': app.innerHTML = renderReview(); break;
+    case 'flashcard-setup': app.innerHTML = renderFlashcardSetup(); break;
+    case 'flashcard': app.innerHTML = renderFlashcard(); break;
+  }
+  bindEvents();
+}
+
+function renderHome() {
+  const overall = getOverallStats();
+  const sections = getSections();
+  const weak = getWeakQuestions();
+  const streakDays = getStudyStreak();
+
+  let sectionCards = sections.map(s => {
+    const st = getSectionStats(s.id);
+    const color = st.rate >= 70 ? 'var(--success)' : st.rate >= 50 ? 'var(--warning)' : st.rate > 0 ? 'var(--danger)' : 'var(--text-light)';
+    return `<div class="section-card" data-action="start-section" data-sid="${s.id}">
+      <div class="section-header">
+        <span class="section-name">${s.name}</span>
+        <span class="section-score" style="color:${color}">${st.total > 0 ? st.rate + '%' : '---'}</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${st.total > 0 ? (st.total/50*100) : 0}%;background:${color}"></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-light)">${st.correct}/${st.total} 正解（全${s.target}問）</div>
+    </div>`;
+  }).join('');
+
+  return `
+    <div class="header">
+      <h1>CPP B級 学習アプリ</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="reset-confirm">リセット</button>
+      </div>
+    </div>
+
+    <div style="padding-top:12px">
+      <div class="quick-banner" data-action="quick-5">
+        <h3>⚡ クイック5問</h3>
+        <p>ランダム5問で今すぐ学習スタート（約3分）</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">学習の進捗</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value">${overall.attempted}</div>
+            <div class="stat-label">回答済み / ${overall.total}問</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" style="color:${overall.rate >= 70 ? 'var(--success)' : overall.rate >= 50 ? 'var(--warning)' : 'var(--danger)'}">${overall.rate}%</div>
+            <div class="stat-label">正解率</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" style="color:var(--danger)">${weak.length}</div>
+            <div class="stat-label">要復習</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">${streakDays}</div>
+            <div class="stat-label">連続学習日数</div>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin-top:12px">
+          <div class="progress-fill" style="width:${overall.attempted/overall.total*100}%;background:var(--primary)"></div>
+        </div>
+        <div style="text-align:center;font-size:11px;color:var(--text-light);margin-top:4px">全体進捗 ${Math.round(overall.attempted/overall.total*100)}%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">セクション別</div>
+        ${sectionCards}
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button class="start-btn" data-action="go-setup" style="flex:1;font-size:14px;padding:12px">
+          📝 演習問題
+        </button>
+        <button class="start-btn" data-action="go-flashcard" style="flex:1;font-size:14px;padding:12px;background:var(--success)">
+          🃏 フラッシュカード
+        </button>
+      </div>
+
+      ${weak.length > 0 ? `
+      <button class="review-btn" data-action="start-weak" style="margin-bottom:12px">
+        🔥 弱点問題に挑戦（${weak.length}問）
+      </button>` : ''}
+
+      <button class="review-btn" data-action="start-mock" style="margin-bottom:12px">
+        📋 模擬試験（20問 / 20分）
+      </button>
+    </div>`;
+}
+
+function renderSetup() {
+  const sections = getSections();
+  const selectedSections = STATE.setupSections || [1,2,3,4];
+  const selectedDiff = STATE.setupDiff || [1,2,3];
+  const count = STATE.setupCount || 10;
+
+  const filtered = QUESTIONS.filter(q =>
+    selectedSections.includes(q.sectionId) && selectedDiff.includes(q.difficulty)
+  );
+
+  return `
+    <div class="header">
+      <h1>演習設定</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="go-home">戻る</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card">
+        <div class="setup-section">
+          <div class="setup-label">セクション</div>
+          <div class="toggle-group">
+            ${sections.map(s => `<button class="toggle-btn ${selectedSections.includes(s.id)?'selected':''}" data-action="toggle-section" data-sid="${s.id}">${s.name}</button>`).join('')}
+          </div>
+        </div>
+        <div class="setup-section">
+          <div class="setup-label">難易度</div>
+          <div class="toggle-group">
+            <button class="toggle-btn ${selectedDiff.includes(1)?'selected':''}" data-action="toggle-diff" data-did="1">★ 基礎</button>
+            <button class="toggle-btn ${selectedDiff.includes(2)?'selected':''}" data-action="toggle-diff" data-did="2">★★ 応用</button>
+            <button class="toggle-btn ${selectedDiff.includes(3)?'selected':''}" data-action="toggle-diff" data-did="3">★★★ 実践</button>
+          </div>
+        </div>
+        <div class="setup-section">
+          <div class="setup-label">出題数</div>
+          <div class="toggle-group">
+            ${[5,10,20,30,50].map(n => `<button class="toggle-btn ${count===n?'selected':''}" data-action="set-count" data-count="${n}">${n}問</button>`).join('')}
+            <button class="toggle-btn ${count===filtered.length?'selected':''}" data-action="set-count" data-count="${filtered.length}">全${filtered.length}問</button>
+          </div>
+        </div>
+        <div class="count-display">
+          対象問題数<strong>${filtered.length}問</strong>
+        </div>
+        <button class="start-btn" data-action="start-quiz" ${filtered.length===0?'disabled':''}>
+          学習スタート
+        </button>
+      </div>
+    </div>`;
+}
+
+function renderQuiz() {
+  const cq = STATE.currentQuiz;
+  const q = cq.questions[cq.index];
+  const ans = cq.answers[cq.index];
+  const answered = ans !== undefined;
+  const elapsed = Date.now() - cq.startTime;
+
+  return `
+    <div class="header">
+      <h1>問${cq.index + 1} / ${cq.questions.length}</h1>
+      <div class="header-right">
+        <span class="timer">${formatTime(elapsed)}</span>
+        <button class="header-btn" data-action="end-quiz">終了</button>
+      </div>
+    </div>
+    <div style="padding-top:8px">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${(cq.index+1)/cq.questions.length*100}%;background:var(--primary)"></div>
+      </div>
+      <div class="quiz-info">
+        <span>${q.section}</span>
+        <span class="difficulty ${diffClass(q.difficulty)}">${diffStars(q.difficulty)}</span>
+      </div>
+      <div class="card">
+        <div class="quiz-question">${q.question}</div>
+        ${q.choices.map((c, i) => {
+          const letter = String.fromCharCode(65 + i);
+          let cls = 'choice-btn';
+          if (answered) {
+            cls += ' answered';
+            if (letter === q.answer) cls += ' correct';
+            else if (letter === ans) cls += ' wrong';
+          }
+          return `<button class="${cls}" data-action="answer" data-letter="${letter}">${c}</button>`;
+        }).join('')}
+        ${answered ? `
+          <div class="explanation">
+            <strong>${ans === q.answer ? '✅ 正解！' : '❌ 不正解'}</strong><br>
+            ${q.explanation}
+          </div>
+          <button class="next-btn" data-action="next-question">
+            ${cq.index < cq.questions.length - 1 ? '次の問題 →' : '結果を見る'}
+          </button>
+        ` : ''}
+      </div>
+    </div>`;
+}
+
+function renderResult() {
+  const cq = STATE.currentQuiz;
+  const correct = cq.answers.filter((a, i) => a === cq.questions[i].answer).length;
+  const rate = Math.round(correct / cq.questions.length * 100);
+  const elapsed = STATE.quizEndTime - cq.startTime;
+
+  // Section breakdown
+  const secStats = {};
+  cq.questions.forEach((q, i) => {
+    if (!secStats[q.section]) secStats[q.section] = { correct: 0, total: 0 };
+    secStats[q.section].total++;
+    if (cq.answers[i] === q.answer) secStats[q.section].correct++;
+  });
+
+  const wrongQuestions = cq.questions.filter((q, i) => cq.answers[i] !== q.answer);
+
+  const color = rate >= 70 ? 'var(--success)' : rate >= 50 ? 'var(--warning)' : 'var(--danger)';
+  const message = rate >= 80 ? '素晴らしい！この調子で！' :
+                  rate >= 60 ? '良い調子！弱点を復習しよう' :
+                  rate >= 40 ? 'もう一踏ん張り！テキストを見直そう' :
+                  'テキストを読み込んでから再挑戦！';
+
+  return `
+    <div class="header">
+      <h1>結果</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="go-home">ホーム</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card">
+        <div class="result-big">
+          <div class="result-score" style="color:${color}">${rate}%</div>
+          <div class="result-label">${correct} / ${cq.questions.length} 正解 ｜ ${formatTime(elapsed)}</div>
+          <div style="margin-top:8px;font-size:14px">${message}</div>
+          <div class="result-bar">
+            <div class="progress-bar"><div class="progress-fill" style="width:${rate}%;background:${color}"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">セクション別</div>
+        ${Object.entries(secStats).map(([name, st]) => {
+          const r = Math.round(st.correct / st.total * 100);
+          const c = r >= 70 ? 'var(--success)' : r >= 50 ? 'var(--warning)' : 'var(--danger)';
+          return `<div class="result-row">
+            <span>${name}</span>
+            <span style="color:${c};font-weight:700">${st.correct}/${st.total}（${r}%）</span>
+          </div>`;
+        }).join('')}
+      </div>
+
+      ${wrongQuestions.length > 0 ? `
+      <div class="card">
+        <div class="card-title">間違えた問題（${wrongQuestions.length}問）</div>
+        ${wrongQuestions.map(q => `
+          <div class="weak-item">
+            <span class="q-num">問${q.id}</span> ${q.question.substring(0, 50)}...
+          </div>
+        `).join('')}
+        <button class="review-btn" data-action="retry-wrong" style="margin-top:12px">
+          🔥 間違えた問題だけ再挑戦
+        </button>
+      </div>` : ''}
+
+      <button class="start-btn" data-action="go-setup" style="margin-top:12px">もう一度挑戦</button>
+      <button class="review-btn" data-action="go-home" style="margin-top:8px">ホームに戻る</button>
+    </div>`;
+}
+
+function renderFlashcardSetup() {
+  const sections = getSections();
+  const selectedSections = STATE.fcSections || [1,2,3,4];
+  const mode = STATE.fcMode || 'all'; // all, weak
+
+  // Build flashcards from questions (question → answer format)
+  const filtered = QUESTIONS.filter(q => selectedSections.includes(q.sectionId));
+
+  return `
+    <div class="header">
+      <h1>フラッシュカード</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="go-home">戻る</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card">
+        <div class="setup-section">
+          <div class="setup-label">セクション</div>
+          <div class="toggle-group">
+            ${sections.map(s => `<button class="toggle-btn ${selectedSections.includes(s.id)?'selected':''}" data-action="fc-toggle-section" data-sid="${s.id}">${s.name}</button>`).join('')}
+          </div>
+        </div>
+        <div class="setup-section">
+          <div class="setup-label">モード</div>
+          <div class="toggle-group">
+            <button class="toggle-btn ${mode==='all'?'selected':''}" data-action="fc-mode" data-mode="all">全問シャッフル</button>
+            <button class="toggle-btn ${mode==='weak'?'selected':''}" data-action="fc-mode" data-mode="weak">弱点のみ</button>
+          </div>
+        </div>
+        <div class="count-display">
+          対象<strong>${filtered.length}枚</strong>
+        </div>
+        <button class="start-btn" data-action="start-flashcard" ${filtered.length===0?'disabled':''}>
+          スタート
+        </button>
+      </div>
+    </div>`;
+}
+
+function renderFlashcard() {
+  const fc = STATE.flashcard;
+  if (fc.index >= fc.cards.length) {
+    // Done
+    const total = fc.known + fc.unknown;
+    const rate = total > 0 ? Math.round(fc.known / total * 100) : 0;
+    return `
+      <div class="header">
+        <h1>完了！</h1>
+        <div class="header-right">
+          <button class="header-btn" data-action="go-home">ホーム</button>
+        </div>
+      </div>
+      <div style="padding-top:12px">
+        <div class="card">
+          <div class="result-big">
+            <div class="result-score" style="color:var(--success)">${rate}%</div>
+            <div class="result-label">覚えた ${fc.known} / ${total} 枚</div>
+          </div>
+        </div>
+        <button class="start-btn" data-action="go-flashcard">もう一度</button>
+        <button class="review-btn" data-action="go-home" style="margin-top:8px">ホームに戻る</button>
+      </div>`;
+  }
+
+  const card = fc.cards[fc.index];
+  const flipped = STATE.fcFlipped || false;
+
+  return `
+    <div class="header">
+      <h1>${fc.index + 1} / ${fc.cards.length}</h1>
+      <div class="header-right">
+        <span style="font-size:12px;color:rgba(255,255,255,0.7)">
+          ⭕${fc.known} ❌${fc.unknown}
+        </span>
+        <button class="header-btn" data-action="go-home">終了</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${fc.index/fc.cards.length*100}%;background:var(--success)"></div>
+      </div>
+      <div style="font-size:12px;color:var(--text-light);margin:8px 0">${card.section}</div>
+
+      <div class="flashcard-container">
+        <div class="flashcard ${flipped?'flipped':''}" data-action="flip-card" style="position:relative;min-height:220px">
+          <div class="flashcard-face flashcard-front" style="position:${flipped?'absolute':'relative'}">
+            <div class="flashcard-section">タップして答えを見る</div>
+            <div class="flashcard-text">${card.question}</div>
+          </div>
+          <div class="flashcard-face flashcard-back" style="position:absolute;top:0">
+            <div class="flashcard-section">正解：${card.answer}</div>
+            <div class="flashcard-text" style="font-size:14px">${card.explanation}</div>
+          </div>
+        </div>
+      </div>
+
+      ${flipped ? `
+      <div class="flashcard-actions">
+        <button class="fc-btn know" data-action="fc-know">⭕ 覚えた</button>
+        <button class="fc-btn dont-know" data-action="fc-dont-know">❌ もう一回</button>
+      </div>` : `
+      <div style="text-align:center;padding:20px;color:var(--text-light);font-size:13px">
+        カードをタップして答えを確認
+      </div>`}
+    </div>`;
+}
+
+// === EVENT HANDLING ===
+function bindEvents() {
+  document.querySelectorAll('[data-action]').forEach(el => {
+    el.onclick = (e) => {
+      e.stopPropagation();
+      handleAction(el.dataset.action, el.dataset);
+    };
+  });
+  // Timer update
+  if (STATE.view === 'quiz' && STATE.currentQuiz.answers[STATE.currentQuiz.index] === undefined) {
+    if (STATE.timerInterval) clearInterval(STATE.timerInterval);
+    STATE.timerInterval = setInterval(() => {
+      const timer = document.querySelector('.timer');
+      if (timer) timer.textContent = formatTime(Date.now() - STATE.currentQuiz.startTime);
+    }, 1000);
+  } else {
+    if (STATE.timerInterval) clearInterval(STATE.timerInterval);
+  }
+}
+
+function handleAction(action, data) {
+  switch(action) {
+    case 'go-home':
+      STATE.view = 'home'; break;
+    case 'go-setup':
+      STATE.view = 'setup';
+      STATE.setupSections = STATE.setupSections || [1,2,3,4];
+      STATE.setupDiff = STATE.setupDiff || [1,2,3];
+      STATE.setupCount = STATE.setupCount || 10;
+      break;
+    case 'go-flashcard':
+      STATE.view = 'flashcard-setup';
+      STATE.fcSections = STATE.fcSections || [1,2,3,4];
+      break;
+    case 'toggle-section': {
+      const sid = parseInt(data.sid);
+      const idx = STATE.setupSections.indexOf(sid);
+      if (idx >= 0) STATE.setupSections.splice(idx, 1);
+      else STATE.setupSections.push(sid);
+      break;
+    }
+    case 'toggle-diff': {
+      const did = parseInt(data.did);
+      const idx = STATE.setupDiff.indexOf(did);
+      if (idx >= 0) STATE.setupDiff.splice(idx, 1);
+      else STATE.setupDiff.push(did);
+      break;
+    }
+    case 'set-count':
+      STATE.setupCount = parseInt(data.count);
+      break;
+    case 'start-quiz': {
+      let filtered = QUESTIONS.filter(q =>
+        STATE.setupSections.includes(q.sectionId) && STATE.setupDiff.includes(q.difficulty)
+      );
+      filtered = shuffle(filtered).slice(0, STATE.setupCount);
+      STATE.currentQuiz = { questions: filtered, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'quick-5': {
+      const qs = shuffle([...QUESTIONS]).slice(0, 5);
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'start-section': {
+      const sid = parseInt(data.sid);
+      const qs = shuffle(QUESTIONS.filter(q => q.sectionId === sid));
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'start-weak': {
+      const weakIds = getWeakQuestions();
+      const qs = shuffle(QUESTIONS.filter(q => weakIds.includes(q.id)));
+      if (qs.length === 0) { alert('弱点問題はありません'); return; }
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'start-mock': {
+      const qs = shuffle([...QUESTIONS]).slice(0, 20);
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'answer': {
+      const cq = STATE.currentQuiz;
+      if (cq.answers[cq.index] !== undefined) return;
+      const letter = data.letter;
+      cq.answers[cq.index] = letter;
+      const q = cq.questions[cq.index];
+      STATE.history.push({ qId: q.id, chosen: letter, correct: letter === q.answer, time: Date.now() });
+      saveHistory();
+      recordStudyDay();
+      break;
+    }
+    case 'next-question': {
+      const cq = STATE.currentQuiz;
+      if (cq.index < cq.questions.length - 1) {
+        cq.index++;
+      } else {
+        STATE.quizEndTime = Date.now();
+        STATE.view = 'result';
+      }
+      break;
+    }
+    case 'end-quiz':
+      STATE.quizEndTime = Date.now();
+      STATE.view = STATE.currentQuiz.answers.length > 0 ? 'result' : 'home';
+      break;
+    case 'retry-wrong': {
+      const cq = STATE.currentQuiz;
+      const wrong = cq.questions.filter((q, i) => cq.answers[i] !== q.answer);
+      STATE.currentQuiz = { questions: shuffle(wrong), index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'reset-confirm':
+      if (confirm('学習履歴をすべてリセットしますか？')) {
+        STATE.history = [];
+        saveHistory();
+        try { localStorage.removeItem('cpp_study_days'); } catch(e) {}
+      }
+      break;
+    // Flashcard
+    case 'fc-toggle-section': {
+      const sid = parseInt(data.sid);
+      if (!STATE.fcSections) STATE.fcSections = [1,2,3,4];
+      const idx = STATE.fcSections.indexOf(sid);
+      if (idx >= 0) STATE.fcSections.splice(idx, 1);
+      else STATE.fcSections.push(sid);
+      break;
+    }
+    case 'fc-mode':
+      STATE.fcMode = data.mode;
+      break;
+    case 'start-flashcard': {
+      let cards = QUESTIONS.filter(q => (STATE.fcSections || [1,2,3,4]).includes(q.sectionId));
+      if (STATE.fcMode === 'weak') {
+        const weakIds = getWeakQuestions();
+        cards = cards.filter(q => weakIds.includes(q.id));
+      }
+      cards = shuffle(cards);
+      STATE.flashcard = { cards, index: 0, known: 0, unknown: 0 };
+      STATE.fcFlipped = false;
+      STATE.view = 'flashcard';
+      break;
+    }
+    case 'flip-card':
+      STATE.fcFlipped = !STATE.fcFlipped;
+      break;
+    case 'fc-know':
+      STATE.flashcard.known++;
+      STATE.flashcard.index++;
+      STATE.fcFlipped = false;
+      break;
+    case 'fc-dont-know':
+      STATE.flashcard.unknown++;
+      // Add back to end
+      STATE.flashcard.cards.push(STATE.flashcard.cards[STATE.flashcard.index]);
+      STATE.flashcard.index++;
+      STATE.fcFlipped = false;
+      break;
+  }
+  render();
+}
+
+// === STUDY STREAK ===
+function recordStudyDay() {
+  try {
+    const days = JSON.parse(localStorage.getItem('cpp_study_days') || '[]');
+    const today = new Date().toISOString().split('T')[0];
+    if (!days.includes(today)) { days.push(today); localStorage.setItem('cpp_study_days', JSON.stringify(days)); }
+  } catch(e) {}
+}
+function getStudyStreak() {
+  try {
+    const days = JSON.parse(localStorage.getItem('cpp_study_days') || '[]').sort();
+    if (days.length === 0) return 0;
+    let streak = 1;
+    const today = new Date().toISOString().split('T')[0];
+    if (days[days.length - 1] !== today) {
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+      if (days[days.length - 1] !== yesterday) return 0;
+    }
+    for (let i = days.length - 1; i > 0; i--) {
+      const d1 = new Date(days[i]);
+      const d2 = new Date(days[i-1]);
+      const diff = (d1 - d2) / 86400000;
+      if (diff === 1) streak++;
+      else break;
+    }
+    return streak;
+  } catch(e) { return 0; }
+}
+
+// Data is loaded in the next script block
+</script>
+<script>
+const QUESTIONS_DATA = [{"id": 1, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "原材料の国際取引で使われる主な取引所として、NYMEXが扱う主要商品はどれか。", "choices": ["(A) 非鉄金属（銅、亜鉛、アルミ等）", "(B) 原油、天然ガス、貴金属", "(C) 穀物、畜産物", "(D) 鉄鉱石、石炭"], "answer": "B", "explanation": "NYMEX（ニューヨークマーカンタイル取引所）は原油・天然ガス・貴金属。LME＝非鉄金属、CME＝穀物・畜産物。"}, {"id": 2, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "LME（ロンドン金属取引所）で取引される主な商品群はどれか。", "choices": ["(A) 原油・天然ガス", "(B) 穀物・畜産物", "(C) 非鉄金属（銅・亜鉛・アルミ等）", "(D) 貴金属（金・銀・プラチナ）"], "answer": "C", "explanation": "LMEは銅、亜鉛、アルミニウム等の非鉄金属を扱う。"}, {"id": 3, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "設備調達においてライフサイクルコスト（LCC）に含まれないものはどれか。", "choices": ["(A) 初期コスト（設計費、製作費）", "(B) 運用コスト（エネルギー、保全費）", "(C) 競合他社の設備投資額", "(D) 廃棄コスト（解体撤去、廃棄処理費）"], "answer": "C", "explanation": "LCCは企画→設計→製作→運用→保全→廃棄の全コスト。競合の投資額は含まない。"}, {"id": 4, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "設備調達における「購入」「リース」「レンタル」の比較で、正しいのはどれか。", "choices": ["(A) リースは中途解約が容易である", "(B) レンタルは契約期間が長期である", "(C) 購入は所有権が自社にある", "(D) リースは減価償却の対象外である"], "answer": "C", "explanation": "購入＝所有権は自社。リース＝中途解約不可が原則。レンタル＝短期・中途解約可。"}, {"id": 5, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "設備調達の一般的なプロセスの順序として正しいのはどれか。", "choices": ["(A) 仕様決定→設備計画→見積取得→発注", "(B) 設備計画→仕様決定→見積取得→業者選定→発注", "(C) 見積取得→設備計画→仕様決定→発注", "(D) 発注→仕様決定→見積取得→検収"], "answer": "B", "explanation": "設備計画→仕様決定→見積取得→業者選定→発注→製作→据付→検収の12ステップ。"}, {"id": 6, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "ソフトウェア調達における「三点見積法」の計算式はどれか。", "choices": ["(A) （楽観値＋最頻値＋悲観値）÷ 3", "(B) （楽観値＋4×最頻値＋悲観値）÷ 6", "(C) （楽観値＋悲観値）÷ 2", "(D) 最頻値×1.5"], "answer": "B", "explanation": "三点見積法 ＝（楽観値＋4×最頻値＋悲観値）÷ 6。PERT法に基づく。"}, {"id": 7, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "ソフトウェア調達で、発注者がシステムの要件を取りまとめ提案を求める文書は何か。", "choices": ["(A) RFI（情報提供依頼書）", "(B) RFP（提案依頼書）", "(C) RFQ（見積依頼書）", "(D) NDA（秘密保持契約）"], "answer": "B", "explanation": "RFP＝Request for Proposal（提案依頼書）。RFI＝情報収集段階、RFQ＝見積取得段階。"}, {"id": 8, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "プロジェクト調達における契約形態で、バイヤー側のリスクが最も高いのはどれか。", "choices": ["(A) 定額契約", "(B) タイム・アンド・マテリアル契約", "(C) 実費償還契約", "(D) 成果報酬契約"], "answer": "C", "explanation": "リスク順：定額＜タイム＆マテリアル＜実費償還。実費償還は発生コスト＋マージン。"}, {"id": 9, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "「仕入」の形態として、在庫を持たずに顧客から受注してからメーカーに発注する方式は何か。", "choices": ["(A) 在庫仕入", "(B) 直送仕入（メーカー直送）", "(C) 取り寄せ仕入", "(D) 委託仕入"], "answer": "C", "explanation": "取り寄せ仕入＝受注後にメーカーに発注し、自社経由で納品。直送仕入はメーカーから顧客へ直接納品。"}, {"id": 10, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "間接品・サービス調達における「テールスペンド」とは何か。", "choices": ["(A) 調達金額の上位20%を占める品目", "(B) 調達件数は多いが金額が小さい品目群", "(C) 新規サプライヤーからの調達品", "(D) 緊急調達の品目"], "answer": "B", "explanation": "テールスペンドは80:20の法則で金額が小さい「ロングテール」部分。管理が行き届きにくい。"}, {"id": 11, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "派遣と請負の最大の違いは何か。", "choices": ["(A) 契約期間の長さ", "(B) 労働者への指揮命令権の所在", "(C) 対価の算出方法", "(D) 社会保険の加入義務"], "answer": "B", "explanation": "派遣＝派遣先（発注者）が指揮命令。請負＝請負業者が指揮命令。指揮命令権の所在が最大の違い。"}, {"id": 12, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "工業所有権（産業財産権）に含まれないものはどれか。", "choices": ["(A) 特許権", "(B) 実用新案権", "(C) 著作権", "(D) 商標権"], "answer": "C", "explanation": "工業所有権は特許権・実用新案権・意匠権・商標権の4種。著作権は知的財産権だが工業所有権ではない。"}, {"id": 13, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "CM方式（Construction Management）で、CMRがコスト・工程・品質の管理を行い、発注者側の立場で助言する方式は何か。", "choices": ["(A) ピュアCM方式", "(B) アットリスクCM方式", "(C) ECI方式", "(D) 設計施工一括方式"], "answer": "A", "explanation": "ピュアCM＝CMRは発注者の代理人として助言。アットリスクCM＝CMRが施工リスクも負担。"}, {"id": 14, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "間接品調達の管理力強化4ステップの正しい順序はどれか。", "choices": ["(A) 集中化→可視化→標準化→最適化", "(B) 可視化→標準化→集中化→最適化", "(C) 標準化→可視化→最適化→集中化", "(D) 最適化→集中化→可視化→標準化"], "answer": "B", "explanation": "可視化（実態把握）→標準化（ルール化）→集中化（窓口一元化）→最適化（継続改善）。"}, {"id": 15, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "サービスの4つの特性に含まれないものはどれか。", "choices": ["(A) 無形性（形がない）", "(B) 同時性（生産と消費が同時）", "(C) 変動性（品質にバラツキ）", "(D) 再現性（同じ品質を再現できる）"], "answer": "D", "explanation": "サービスの4特性は無形性・同時性・変動性・消滅性。再現性はサービスの特性ではない。"}, {"id": 16, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "原材料調達で「先物取引」を利用する主な目的はどれか。", "choices": ["(A) 投機により利益を得る", "(B) 価格変動リスクをヘッジ（回避）する", "(C) サプライヤー数を増やす", "(D) 品質を向上させる"], "answer": "B", "explanation": "先物取引の調達における主目的は価格変動リスクのヘッジ。"}, {"id": 17, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "設備調達の評価項目として「設備総合効率」が使われるが、その計算式はどれか。", "choices": ["(A) 稼働率 × 不良率", "(B) 時間稼働率 × 性能稼働率 × 良品率", "(C) 生産量 ÷ 投入量", "(D) 計画時間 ÷ 実績時間"], "answer": "B", "explanation": "設備総合効率＝時間稼働率×性能稼働率×良品率。85%以上が良好。"}, {"id": 18, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "ソフトウェアの著作権について正しいのはどれか。", "choices": ["(A) 特許庁への登録が必要", "(B) 創作した時点で自動的に発生する", "(C) 有効期間は20年間", "(D) 法人には著作権は認められない"], "answer": "B", "explanation": "著作権は創作時に自動発生（無方式主義）。登録不要。"}, {"id": 19, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "プロジェクト調達で「変更管理」が特に重要とされる理由はどれか。", "choices": ["(A) 変更を一切認めないため", "(B) 変更がスコープ・コスト・スケジュールに大きく影響するため", "(C) 変更の記録が法的に義務付けられているため", "(D) 変更は通常発生しないため"], "answer": "B", "explanation": "プロジェクトの変更はスコープ・コスト・スケジュール全てに影響するため厳格な管理が必要。"}, {"id": 20, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "業務委託の形態で、「委任」と「請負」の違いとして正しいのはどれか。", "choices": ["(A) 委任は成果物の完成義務があるが、請負にはない", "(B) 請負は成果物の完成義務があるが、委任にはない", "(C) 両方とも成果物の完成義務がある", "(D) 両方とも成果物の完成義務はない"], "answer": "B", "explanation": "請負＝仕事の完成が目的（完成義務あり）。委任＝事務処理行為の委託（完成義務なし）。"}, {"id": 21, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "間接品調達で「8つの課題」に含まれないものはどれか。", "choices": ["(A) 全社最適の視点不足", "(B) 購買部門の関与不足", "(C) 品目知識の不足", "(D) 原材料価格の高騰"], "answer": "D", "explanation": "間接品8課題：全社最適不足、購買関与不足、品目知識不足、仕様の曖昧さ、実態把握困難、サプライヤー評価不足、分散購買、管理ルール未整備など。原材料価格は直接材の課題。"}, {"id": 22, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "設備調達で「デバッグ運転」とは何か。", "choices": ["(A) 設備の設計段階での図面チェック", "(B) 設備据付後の試運転で不具合を発見・修正すること", "(C) 設備の定期保全活動", "(D) 設備の廃棄前の最終運転"], "answer": "B", "explanation": "デバッグ運転＝据付後の試運転で不具合（バグ）を発見し修正する工程。"}, {"id": 23, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "ソフトウェア調達において、開発の上流工程で品質を作り込むことが重要とされる理由はどれか。", "choices": ["(A) 上流工程のコストが最も高いため", "(B) 下流工程で発見された不具合の修正コストが飛躍的に増大するため", "(C) 上流工程は省略できないため", "(D) 法律で義務付けられているため"], "answer": "B", "explanation": "上流（要件定義・設計）の不具合を下流（テスト・運用）で修正すると、コストが数十倍に膨らむ。"}, {"id": 24, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "原材料の調達方式として「スポット購入」の特徴はどれか。", "choices": ["(A) 長期契約で安定供給を確保する", "(B) 必要な時にその都度市場価格で購入する", "(C) 自社で原材料を生産する", "(D) 先物市場で将来の価格を固定する"], "answer": "B", "explanation": "スポット購入＝必要な時にその都度購入。長期契約と組み合わせて価格変動リスクを管理。"}, {"id": 25, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "設備調達の12ステップにおいて「受入検査」の主な確認事項として最も重要なのはどれか。", "choices": ["(A) 梱包状態の確認", "(B) 仕様書どおりの性能・機能を満たしているか", "(C) 配送業者の対応", "(D) 設備の外観の色"], "answer": "B", "explanation": "受入検査では仕様書に基づく性能・機能の適合確認が最重要。"}, {"id": 26, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "プロジェクト調達で使用されるRFI、RFP、RFQの正しい順序はどれか。", "choices": ["(A) RFQ → RFP → RFI", "(B) RFP → RFI → RFQ", "(C) RFI → RFP → RFQ", "(D) RFI → RFQ → RFP"], "answer": "C", "explanation": "RFI（情報収集）→ RFP（提案依頼）→ RFQ（見積依頼）の順で進める。"}, {"id": 27, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "「偽装請負」に該当するのはどれか。", "choices": ["(A) 請負契約で、請負業者の管理者が労働者を指揮命令する", "(B) 請負契約だが、発注者が直接労働者に指揮命令する", "(C) 派遣契約で、派遣先が労働者を指揮命令する", "(D) 委任契約で、受任者が独自に業務を遂行する"], "answer": "B", "explanation": "偽装請負＝形式は請負だが実態は派遣（発注者が直接指揮命令）。労働者派遣法違反。"}, {"id": 28, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "仕入の3形態に含まれないのはどれか。", "choices": ["(A) 在庫仕入", "(B) 取り寄せ仕入", "(C) 直送仕入", "(D) 委託仕入"], "answer": "D", "explanation": "仕入の3形態は在庫仕入・取り寄せ仕入・直送仕入（メーカー直送）。"}, {"id": 29, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "ECI方式（Early Contractor Involvement）の特徴として正しいのはどれか。", "choices": ["(A) 設計が完了してから施工業者を選定する", "(B) 設計段階から施工業者を参画させる", "(C) 設計と施工を別々の会社が担当する", "(D) 施工後に設計の見直しを行う"], "answer": "B", "explanation": "ECI＝設計の早い段階から施工予定者を参画させ、施工性やコスト面の知見を設計に反映。"}, {"id": 30, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "特許権の有効期間は出願から何年か。", "choices": ["(A) 10年", "(B) 15年", "(C) 20年", "(D) 25年"], "answer": "C", "explanation": "特許権＝出願から20年。実用新案権＝出願から10年。意匠権＝登録から25年。商標権＝登録から10年（更新可）。"}, {"id": 31, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "CMEで主に取引される商品はどれか。", "choices": ["(A) 原油・天然ガス", "(B) 非鉄金属", "(C) 穀物・畜産物", "(D) 鉄鋼製品"], "answer": "C", "explanation": "CME（シカゴマーカンタイル取引所）は穀物・畜産物が中心。"}, {"id": 32, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "設備のライフサイクルコストにおいて、一般的に最もコスト比率が高い段階はどれか。", "choices": ["(A) 企画・設計段階", "(B) 製作・据付段階", "(C) 運用・保全段階", "(D) 廃棄段階"], "answer": "C", "explanation": "運用・保全コストが設備のライフサイクル全体で最大の比率を占める。"}, {"id": 33, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "ソフトウェア調達で「ウォーターフォール型」と「アジャイル型」の違いで正しいのはどれか。", "choices": ["(A) ウォーターフォール型は変更に柔軟", "(B) アジャイル型は上流から下流へ順次進める", "(C) ウォーターフォール型は工程を順次進め、アジャイル型は反復的に進める", "(D) 両者に違いはない"], "answer": "C", "explanation": "ウォーターフォール＝順次進行（手戻り困難）、アジャイル＝短い反復サイクルで開発。"}, {"id": 34, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "間接品調達における「マーケットバスケット分析」の目的はどれか。", "choices": ["(A) サプライヤーの財務状況を分析する", "(B) 購買パターンを分析し品目の関連性を把握する", "(C) 在庫の適正量を算出する", "(D) 品質不良の原因を特定する"], "answer": "B", "explanation": "マーケットバスケット分析は購買の組み合わせパターンを分析し、効率的な調達戦略を検討する手法。"}, {"id": 35, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "プロジェクト調達でクリティカル・パス上の作業が2日遅延した場合、正しいのはどれか。", "choices": ["(A) プロジェクト全体が2日遅延する", "(B) プロジェクト全体に影響はない", "(C) バッファで吸収できる", "(D) 他のパスに影響が移る"], "answer": "A", "explanation": "クリティカルパス上の遅延はそのままプロジェクト全体の遅延に直結する。"}, {"id": 36, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "リース契約の特徴として正しいのはどれか。", "choices": ["(A) 所有権はユーザー（借り手）にある", "(B) 原則として中途解約はできない", "(C) 契約期間は通常1ヶ月以内", "(D) 保守・修繕はリース会社の責任"], "answer": "B", "explanation": "リース＝原則中途解約不可、所有権はリース会社、契約期間は比較的長期。"}, {"id": 37, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "原材料調達における「コモディティ管理」で重要な指標はどれか。", "choices": ["(A) 従業員満足度", "(B) 市場価格のトレンドと在庫水準", "(C) サプライヤーの従業員数", "(D) 製品のデザイン性"], "answer": "B", "explanation": "コモディティ管理では市場価格動向と在庫水準の把握が重要。"}, {"id": 38, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "設備調達で「イニシャルコスト」と「ランニングコスト」について正しいのはどれか。", "choices": ["(A) イニシャルコストを最小にすれば総コストも最小になる", "(B) ランニングコストは設備の耐用年数に関係しない", "(C) LCCの観点ではイニシャルとランニングの総合で判断すべき", "(D) ランニングコストはイニシャルコストの10%程度である"], "answer": "C", "explanation": "LCC（ライフサイクルコスト）の観点で初期費用と運用費用の総合で判断する。"}, {"id": 39, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "業務委託で「準委任契約」が適している業務はどれか。", "choices": ["(A) 建物の建設", "(B) コンサルティング業務", "(C) ソフトウェアの完成納品", "(D) 機械部品の製造"], "answer": "B", "explanation": "準委任＝事務処理の委託（完成義務なし）。コンサルティング、調査業務等に適する。"}, {"id": 40, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "意匠権の保護対象はどれか。", "choices": ["(A) 技術的なアイデア", "(B) 物品のデザイン（形状・模様・色彩）", "(C) 商品やサービスの名称", "(D) プログラムのソースコード"], "answer": "B", "explanation": "意匠権＝物品のデザイン（形状、模様、色彩）を保護。"}, {"id": 41, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "サービス調達で「SLA（Service Level Agreement）」の目的はどれか。", "choices": ["(A) サービス提供者の利益を保証する", "(B) サービスの品質水準を定量的に定義し合意する", "(C) サービス料金を固定する", "(D) サービスの解約条件を定める"], "answer": "B", "explanation": "SLA＝サービスレベル合意書。提供されるサービスの品質水準を定量的に定義・合意。"}, {"id": 42, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "原材料調達で「デリバティブ」を活用する場面として適切なのはどれか。", "choices": ["(A) サプライヤーの品質改善指導", "(B) 原材料価格の変動リスクヘッジ", "(C) 新規サプライヤーの開拓", "(D) 物流コストの削減"], "answer": "B", "explanation": "デリバティブ（金融派生商品）＝先物・オプション等で原材料の価格変動リスクをヘッジ。"}, {"id": 43, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "プロジェクト調達の推進体制として正しくないのはどれか。", "choices": ["(A) 調達の専門部門が調達業務を行う", "(B) プロジェクトチームメンバーが調達業務を行う", "(C) 事情に応じて上記2つのタイプから選択する", "(D) 必ず外部コンサルタントが担当する"], "answer": "D", "explanation": "推進体制は①専門部門型、②チームメンバー型の2つ。外部コンサルは必須ではない。"}, {"id": 44, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "設備調達でレンタルのメリットはどれか。", "choices": ["(A) 長期間の安定利用", "(B) 中途解約が容易", "(C) 所有権を取得できる", "(D) 月額費用がリースより安い"], "answer": "B", "explanation": "レンタル＝短期利用向け、中途解約が容易。ただし月額はリースや購入より割高。"}, {"id": 45, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "仕入の「在庫仕入」方式のリスクとして最も大きいのはどれか。", "choices": ["(A) 納期が長くなる", "(B) 在庫の陳腐化・廃棄リスク", "(C) サプライヤーが見つからない", "(D) 品質が安定しない"], "answer": "B", "explanation": "在庫仕入は即納が可能だが、需要変動により在庫の陳腐化・廃棄リスクが最大の課題。"}, {"id": 46, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "ソフトウェア調達で「要件定義」の品質が調達成功に重要な理由はどれか。", "choices": ["(A) 要件定義のコストが最も高いため", "(B) 要件の曖昧さが手戻り・追加コストの最大要因となるため", "(C) 法律で要件定義書の作成が義務付けられているため", "(D) 要件定義はサプライヤーが行うため"], "answer": "B", "explanation": "要件定義の曖昧さはプロジェクト失敗の最大要因。明確な要件＝成功の基盤。"}, {"id": 47, "section": "専門領域調達", "sectionId": 1, "difficulty": 2, "question": "間接品調達で「購買カード（Pカード）」を導入する目的はどれか。", "choices": ["(A) サプライヤーの信用調査", "(B) 少額・多頻度の購買処理を効率化する", "(C) 在庫管理を自動化する", "(D) 品質検査を省略する"], "answer": "B", "explanation": "購買カード＝少額・多頻度の間接品購買の注文・支払処理を簡素化・効率化するツール。"}, {"id": 48, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "プロジェクト調達における「スコープクリープ」とは何か。", "choices": ["(A) プロジェクトの予算超過", "(B) プロジェクトの範囲が管理されないまま徐々に拡大すること", "(C) プロジェクトメンバーの離脱", "(D) 納期の前倒し"], "answer": "B", "explanation": "スコープクリープ＝プロジェクト範囲の無秩序な拡大。変更管理の不備が原因。"}, {"id": 49, "section": "専門領域調達", "sectionId": 1, "difficulty": 1, "question": "商標権の有効期間と更新について正しいのはどれか。", "choices": ["(A) 登録から20年、更新不可", "(B) 登録から10年、更新可能", "(C) 出願から15年、更新不可", "(D) 登録から5年、更新可能"], "answer": "B", "explanation": "商標権＝登録から10年間、更新可能（半永久的に保護可能）。"}, {"id": 50, "section": "専門領域調達", "sectionId": 1, "difficulty": 3, "question": "業務委託における「善管注意義務」が課されるのはどれか。", "choices": ["(A) 請負契約の受注者", "(B) 委任・準委任契約の受任者", "(C) 派遣契約の派遣社員", "(D) リース契約のリース会社"], "answer": "B", "explanation": "善管注意義務（善良な管理者の注意義務）＝委任・準委任契約の受任者に課される義務。"}, {"id": 51, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "コミュニケーションにおける「質問の5原則」に含まれないのはどれか。", "choices": ["(A) 簡潔に聞く", "(B) わかりやすく聞く", "(C) 長文で詳細に聞く", "(D) 1つずつ聞く"], "answer": "C", "explanation": "質問の5原則は「簡潔・わかりやすく・具体的・1つずつ・相手の答えやすいように」。長文で詳細にとは逆。"}, {"id": 52, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "質問の4基本型のうち「拡大質問（オープン質問）」の特徴はどれか。", "choices": ["(A) 「はい」「いいえ」で答えられる", "(B) 相手の考えや意見を自由に引き出す", "(C) 選択肢を提示して選ばせる", "(D) 事実のみを確認する"], "answer": "B", "explanation": "拡大質問（オープン）＝相手に自由に考えさせ、幅広い回答を引き出す。限定質問＝Yes/No型。"}, {"id": 53, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "コーチングの6つのスキルに含まれないのはどれか。", "choices": ["(A) 傾聴", "(B) 質問", "(C) 命令", "(D) 承認"], "answer": "C", "explanation": "コーチングの6スキル：傾聴・質問・承認・フィードバック・提案・要望。命令はコーチングスキルではない。"}, {"id": 54, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "ファシリテーションの5ステップの正しい順序はどれか。", "choices": ["(A) 意見出し→目的確認→構造化→合意形成→振り返り", "(B) 目的確認→意見出し→構造化→合意形成→振り返り", "(C) 構造化→目的確認→意見出し→合意形成→振り返り", "(D) 合意形成→目的確認→意見出し→構造化→振り返り"], "answer": "B", "explanation": "目的確認→意見出し→構造化（整理）→合意形成→振り返り。"}, {"id": 55, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "問題の3類型のうち「設定型」問題の特徴はどれか。", "choices": ["(A) 現在すでに発生している問題", "(B) 将来発生する可能性のある問題", "(C) 自ら高い目標を設定することで生まれる問題", "(D) 過去に起きた問題の再発"], "answer": "C", "explanation": "設定型＝現状に問題がなくても、より高い目標を設定することで生まれるギャップ。発生型＝現在の問題、探索型＝将来の問題。"}, {"id": 56, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "QCストーリーの8ステップの正しい順序はどれか。", "choices": ["(A) テーマ選定→対策立案→現状把握→目標設定→要因分析→効果確認→標準化→今後の課題", "(B) テーマ選定→現状把握→目標設定→要因分析→対策立案→対策実施→効果確認→標準化・今後の課題", "(C) 目標設定→テーマ選定→現状把握→対策立案→要因分析→効果確認→標準化→今後の課題", "(D) 現状把握→テーマ選定→目標設定→対策実施→要因分析→効果確認→今後の課題→標準化"], "answer": "B", "explanation": "テーマ選定→現状把握→目標設定→要因分析→対策立案→対策実施→効果確認→標準化・今後の課題。"}, {"id": 57, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "QC7つ道具に含まれないのはどれか。", "choices": ["(A) パレート図", "(B) 特性要因図", "(C) 親和図法", "(D) ヒストグラム"], "answer": "C", "explanation": "親和図法は「新QC7つ道具」。QC7つ道具は：パレート図、特性要因図、ヒストグラム、散布図、管理図、チェックシート、層別（グラフ）。"}, {"id": 58, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「パレート図」の主な用途はどれか。", "choices": ["(A) データの分布状態を把握する", "(B) 問題の重点項目を明確にする", "(C) 2つの変数の相関関係を調べる", "(D) 工程の安定性を監視する"], "answer": "B", "explanation": "パレート図＝問題を大きい順に並べ、重点的に取り組むべき項目を明確にする（80:20の法則）。"}, {"id": 59, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「特性要因図」の別名はどれか。", "choices": ["(A) パレート図", "(B) フィッシュボーン図（魚の骨図）", "(C) 散布図", "(D) ガントチャート"], "answer": "B", "explanation": "特性要因図＝フィッシュボーン図（魚の骨図）。特性（結果）と要因（原因）の関係を整理。"}, {"id": 60, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「新QC7つ道具」に含まれるのはどれか。", "choices": ["(A) ヒストグラム", "(B) 管理図", "(C) 系統図法", "(D) 散布図"], "answer": "C", "explanation": "新QC7つ道具：親和図法、連関図法、系統図法、マトリックス図法、マトリックスデータ解析法、PDPC法、アローダイアグラム法。"}, {"id": 61, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "「連関図法」と「特性要因図」の違いとして正しいのはどれか。", "choices": ["(A) 連関図法は原因と結果が1対1の関係", "(B) 連関図法は原因同士の因果関係も表現できる", "(C) 特性要因図は原因間の複雑な関係を表現できる", "(D) 両者に違いはない"], "answer": "B", "explanation": "連関図法＝原因同士の複雑な因果関係を表現可能。特性要因図＝特性に対する要因を一方向で整理。"}, {"id": 62, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「散布図」で確認できることはどれか。", "choices": ["(A) 問題の重要度の順位", "(B) 2つの変数間の相関関係", "(C) 時系列の変化", "(D) データの度数分布"], "answer": "B", "explanation": "散布図＝2変数のデータをプロットし、相関関係（正の相関、負の相関、無相関）を確認。"}, {"id": 63, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「管理図」の目的はどれか。", "choices": ["(A) 問題の原因を特定する", "(B) 工程が安定状態にあるかを判断する", "(C) データの分布を視覚化する", "(D) 計画と実績の差異を分析する"], "answer": "B", "explanation": "管理図＝UCL（管理上限）とLCL（管理下限）を設け、工程の安定性・異常を監視。"}, {"id": 64, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「チェックシート」の主な用途はどれか。", "choices": ["(A) データの分布を視覚化する", "(B) データを簡単に収集・整理する", "(C) 問題の原因を特定する", "(D) 作業の標準を定める"], "answer": "B", "explanation": "チェックシート＝あらかじめ記入項目を決め、データを簡単・確実に収集・整理するツール。"}, {"id": 65, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「ヒストグラム」で確認できることとして適切でないのはどれか。", "choices": ["(A) データの分布の形状", "(B) データのばらつき具合", "(C) 2変数間の相関関係", "(D) 規格との適合状況"], "answer": "C", "explanation": "2変数間の相関は散布図で確認。ヒストグラムは1変数のデータ分布を把握する。"}, {"id": 66, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "問題解決で「なぜなぜ分析」を行う目的はどれか。", "choices": ["(A) 問題の重要度を順位付ける", "(B) 真の原因（根本原因）に到達する", "(C) 解決策の優先順位を決める", "(D) 効果を測定する"], "answer": "B", "explanation": "なぜなぜ分析＝「なぜ？」を繰り返し、表面的な原因ではなく真の原因（根本原因）に到達する手法。"}, {"id": 67, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "コミュニケーションにおける「非言語コミュニケーション」に含まれないのはどれか。", "choices": ["(A) 表情", "(B) 身振り手振り", "(C) メールの文面", "(D) 声のトーン"], "answer": "C", "explanation": "メールの文面は言語コミュニケーション。非言語＝表情・身振り・声のトーン・姿勢等。"}, {"id": 68, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「PDPC法」（過程決定計画図）の用途はどれか。", "choices": ["(A) 事態の進展を予測し、望ましい結果に導く", "(B) データの度数分布を把握する", "(C) 2変数の関係を分析する", "(D) 作業の標準時間を設定する"], "answer": "A", "explanation": "PDPC法＝事態が進展する過程をあらかじめ想定し、不測の事態への対応策を検討して望ましい結果に導く。"}, {"id": 69, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「アローダイアグラム法」の用途はどれか。", "choices": ["(A) 原因と結果の関係を整理する", "(B) 日程計画を立て、クリティカルパスを明確にする", "(C) データの分布を視覚化する", "(D) 問題の重要度を順位付ける"], "answer": "B", "explanation": "アローダイアグラム＝PERT図。作業の順序関係と所要時間を示し、日程計画・クリティカルパスを明確にする。"}, {"id": 70, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "「マトリックス図法」と「マトリックスデータ解析法」の違いはどれか。", "choices": ["(A) マトリックス図法は数値データを使い、データ解析法は定性的", "(B) マトリックス図法は定性的な関連度を示し、データ解析法は数値データを統計的に分析する", "(C) 両者は同じ手法の別名である", "(D) データ解析法はQC7つ道具に含まれる"], "answer": "B", "explanation": "マトリックス図法＝2つの要素の対応関係を定性的に整理。マトリックスデータ解析法＝数値データを統計的に分析（新QC7つ道具で唯一の数値解析手法）。"}, {"id": 71, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「系統図法」の用途はどれか。", "choices": ["(A) 目的を達成するための手段を系統的に展開する", "(B) データの時系列変化を追跡する", "(C) 2つの集団のデータを比較する", "(D) 作業工程の流れを記録する"], "answer": "A", "explanation": "系統図法＝目的→手段の関係を系統的に展開し、最適な手段を追求する。"}, {"id": 72, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「親和図法」（KJ法）の用途はどれか。", "choices": ["(A) 明確なデータを統計的に分析する", "(B) 混沌とした言語データを親和性（似ているもの）でグループ化し整理する", "(C) 作業の標準時間を設定する", "(D) 工程の安定性を監視する"], "answer": "B", "explanation": "親和図法（KJ法）＝言語データをカードに書き出し、似たものをグループ化して問題の構造を明らかにする。"}, {"id": 73, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "問題の3類型で「発生型」とは何か。", "choices": ["(A) 自ら高い目標を設定して生じるギャップ", "(B) 現在すでに発生している、あるべき姿と現状のギャップ", "(C) 将来発生する可能性のある潜在的問題", "(D) 他社と比較して初めてわかる問題"], "answer": "B", "explanation": "発生型＝あるべき姿（基準・標準）と現状のギャップとして既に発生している問題。"}, {"id": 74, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "要因解析ツールの「FTA（Fault Tree Analysis）」の特徴はどれか。", "choices": ["(A) ボトムアップで原因を積み上げる", "(B) トップダウンで故障の原因を論理的に展開する", "(C) 統計的にデータを分析する", "(D) ブレーンストーミングで自由にアイデアを出す"], "answer": "B", "explanation": "FTA＝トップ事象（故障）から出発し、トップダウンで原因を論理的（AND/ORゲート）に展開する解析手法。"}, {"id": 75, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「PM分析」の「PM」は何の略か。", "choices": ["(A) Project Management", "(B) Preventive Maintenance", "(C) Physical Mechanism / Phenomenon Mechanism", "(D) Performance Measurement"], "answer": "C", "explanation": "PM分析＝Physical Mechanism（物理メカニズム）/ Phenomenon Mechanism（現象メカニズム）の略。慢性的不良の原因を物理的に解明する手法。"}, {"id": 76, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "リーダーシップの2つの機能とは何か。", "choices": ["(A) 計画と実行", "(B) 目標達成機能と集団維持機能", "(C) 管理と監督", "(D) 報告と連絡"], "answer": "B", "explanation": "リーダーシップの2機能：P機能（Performance＝目標達成）とM機能（Maintenance＝集団維持）。"}, {"id": 77, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「ネゴシエーション」において「Win-Win」の関係を構築するために重要なことはどれか。", "choices": ["(A) 自社の利益を最大化する", "(B) 相手の立場や利益も考慮した創造的解決策を見出す", "(C) 常に譲歩する", "(D) 交渉を長引かせる"], "answer": "B", "explanation": "Win-Win＝双方の利益を考慮し、創造的な解決策を見出すこと。"}, {"id": 78, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "「R-f分析（要因の信頼性分析）」の目的はどれか。", "choices": ["(A) サプライヤーの信頼性を評価する", "(B) 故障の再現性と要因の関連性を分析する", "(C) 統計的にロットの合否を判定する", "(D) 顧客満足度を測定する"], "answer": "B", "explanation": "R-f分析＝故障の再現性（Repeatability）と要因（factor）の関連性を分析し、真の原因を特定する手法。"}, {"id": 79, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "プレゼンテーションの3要素はどれか。", "choices": ["(A) 目的・手段・効果", "(B) コンテンツ・デリバリー・ビジュアル", "(C) 計画・実行・評価", "(D) 報告・連絡・相談"], "answer": "B", "explanation": "プレゼンテーション3要素＝コンテンツ（内容）・デリバリー（伝え方）・ビジュアル（視覚資料）。"}, {"id": 80, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「限定質問（クローズド質問）」が適切な場面はどれか。", "choices": ["(A) 相手の考えを自由に引き出したいとき", "(B) 事実の確認や意思決定の確認をしたいとき", "(C) 創造的なアイデアを求めるとき", "(D) 問題の原因を探りたいとき"], "answer": "B", "explanation": "限定質問（クローズド）＝Yes/No等で事実確認・意思決定の確認に適する。"}, {"id": 81, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "QCストーリーで「標準化」を行う目的はどれか。", "choices": ["(A) 改善効果を一時的に確認する", "(B) 改善結果を維持し、再発を防止する", "(C) 新たな問題を発見する", "(D) 目標を再設定する"], "answer": "B", "explanation": "標準化＝改善した結果を標準として定着させ、効果を持続させ再発を防止する。"}, {"id": 82, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "「層別」の目的はどれか。", "choices": ["(A) データを同質のグループに分け、問題の所在を明らかにする", "(B) データの平均値を算出する", "(C) データの最大値と最小値を求める", "(D) データを時系列で並べる"], "answer": "A", "explanation": "層別＝データを機械別・作業者別・時間帯別等のグループに分けて、問題の所在を明確にする。"}, {"id": 83, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「ブレーンストーミング」のルールとして正しくないのはどれか。", "choices": ["(A) 自由奔放にアイデアを出す", "(B) 他人のアイデアを批判しない", "(C) 質より量を重視する", "(D) 実現可能なアイデアのみ出す"], "answer": "D", "explanation": "ブレスト4ルール：①批判禁止、②自由奔放、③質より量、④便乗歓迎。実現可能性は問わない。"}, {"id": 84, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「5W1H」で改善を検討する際、最初に取り組むべきは何か。", "choices": ["(A) Who（誰が）", "(B) What（目的は何か）", "(C) How（いかに）", "(D) When（いつ）"], "answer": "B", "explanation": "まず「What（目的は何か）→ Why（なぜ）」で不必要な仕事を排除。その後Where, When, Who, How。"}, {"id": 85, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "「信頼関係」構築の基盤として最も重要なのはどれか。", "choices": ["(A) 高い交渉力", "(B) 約束を守り、一貫性のある行動をとること", "(C) 専門知識の豊富さ", "(D) コミュニケーション頻度の多さ"], "answer": "B", "explanation": "信頼関係の基盤＝言行一致、約束の遵守、一貫性のある行動。"}, {"id": 86, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「管理図」でUCLとLCLの範囲外にデータが出た場合、何を意味するか。", "choices": ["(A) 工程は正常である", "(B) 工程に異常がある可能性がある", "(C) データの収集方法が間違っている", "(D) 工程を停止すべきである"], "answer": "B", "explanation": "管理限界（UCL/LCL）外のデータ＝工程に異常原因が存在する可能性を示唆。調査が必要。"}, {"id": 87, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「探索型」問題の特徴はどれか。", "choices": ["(A) 現在発生している問題", "(B) 将来発生する可能性のある潜在的問題を先取りして対策する", "(C) 目標を高く設定して生じるギャップ", "(D) 過去の問題の再発"], "answer": "B", "explanation": "探索型＝将来の環境変化やリスクを先取りし、潜在的な問題を発見・対策する。"}, {"id": 88, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "コーチングとティーチングの違いとして正しいのはどれか。", "choices": ["(A) コーチングは答えを教え、ティーチングは質問で気づきを促す", "(B) コーチングは質問で気づきを促し、ティーチングは知識・スキルを直接教える", "(C) 両者に違いはない", "(D) ティーチングの方が時間がかかる"], "answer": "B", "explanation": "コーチング＝質問・傾聴で相手自身の気づきを引き出す。ティーチング＝知識・技術を直接伝授する。"}, {"id": 89, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "「マトリックスデータ解析法」が新QC7つ道具の中で特殊とされる理由はどれか。", "choices": ["(A) 最も簡単な手法だから", "(B) 唯一、数値データを統計的に処理する手法だから", "(C) 最も新しく開発された手法だから", "(D) 他の手法と併用できないから"], "answer": "B", "explanation": "新QC7つ道具の中で唯一の数値データ解析手法。他6つは言語データ主体。"}, {"id": 90, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「報連相（ほうれんそう）」の「連」は何を指すか。", "choices": ["(A) 連携", "(B) 連絡", "(C) 連続", "(D) 連帯"], "answer": "B", "explanation": "報連相＝報告・連絡・相談。ビジネスコミュニケーションの基本。"}, {"id": 91, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "傾聴の技法として適切なのはどれか。", "choices": ["(A) 相手の話を遮って自分の意見を述べる", "(B) 相手の話にうなずき、要点を繰り返して確認する", "(C) 相手の話を聞きながら別の作業をする", "(D) 相手の感情は無視して事実だけを聞く"], "answer": "B", "explanation": "傾聴＝うなずき、相づち、要点の繰り返し（パラフレーズ）、感情への共感等。"}, {"id": 92, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "QCストーリーの「現状把握」で使用するツールとして最も適切な組み合わせはどれか。", "choices": ["(A) パレート図とヒストグラム", "(B) アローダイアグラムとPDPC法", "(C) 系統図法と親和図法", "(D) 管理図とFTA"], "answer": "A", "explanation": "現状把握にはパレート図（重点の把握）、ヒストグラム（分布の把握）、チェックシート（データ収集）等が適切。"}, {"id": 93, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "交渉において「BATNA」とは何か。", "choices": ["(A) 最高の交渉結果", "(B) 交渉が不成立の場合の最善の代替案", "(C) 交渉のルール", "(D) 相手の弱点"], "answer": "B", "explanation": "BATNA（Best Alternative To a Negotiated Agreement）＝交渉が合意に至らない場合の最善の代替案。"}, {"id": 94, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「フィードバック」の効果的な方法として正しいのはどれか。", "choices": ["(A) 人格を否定する", "(B) 具体的な行動に焦点を当て、改善点と良い点をバランスよく伝える", "(C) 抽象的に伝える", "(D) 他の人と比較して評価する"], "answer": "B", "explanation": "効果的なフィードバック＝具体的行動に焦点、改善点と良い点のバランス、タイムリーに。"}, {"id": 95, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「パレート図」の基になっている原則はどれか。", "choices": ["(A) 50:50の法則", "(B) 80:20の法則（パレートの法則）", "(C) 100:0の法則", "(D) 60:40の法則"], "answer": "B", "explanation": "パレートの法則（80:20の法則）＝全体の80%の結果は20%の原因から生じる。"}, {"id": 96, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "QCストーリーの「要因分析」で使用する代表的なツールはどれか。", "choices": ["(A) パレート図", "(B) 特性要因図（フィッシュボーン図）", "(C) 管理図", "(D) チェックシート"], "answer": "B", "explanation": "要因分析では特性要因図で要因を体系的に整理し、真の原因を追究する。"}, {"id": 97, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 1, "question": "「アサーション」とは何か。", "choices": ["(A) 相手の意見を否定すること", "(B) 自分も相手も尊重した自己主張の方法", "(C) 一方的に自分の意見を押し通すこと", "(D) 相手の意見にすべて同意すること"], "answer": "B", "explanation": "アサーション＝自分も相手も大切にした上で、自分の考えを適切に表現するコミュニケーション技法。"}, {"id": 98, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "「連関図法」で明らかにできることはどれか。", "choices": ["(A) 作業の標準時間", "(B) 複雑に絡み合った原因と結果の関係", "(C) データの度数分布", "(D) 工程の安定性"], "answer": "B", "explanation": "連関図法＝複雑に絡み合った問題の原因と結果の関係を矢印で結び、全体構造を明らかにする。"}, {"id": 99, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 3, "question": "問題解決における「対策の水平展開」とは何か。", "choices": ["(A) 同じ問題を繰り返すこと", "(B) 成功した対策を類似の問題や他の部門にも適用すること", "(C) 対策を段階的に実施すること", "(D) 対策の効果を測定すること"], "answer": "B", "explanation": "水平展開＝ある問題で成功した対策を、他の類似問題・他部門・他工場にも展開して効果を拡大する。"}, {"id": 100, "section": "ビジネスファンダメンタルズ", "sectionId": 2, "difficulty": 2, "question": "問題解決で「仮説検証アプローチ」の正しい手順はどれか。", "choices": ["(A) データ収集→仮説設定→検証→結論", "(B) 仮説設定→データ収集→分析・検証→結論", "(C) 結論→仮説設定→データ収集→検証", "(D) 分析→仮説設定→結論→データ収集"], "answer": "B", "explanation": "仮説設定→データ収集→分析・検証→結論（仮説の採択/棄却）。"}, {"id": 101, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "トヨタ生産方式（TPS）の中核をなすサブシステムはどれか。", "choices": ["(A) MRP方式", "(B) JIT（ジャストインタイム）生産方式", "(C) セル生産方式", "(D) バッチ生産方式"], "answer": "B", "explanation": "TPSの中核＝JIT生産方式。「必要な部品を必要な数量だけ必要なときにつくる」がコンセプト。"}, {"id": 102, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "「かんばん」の機能として正しくないのはどれか。", "choices": ["(A) 生産指示（引取り、組立、加工）", "(B) 目で見る管理（情報とモノの一致）", "(C) 原価計算", "(D) 問題点の顕在化"], "answer": "C", "explanation": "かんばんの機能は生産指示・目で見る管理・流動数規制・問題点顕在化。原価計算は機能ではない。"}, {"id": 103, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "セル生産方式で「編成効率100%」を達成できるのはどの方式か。", "choices": ["(A) コンベヤー方式", "(B) 分割方式（部分巡回）", "(C) 1人方式（ベンチ生産）", "(D) バッチ生産方式"], "answer": "C", "explanation": "1人方式は1人で全工程を完結するため、手待ち時間なし＝編成効率100%。"}, {"id": 104, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "「プル方式」と「プッシュ方式」の説明で正しいのはどれか。", "choices": ["(A) プル方式は計画に基づき生産する", "(B) プッシュ方式は前工程が使った分だけ補給する", "(C) プル方式は前工程が使った分だけ補給する", "(D) 両者に違いはない"], "answer": "C", "explanation": "プル＝使った分だけ補給（かんばん方式）、プッシュ＝計画に基づき生産・調達。"}, {"id": 105, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "IEの2つの側面として正しい組み合わせはどれか。", "choices": ["(A) 品質管理と原価管理", "(B) 方法工学と作業測定", "(C) 生産計画と在庫管理", "(D) 設備保全と品質保証"], "answer": "B", "explanation": "IE＝方法工学（メソッドエンジニアリング）＋作業測定（ワークメジャメント）。"}, {"id": 106, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "ECRSの法則で、最初に検討すべきは何か。", "choices": ["(A) Simplify（簡素化）", "(B) Rearrange（入替と代替）", "(C) Combine（統合と分離）", "(D) Eliminate（排除）"], "answer": "D", "explanation": "E→C→R→Sの順。Eliminate（排除）は作業そのものをなくすため効果最大→最初に検討。"}, {"id": 107, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "動作経済の4原則に含まれないのはどれか。", "choices": ["(A) 動作の数を少なくする", "(B) 両手は同時に使う", "(C) 作業者を増やす", "(D) 移動距離を短縮する"], "answer": "C", "explanation": "動作経済の4原則：①動作数を減らす、②両手を同時に使う、③移動距離を短縮、④動作を楽にする。"}, {"id": 108, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "タイムスタディーにおいて、ストップウォッチで測定できる最小単位はどれか。", "choices": ["(A) 動作", "(B) 要素作業", "(C) 単位作業", "(D) 工程"], "answer": "B", "explanation": "要素作業＝いくつかの動作の組合せで構成される作業の区切り。ストップウォッチ測定の最小単位。"}, {"id": 109, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "工程図記号で「▽」が表すのはどれか。", "choices": ["(A) 加工", "(B) 運搬", "(C) 滞留", "(D) 貯蔵"], "answer": "D", "explanation": "▽＝貯蔵（計画により貯えている）。D＝滞留（滞っている状態）。"}, {"id": 110, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "ワークサンプリングで「かたより」を防ぐための工夫として正しいのはどれか。", "choices": ["(A) 毎回同じ時刻に観測する", "(B) 観測時刻を作業サイクルと合わないように設定する", "(C) 1回の観測で全データを取得する", "(D) 観測者を固定する"], "answer": "B", "explanation": "かたより防止：①観測時刻を作業サイクルと合わないように、②巡回経路を複数設定し都度選択。"}, {"id": 111, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "「目標サイクルタイム」の計算式はどれか。", "choices": ["(A) ライン稼働時間 × 生産必要量 × 良品率", "(B) ライン稼働時間 ÷ 生産必要量 ÷ 良品率", "(C) 生産必要量 ÷ ライン稼働時間 × 良品率", "(D) ライン稼働時間 ÷ 生産必要量 × 良品率"], "answer": "B", "explanation": "目標サイクルタイム＝ライン稼働時間÷生産必要量÷良品率。"}, {"id": 112, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "連合作業分析で使用する代表的なツールはどれか。", "choices": ["(A) パレート図", "(B) M-Mチャート（マンマシンチャート）", "(C) ガントチャート", "(D) 散布図"], "answer": "B", "explanation": "連合作業分析ではM-Mチャート（Man-Machine / Man-Man chart）を使用。"}, {"id": 113, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "設備保全で「予防保全（PM）」に分類されるのはどれか。", "choices": ["(A) 事後保全（BM）", "(B) 改良保全（CM）", "(C) 時間基準保全（TBM）", "(D) MP活動"], "answer": "C", "explanation": "TBM＝予防保全の定期保全の一種。時間パラメータで周期を定め無条件交換。"}, {"id": 114, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "「状態基準保全（CBM）」の特徴はどれか。", "choices": ["(A) 時間で周期を決めて無条件に交換する", "(B) 劣化状態を連続測定し、基準到達時に修理・交換する", "(C) 故障してから修理する", "(D) 設備の部品を改良する"], "answer": "B", "explanation": "CBM＝状態監視型。劣化パラメータを連続測定し、基準値に達した時点で修理・交換。"}, {"id": 115, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "設備の「6大ロス」のうち「速度ロス」に分類されるのはどれか。", "choices": ["(A) 故障ロス", "(B) 段取り調整ロス", "(C) 空転・小停止ロス（チョコ停）", "(D) 工程不良ロス"], "answer": "C", "explanation": "速度ロス＝③空転・小停止ロス（チョコ停）＋④速度低下ロス。故障・段取り＝停止ロス、不良＝不良ロス。"}, {"id": 116, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "設備総合効率が50〜60%の場合、何を意味するか。", "choices": ["(A) 設備状態は良好", "(B) 設備保全が適切に行われていない", "(C) 設備を更新すべき", "(D) 設備の能力が過剰"], "answer": "B", "explanation": "85%以上＝良好、50〜60%＝保全が不適切、85%未満＝改善余地あり。"}, {"id": 117, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "設備総合効率の「性能稼働率」はどのように計算されるか。", "choices": ["(A) 時間稼働率 × 良品率", "(B) 速度稼働率 × 正味稼働率", "(C) 負荷時間 ÷ 停止時間", "(D) 加工数量 ÷ 良品数量"], "answer": "B", "explanation": "性能稼働率＝速度稼働率（基準CT÷実際CT）×正味稼働率（出来高×実際CT÷稼働時間）。"}, {"id": 118, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "「事後保全（BM）」が適用される条件として正しいのはどれか。", "choices": ["(A) 故障すると他に多大な影響がある設備", "(B) 故障しても影響・損失が小さく、予備品が常にある設備", "(C) 劣化周期のバラツキが大きい設備", "(D) 部品が高価な設備"], "answer": "B", "explanation": "BM適用条件：①影響・損失小、②予備品を常備or短期入手可能、③交換に時間がかからない。"}, {"id": 119, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "IPSにおける「理念」とはどのような状態か。", "choices": ["(A) 現状の最高性能", "(B) 稼働率100%、良品率100%、人員0、速度∞の状態", "(C) 競合他社のベストプラクティス", "(D) 業界平均の水準"], "answer": "B", "explanation": "理念＝究極の「神様の工場」。稼働率100%、良品率100%、人員0人、速度は無限大。"}, {"id": 120, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "IPSの「右からの発想」とはどういう意味か。", "choices": ["(A) 現状の問題から改善を積み上げる", "(B) 理想の姿からものごとを発想する", "(C) 右利きの人向けの作業改善", "(D) 組織の右側（営業部門）から発想する"], "answer": "B", "explanation": "右からの発想＝理想の姿から出発し、理念→理想→経営戦略コスト→理想目標原価と展開。"}, {"id": 121, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "IPSで許容される制約条件は最大いくつか。", "choices": ["(A) 1つ", "(B) 2つ", "(C) 3つ", "(D) 5つ"], "answer": "C", "explanation": "IPSでは3つまで許容：技術の制約・資金/投資機会の制約・方針の制約。"}, {"id": 122, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "IPSにおける「経営戦略コスト」の計算式はどれか。", "choices": ["(A) 現状原価 − 目標削減額", "(B) 戦略売価 − 利益目標", "(C) 売上高 − 変動費", "(D) 直接費 + 間接費"], "answer": "B", "explanation": "経営戦略コスト＝戦略売価（競合に勝てる価格）− 利益目標。"}, {"id": 123, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "物流の8Rに含まれないのはどれか。", "choices": ["(A) Right Material", "(B) Right Speed", "(C) Right Cost", "(D) Right Impression"], "answer": "B", "explanation": "8R：Material, Quantity, Quality, Place, Time, Method, Cost, Impression。Speedは含まれない。"}, {"id": 124, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "「静脈物流」とは何か。", "choices": ["(A) サプライヤーから自社への物流", "(B) 製品の廃棄・リサイクルに伴う物流", "(C) 工場内の物流", "(D) 販売店への製品配送"], "answer": "B", "explanation": "静脈物流＝製品廃棄・リサイクルに伴う物流。血液循環の静脈（帰り）に例えた名称。"}, {"id": 125, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "「ミルクラン」モデルの特徴はどれか。", "choices": ["(A) 1つのサプライヤーから大量に直送する", "(B) 複数サプライヤーを1台の車両で巡回して集荷する", "(C) 中継拠点に在庫を持つ", "(D) 宅配便を利用する"], "answer": "B", "explanation": "ミルクラン＝牛乳配達モデル。複数サプライヤーを1台で巡回。輸送効率高く在庫水準低い。"}, {"id": 126, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "3PL事業者の最大の特徴はどれか。", "choices": ["(A) 自社の倉庫を持っている", "(B) 報酬とリスクを荷主と共有する（ゲインシェアリング）", "(C) 輸送のみを担当する", "(D) 国際物流専門である"], "answer": "B", "explanation": "3PLの最大特徴＝報酬とリスクの共有。ゲインシェアリング（CR効果の利益シェア）。"}, {"id": 127, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "物流とロジスティクスの違いで正しいのはどれか。", "choices": ["(A) 物流とロジスティクスは同じ概念", "(B) 物流は個別機能に重点、ロジスティクスは全体最適のマネジメント", "(C) ロジスティクスは倉庫管理のみを指す", "(D) 物流はロジスティクスの上位概念"], "answer": "B", "explanation": "物流＝個別機能（輸送・保管等）に重点。ロジスティクス＝全体最適の物流マネジメント。"}, {"id": 128, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "BPRの特徴として正しくないのはどれか。", "choices": ["(A) トップダウンによる推進", "(B) ゼロベースの思考", "(C) 部門最適の追求", "(D) ITの積極的活用"], "answer": "C", "explanation": "BPRは部門最適ではなく「全体最適」を追求。トップダウン・ゼロベース・IT活用が特徴。"}, {"id": 129, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "BPR導入の5ステップのうち、Step3はどれか。", "choices": ["(A) 目的と対象の明確化", "(B) 目標の設定", "(C) 課題認識（プロセスリデザイン）", "(D) テーマ設定"], "answer": "C", "explanation": "Step1目的と対象→Step2目標設定→Step3課題認識→Step4テーマ設定→Step5推進計画。"}, {"id": 130, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "BPRの「プロセスリデザイン」における3つの改革視点に含まれないのはどれか。", "choices": ["(A) 機能分担改革", "(B) 業務・情報システム改革", "(C) 人材改革", "(D) 財務改革"], "answer": "D", "explanation": "3改革視点：機能分担改革・業務/情報システム改革・人材改革。財務改革は含まれない。"}, {"id": 131, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "セル生産方式の「巡回方式」の特徴はどれか。", "choices": ["(A) 1人で全工程を完結", "(B) 数人が同一セル内で各自全工程を巡回", "(C) 工程の一部を受持ち分業", "(D) コンベヤーで流す"], "answer": "B", "explanation": "巡回方式（兎追い）＝数人が同一セル内で各自初工程〜最終工程を1人完結で巡回。"}, {"id": 132, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "P-Q分析の目的はどれか。", "choices": ["(A) 品質不良の原因を特定する", "(B) 製品別の生産量を整理しレイアウト計画の基礎とする", "(C) 作業者の能力を評価する", "(D) 設備の稼働率を分析する"], "answer": "B", "explanation": "P-Q分析＝Product(製品)×Quantity(量)分析。生産量の多い順に並べ、レイアウト計画に活用。"}, {"id": 133, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "「改良保全（CM）」が適用される条件として正しくないのはどれか。", "choices": ["(A) 劣化傾向のバラツキが大きい設備", "(B) 故障頻度が多く寿命が短い設備", "(C) 影響・損失が小さい設備", "(D) 修理時間が長い設備"], "answer": "C", "explanation": "CM適用条件：①バラツキ大、②修理費高い、③寿命短い/故障頻度多い、④修理時間長い、⑤点検しにくい。影響小は事後保全（BM）の条件。"}, {"id": 134, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "リーン生産方式の起源はどれか。", "choices": ["(A) フォード生産方式", "(B) トヨタ生産方式", "(C) セル生産方式", "(D) バッチ生産方式"], "answer": "B", "explanation": "リーン生産方式はトヨタ生産方式から生まれた欧米流の生産方式。"}, {"id": 135, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "フロープロセスチャートの工程分類で「D」が表すのはどれか。", "choices": ["(A) 加工", "(B) 検査", "(C) 滞留", "(D) 貯蔵"], "answer": "C", "explanation": "D＝滞留（材料・部品が滞っている状態）。▽＝貯蔵（計画により貯えている）。"}, {"id": 136, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "ATカーニー社の調査によると、IT化によるBPRを調達業務で実施した場合、業務時間はどの程度短縮可能か。", "choices": ["(A) 10%以上", "(B) 20%以上", "(C) 35%以上", "(D) 50%以上"], "answer": "C", "explanation": "ATカーニー社調査＝IT化BPRにより調達業務全体で35%以上の業務時間短縮が可能。"}, {"id": 137, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "物流コスト分析の「ABC手法」とは何か。", "choices": ["(A) A・B・Cランクに品目を分類する", "(B) 作業単位（Activity）のコストを積み上げて全体を分析する", "(C) 売上高の上位をA、中位をB、下位をCとする", "(D) 在庫のABC管理"], "answer": "B", "explanation": "ABC（Activity Based Costing）＝ピッキング・検品・梱包等の個別作業コストから物流コスト全体を分析。"}, {"id": 138, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "「クロスドッキング」モデルの特徴はどれか。", "choices": ["(A) 中継拠点に在庫を持つ", "(B) 中継拠点で在庫を持たず積替えのみ行う", "(C) サプライヤーから工場へ直送する", "(D) 複数サプライヤーを1台で巡回する"], "answer": "B", "explanation": "クロスドッキング＝中継拠点で在庫を持たず、車の積替えのみ。LTは最も遅い搬入で決まる。"}, {"id": 139, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "IPSのコスト3段階で「FC（Factory Cost）」の内容はどれか。", "choices": ["(A) 直接費のみ", "(B) 直接費＋間接費", "(C) 直接費＋間接費＋販管費", "(D) 売上高−変動費"], "answer": "B", "explanation": "FC＝Direct Cost＋Indirect Cost。DC＝直接費のみ、TC＝DC+間接費+販管費+営業外。"}, {"id": 140, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "MRP方式の特徴として正しいのはどれか。", "choices": ["(A) 製品中心の管理で注文ベース", "(B) 部品中心の考え方で計画に基づき手配する", "(C) 前工程が使った分だけ補給する", "(D) 在庫を持たない"], "answer": "B", "explanation": "MRP＝部品中心、計画に基づき必要数量を手配・在庫。製番方式＝製品中心・注文ベース。"}, {"id": 141, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "3PL導入の安定稼働期に重要なポイントはどれか。", "choices": ["(A) 経営トップの強い意志", "(B) 競争入札による選定", "(C) 情報開示と機密保持の徹底、目標の共有化", "(D) 移行チームの設立"], "answer": "C", "explanation": "安定稼働期＝情報開示と機密保持、目標共有、相互評価、契約内容（報酬とリスクのシェア）。"}, {"id": 142, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "「TPM（Total Productive Maintenance）」の目的はどれか。", "choices": ["(A) 品質管理の統計的手法を適用すること", "(B) 設備の生産性を最大化し、全員参加で保全活動を推進すること", "(C) 製品のライフサイクルコストを算出すること", "(D) プロジェクトのスケジュールを管理すること"], "answer": "B", "explanation": "TPM＝全員参加の生産保全。設備効率を極限まで高め、ロスゼロを目指す。"}, {"id": 143, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "BPRの提唱者は誰か。", "choices": ["(A) マイケル・ポーター", "(B) マイケル・ハマーとジェームス・チャンピー", "(C) ピーター・ドラッカー", "(D) エリヤフ・ゴールドラット"], "answer": "B", "explanation": "BPR＝マイケル・ハマーとジェームス・チャンピーが1993年に提唱。"}, {"id": 144, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "IPSが開発された企業はどれか。", "choices": ["(A) トヨタ自動車", "(B) TDK", "(C) モトローラ", "(D) GE"], "answer": "B", "explanation": "IPS＝1970年代にTDK（株）のセラミック事業部で開発。増島勝氏が事業部長。"}, {"id": 145, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "物流の機能別管理指標で「在庫回転率」はどの機能の指標か。", "choices": ["(A) 調達", "(B) 生産", "(C) 在庫", "(D) 顧客"], "answer": "C", "explanation": "在庫回転率＝在庫機能の管理指標。在庫金額・滞留品比率・製品廃棄率も在庫の指標。"}, {"id": 146, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "調達部門のBPRにおける「段階2」で行うことはどれか。", "choices": ["(A) ソーシング業務を本社に集中化", "(B) 手配オペレーション（発注・検収）を標準化してアウトソーシング", "(C) サプライヤーの評価を実施", "(D) 新規サプライヤーを開拓"], "answer": "B", "explanation": "段階1＝ソーシング・値決めを本社集中。段階2＝手配オペレーションを標準化→アウトソーシング。"}, {"id": 147, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "「BPM（Business Process Management）」の役割はどれか。", "choices": ["(A) BPRの一時的な改革を実施する", "(B) BPRを継続的に支援し、プロセス改善のサイクルを回す", "(C) 設備の保全管理を行う", "(D) 財務諸表を作成する"], "answer": "B", "explanation": "BPM＝分析→設計→実行→モニタリング→改善・再構築のサイクルで継続的BPRを支援。"}, {"id": 148, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 1, "question": "セル生産方式のレイアウト形状に含まれないのはどれか。", "choices": ["(A) U字型", "(B) L字型", "(C) X字型", "(D) フラワー型"], "answer": "C", "explanation": "セルのレイアウト＝U字型、L字型、二の字型、フラワー型。X字型は含まれない。"}, {"id": 149, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 3, "question": "設備総合効率の計算で、速度稼働率の計算式はどれか。", "choices": ["(A) 基準サイクルタイム ÷ 実際サイクルタイム", "(B) 実際サイクルタイム ÷ 基準サイクルタイム", "(C) 負荷時間 ÷ 稼働時間", "(D) 良品数 ÷ 加工数量"], "answer": "A", "explanation": "速度稼働率＝基準サイクルタイム÷実際サイクルタイム。設計スピードに対する実際の比率。"}, {"id": 150, "section": "CRのための関連知識", "sectionId": 3, "difficulty": 2, "question": "ロジスティクスの発展段階で「調達・生産・販売・物流が横断的につながっている」段階はどれか。", "choices": ["(A) 後処理物流", "(B) 物流システム", "(C) ビジネス・ロジスティクスシステム", "(D) グリーン・ロジスティクスシステム"], "answer": "C", "explanation": "③ビジネス・ロジスティクス＝調達・生産・販売・物流が横断的に接続。④SC・ロジスティクス＝顧客・供給業者との連携。"}, {"id": 151, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "方針管理の起源は何か。", "choices": ["(A) ISO9000s", "(B) TQC（Total Quality Control）", "(C) シックスシグマ", "(D) TOC"], "answer": "B", "explanation": "方針管理の起源＝TQC。"}, {"id": 152, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "方針管理において「旗方式」を始めた企業はどれか。", "choices": ["(A) トヨタ自動車", "(B) ブリジストン", "(C) 小松製作所", "(D) モトローラ"], "answer": "C", "explanation": "1961年、小松製作所の管理点設定図（旗方式）＝方針管理の始まり。"}, {"id": 153, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "方針管理の手順で「目標展開」のポイントとして正しいのはどれか。", "choices": ["(A) 目標は定性的に示す", "(B) 目標は数値化し、上下左右のすり合わせを行う", "(C) 目標は上位者のみが設定する", "(D) 目標の期限は設けない"], "answer": "B", "explanation": "目標は数値化。上下（上位目標・上司）左右（関係部門）のすり合わせが重要。"}, {"id": 154, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "方針管理の「期中フォロー」で管理すべき2つの側面はどれか。", "choices": ["(A) コストと品質", "(B) 行動面と成果", "(C) 計画と実績", "(D) 短期と長期"], "answer": "B", "explanation": "行動面（行動が実際に取られたか否か）＋成果（目標に対する実績）の両面で管理。"}, {"id": 155, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "プロジェクトマネジメントで「最も重要なフェーズ」とされるのはどれか。", "choices": ["(A) 立上げ", "(B) 計画立案", "(C) 実行", "(D) 終結"], "answer": "B", "explanation": "計画立案が最も重要。スコープ・スケジュール・コスト・品質等を明確化する。"}, {"id": 156, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "プロジェクトの契約形態で「タイム・アンド・マテリアル契約」の特徴はどれか。", "choices": ["(A) 最初に総額を合意する", "(B) 時間単金×かかった時間で支払う", "(C) 発生コスト全額＋マージンを支払う", "(D) 成果物完成時にのみ支払う"], "answer": "B", "explanation": "T&M契約＝定額契約と実費償還契約の中間。時間あたりの単金を決め、かかった時間を乗じて支払。"}, {"id": 157, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "プロジェクトにおける調達アクティビティで「変更管理」が特に重要な段階はどれか。", "choices": ["(A) 計画立案", "(B) 実行", "(C) 実施管理", "(D) 終結"], "answer": "C", "explanation": "実施管理段階で変更管理が特に大切。変更はスコープ・コスト・スケジュールに影響。"}, {"id": 158, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "TOCの提唱者は誰か。", "choices": ["(A) マイケル・ハリー", "(B) エリヤフ・ゴールドラット", "(C) マイケル・ハマー", "(D) 野中郁次郎"], "answer": "B", "explanation": "TOC＝物理学者エリヤフ・ゴールドラット博士が提唱。"}, {"id": 159, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "TOCにおいて「企業のゴール」とされるものはどれか。", "choices": ["(A) 市場シェアの拡大", "(B) 現在から将来に渡って利益を出し続けること", "(C) 従業員数の増加", "(D) 設備投資の最大化"], "answer": "B", "explanation": "TOCのゴール＝「現在から将来に渡って利益を出し続ける」＋市場満足＋従業員の安心・満足。"}, {"id": 160, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "TOCの「スループット」の定義はどれか。", "choices": ["(A) 生産量 × 単価", "(B) 売上高 − 資材費", "(C) 売上高 − 人件費", "(D) 利益 ＋ 減価償却費"], "answer": "B", "explanation": "T＝売上高−資材費（厳密には売上高−真の変動費）。販売した分のみ（生産高ではない）。"}, {"id": 161, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "TOCの3つの制約条件のうち「最大の制約条件」とされるのはどれか。", "choices": ["(A) 物理制約", "(B) 市場制約", "(C) 方針（管理）制約", "(D) 資金制約"], "answer": "C", "explanation": "方針制約＝原価計算方式、業績評価、手順、組織体制、慣習、価値観。TOC最大の制約。"}, {"id": 162, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "TOCの改善5ステップの第3ステップはどれか。", "choices": ["(A) 制約条件を見つける", "(B) 制約条件を活用する", "(C) 制約条件以外を制約条件に従わせる", "(D) 制約条件を強化する"], "answer": "C", "explanation": "Step3＝制約条件以外を制約条件に従わせる（制約以外には着手してはならない）。"}, {"id": 163, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "TOCの5つのツリーで「中核問題を特定する」のはどれか。", "choices": ["(A) CRT（現状問題構造ツリー）", "(B) CRD（対立解消図）", "(C) FRT（未来問題構造ツリー）", "(D) TrT（移行ツリー）"], "answer": "A", "explanation": "CRT＝好ましくない事実を因果関係で整理し、問題の70%に影響する中核問題を特定。"}, {"id": 164, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "DBRの「バッファ」の意味はどれか。", "choices": ["(A) 制約工程の生産スケジュール", "(B) 制約工程を受注変動から保護する時間的余裕", "(C) 制約工程に同期した部材の配当計画", "(D) ボトルネック工程の強化策"], "answer": "B", "explanation": "バッファ＝制約工程が受注変動やトラブルに左右されないための保護時間。"}, {"id": 165, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "VAT分析の「A型」に該当する業種はどれか。", "choices": ["(A) 鉄鋼", "(B) 家電", "(C) 橋梁・建設・航空機", "(D) 化学品"], "answer": "C", "explanation": "A型＝部品組立（個別受注生産）。橋梁、建設、航空機。部品取り揃えがDBRの鍵。"}, {"id": 166, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "シックスシグマを考案した企業はどれか。", "choices": ["(A) GE", "(B) トヨタ", "(C) モトローラ", "(D) IBM"], "answer": "C", "explanation": "1980年にモトローラ社のマイケル・ハリー氏が考案。"}, {"id": 167, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "DMAICの「D」は何を意味するか。", "choices": ["(A) Design（設計）", "(B) Define（機会の定義）", "(C) Develop（開発）", "(D) Distribute（配布）"], "answer": "B", "explanation": "DMAIC の D＝Define（機会の定義）。問題からビジネスチャンスを定義する。"}, {"id": 168, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "シックスシグマの推進体制で、1テーマ年間250万円以上の成果が求められる役割はどれか。", "choices": ["(A) チャンピオン", "(B) Black Belt（BB）", "(C) Green Belt（GB）", "(D) Master Black Belt（MBB）"], "answer": "C", "explanation": "GB＝250万円以上。BB＝1000万円以上。チャンピオン＝テーマに責任を持つ人（成果額基準なし）。"}, {"id": 169, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "「COPQ（Cost of Poor Quality）」とは何か。", "choices": ["(A) 高品質を実現するためのコスト", "(B) 品質が良くないために発生するコストの総称", "(C) 品質管理部門の人件費", "(D) 品質認証の取得費用"], "answer": "B", "explanation": "COPQ＝品質不良による発生コスト。目に見えるコスト（検査・廃棄等）＋見えにくいコスト（設計変更・機会損失等）。"}, {"id": 170, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "シックスシグマの成功ポイントで「最も重要」とされるのはどれか。", "choices": ["(A) 統計ソフトの活用", "(B) 共通教育", "(C) 経営トップの改革意欲の表明", "(D) 財務成果への直結"], "answer": "C", "explanation": "最も重要＝経営トップの改革意欲度を表明する場の設定（トップダウンの本気度）。"}, {"id": 171, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "SECIモデルの「S」は何か。", "choices": ["(A) Standardization（標準化）", "(B) Socialization（共同化）", "(C) Simplification（簡素化）", "(D) Systematization（体系化）"], "answer": "B", "explanation": "S＝Socialization（共同化）：暗黙知→暗黙知。同じ体験を通じて暗黙知を伝達。"}, {"id": 172, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "SECIモデルで「暗黙知を形式知に変換する」フェーズはどれか。", "choices": ["(A) 共同化（S）", "(B) 表出化（E）", "(C) 連結化（C）", "(D) 内面化（I）"], "answer": "B", "explanation": "E＝Externalization（表出化）：暗黙知→形式知。メタファー・アナロジーで言語化。"}, {"id": 173, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "ロジャーズのイノベーション普及曲線で、普及率が急上昇する閾値は何%か。", "choices": ["(A) 5%", "(B) 10%", "(C) 16%", "(D) 25%"], "answer": "C", "explanation": "普及率16%を超えると急上昇。イノベーター(2.5%)+アーリーアダプター(13.5%)=16%。"}, {"id": 174, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "「形式知」と「暗黙知」の説明で正しいのはどれか。", "choices": ["(A) 形式知は言語化できない知識", "(B) 暗黙知は言語・文章で表現しがたい主観的な知", "(C) 形式知は個人にしか伝えられない", "(D) 暗黙知はマニュアルに記載された知識"], "answer": "B", "explanation": "暗黙知＝言語化しにくい主観的な知（技能、勘等）。形式知＝言語・文章で表現した客観的な知。"}, {"id": 175, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "KM推進の5ステップでStep4「実践」において重要なことはどれか。", "choices": ["(A) ビジョンを策定する", "(B) ツールを整備する", "(C) early adapterを見極め、前向きな人に働きかける", "(D) 実践状況を測定する"], "answer": "C", "explanation": "Step4実践＝推奨ワークスタイルの実践を促し、early adapter（初期採用者）を見極めて働きかける。"}, {"id": 176, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "スキル伝承における「ワザ言語」とは何か。", "choices": ["(A) 外国語での技術用語", "(B) 感覚を表現する言葉（コクがある、キレがいい等）", "(C) プログラミング言語", "(D) 業界の専門用語"], "answer": "B", "explanation": "ワザ言語＝感覚を表現する言葉。暗黙知の形式知化を助けるツール。"}, {"id": 177, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "「バランススコアカード」において、KMの評価指標が位置づけられる視点はどれか。", "choices": ["(A) 財務の視点", "(B) 顧客の視点", "(C) 業務プロセスの視点", "(D) 学習と成長の視点"], "answer": "D", "explanation": "KM評価＝バランススコアカードの「学習と成長の視点」に位置づけ。"}, {"id": 178, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "デミング賞が創設された年はいつか。", "choices": ["(A) 1945年", "(B) 1951年", "(C) 1961年", "(D) 1965年"], "answer": "B", "explanation": "デミング賞＝1951年創設。故W.E.デミング博士の業績を記念。"}, {"id": 179, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "方針管理とISO9000sの関係について正しいのはどれか。", "choices": ["(A) ISO9000sは方針管理とは無関係", "(B) ISO9001を取得すれば自動的に方針管理をマスターできる仕組みになっている", "(C) 方針管理はISO9000sの代替手法", "(D) ISO9000sは方針管理より劣る"], "answer": "B", "explanation": "ISO9000sは方針管理の要素を標準化しており、取得すれば自動的に方針管理を実践できる。"}, {"id": 180, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "プロジェクトにおけるRFI、RFP、RFQの説明で正しいのはどれか。", "choices": ["(A) RFI＝見積依頼書", "(B) RFP＝情報提供依頼書", "(C) RFQ＝提案依頼書", "(D) RFI＝情報提供依頼書、RFP＝提案依頼書、RFQ＝見積依頼書"], "answer": "D", "explanation": "RFI=Request for Information、RFP=Request for Proposal、RFQ=Request for Quotation。"}, {"id": 181, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "TOCにおけるCPM（Constraints Per Minute）とは何か。", "choices": ["(A) 制約工程の1分あたりの処理数", "(B) ボトルネック工程の分あたりのスループット", "(C) 全工程の平均サイクルタイム", "(D) クリティカルパスの所要時間"], "answer": "B", "explanation": "CPM＝ボトルネック工程の分あたりのスループット。製品選択の意思決定に使用。"}, {"id": 182, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "シックスシグマが「部門限定ではない」理由はどれか。", "choices": ["(A) コストが安いから", "(B) 部門共通の重要特性を重視し、全体最適の答えを出すから", "(C) 統計ソフトがどの部門でも使えるから", "(D) 法律で全社適用が義務付けられているから"], "answer": "B", "explanation": "シックスシグマは部門共通の重要特性を重視し、部門の壁を取り払って全体最適を追求。"}, {"id": 183, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "TOCの「現状問題構造ツリー（CRT）」で特定する「中核問題」とは何か。", "choices": ["(A) 最も費用がかかる問題", "(B) 問題全体の70%に影響を持つ根底の問題", "(C) 最新の問題", "(D) 最も簡単に解決できる問題"], "answer": "B", "explanation": "中核問題＝目的達成を阻害する根底の問題で、問題全体の70%に影響を持つ。"}, {"id": 184, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "「日常管理」の定義に含まれるのはどれか。", "choices": ["(A) 長期経営計画の策定", "(B) 現状維持の活動を基本とし、改善活動も含む", "(C) 特別プロジェクトの推進", "(D) 組織改編の実施"], "answer": "B", "explanation": "日常管理＝各部門の担当業務について効率的達成のために日常実施する全活動。現状維持＋改善。"}, {"id": 185, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "クリティカル・パス法でクリティカルパスを特定した後に使用するツールはどれか。", "choices": ["(A) パレート図", "(B) ガントチャート", "(C) ヒストグラム", "(D) 散布図"], "answer": "B", "explanation": "クリティカルパス特定後、ガントチャートでスケジュールを組み立てる。"}, {"id": 186, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "DMAICとDMADVの「A」の違いはどれか。", "choices": ["(A) DMAICのAは「Analyze（分析）」で欠陥要因を特定、DMADVのAも同じ「Analyze」で最適値を特定", "(B) DMAICのAは「Action」、DMADVのAは「Analyze」", "(C) 両方とも「Application」", "(D) DMAICには「A」がない"], "answer": "A", "explanation": "両方ともAnalyze。DMAIC＝欠陥要因の特定、DMADV＝特性の最適値の特定。"}, {"id": 187, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "SECIモデルの「連結化（C）」の具体例はどれか。", "choices": ["(A) 徒弟制度で技能を伝承する", "(B) 暗黙知をメタファーで言語化する", "(C) 業務マニュアルとして形式知を再編する", "(D) マニュアルの知識を実践で体得する"], "answer": "C", "explanation": "連結化＝既知の形式知と形式知を組み合わせて再編。業務マニュアルの作成が代表例。"}, {"id": 188, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "TOCの改善5ステップで「惰性に注意しながら繰り返す」のは第何ステップか。", "choices": ["(A) 第1ステップ", "(B) 第3ステップ", "(C) 第4ステップ", "(D) 第5ステップ"], "answer": "D", "explanation": "Step5＝惰性に注意しながら繰り返す。新たな制約を発見しStep1〜5を繰り返す。"}, {"id": 189, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "ナレッジマネジメントの基本的考え方として正しいのはどれか。", "choices": ["(A) 知識そのものに働きかけることが重要", "(B) 知識を保有する人間に対して働きかけることが重要", "(C) ITシステムを導入すれば自動的にKMが実現する", "(D) KMは管理部門のみの仕事"], "answer": "B", "explanation": "KMは人間集団の意識改革・行動変革。知識を保有する人間に働きかけることが重要。"}, {"id": 190, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "方針管理の「方針」に含まれる3つの概念はどれか。", "choices": ["(A) 計画・実行・評価", "(B) 方針（方向）・目標（ゴール）・方策（方法→実施計画）", "(C) 品質・コスト・納期", "(D) 報告・連絡・相談"], "answer": "B", "explanation": "広義の方針＝①方針（方向・姿勢）、②目標（達成すべきゴール）、③方策（目標達成の方法）。"}, {"id": 191, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "TOCにおける「T/OE」は何を表すか。", "choices": ["(A) 在庫がスループットに変換される効率", "(B) 全体の生産性（1円の費用で獲得したお金）", "(C) 設備の総合効率", "(D) 業務費用の削減率"], "answer": "B", "explanation": "T/OE＝全体の生産性。1円の費用を使って獲得したお金。T/I＝在庫→スループットの変換効率。"}, {"id": 192, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "シックスシグマのDMADVの「V」は何を意味するか。", "choices": ["(A) Value（価値）", "(B) Verify（検証）", "(C) Vision（ビジョン）", "(D) Variable（変数）"], "answer": "B", "explanation": "DMADV の V＝Verify（検証）。設計内容を検証し、所定の効果が得られるよう維持管理する。"}, {"id": 193, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "ロジャーズの採用者分類で「うたぐり深く、世の中の普及状況を見て模倣的に採用する」のはどれか。", "choices": ["(A) アーリーアダプター", "(B) アーリーマジョリティ", "(C) レイトマジョリティ", "(D) ラガード"], "answer": "C", "explanation": "レイトマジョリティ＝うたぐり深い、模倣的採用。ラガード＝最も保守的、最後に採用。"}, {"id": 194, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "DBRの「少年たちの行進」の例えで、ボトルネックに該当するのはどれか。", "choices": ["(A) 先頭の少年", "(B) 最も足の遅い少年", "(C) 最後尾の少年", "(D) ドラムを叩く少年"], "answer": "B", "explanation": "足の遅い少年＝ボトルネック。先頭の少年＝初工程。ロープでつなぎバッファ（たるみ）を持たせる。"}, {"id": 195, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "シックスシグマの「VOC」を出発点とする理由はどれか。", "choices": ["(A) 社内の管理を簡素化するため", "(B) 顧客満足を基点とした改革で全体最適を実現するため", "(C) 法律で義務付けられているため", "(D) コスト削減が唯一の目的であるため"], "answer": "B", "explanation": "VOC（Voice of Customer）を出発点とし、顧客にとっての価値を基点に全体最適を追求。"}, {"id": 196, "section": "マネジメント手法", "sectionId": 4, "difficulty": 1, "question": "「方針管理」という用語が誕生した年と企業の組合せはどれか。", "choices": ["(A) 1958年・デミング賞", "(B) 1961年・小松製作所", "(C) 1965年・ブリジストン", "(D) 1980年・モトローラ"], "answer": "C", "explanation": "1965年、ブリジストンで「方針管理要領」制定時に「方針管理」という用語が誕生。"}, {"id": 197, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "プロジェクトマネジメントの成功5ポイントに含まれないのはどれか。", "choices": ["(A) 計画の重視", "(B) 変更管理の重視", "(C) コスト最小化の重視", "(D) コミュニケーションの重視"], "answer": "C", "explanation": "成功5ポイント：①計画重視、②要件明確化、③変更管理、④コミュニケーション、⑤完了レビュー。「コスト最小化」は含まれない。"}, {"id": 198, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "TOCにおいて「増産すれば利益が増える」と考える従来の会計制度の問題点はどれか。", "choices": ["(A) キャッシュフローと会計上の利益が対応しないこと", "(B) 売上高が正確に把握できないこと", "(C) 税金の計算が複雑になること", "(D) 在庫が減少すること"], "answer": "A", "explanation": "在庫を資産として扱うため、売れなくても増産すれば会計上の利益が増える→黒字倒産・自転車操業の原因。"}, {"id": 199, "section": "マネジメント手法", "sectionId": 4, "difficulty": 2, "question": "野中郁次郎氏の論文「知識創造企業」が掲載されたのはどの学術誌か。", "choices": ["(A) Nature", "(B) Harvard Business Review", "(C) Science", "(D) The Economist"], "answer": "B", "explanation": "1990年に野中郁次郎氏の「知識創造企業」がハーバード（Harvard Business Review）に掲載。"}, {"id": 200, "section": "マネジメント手法", "sectionId": 4, "difficulty": 3, "question": "TOCの「対立解消図（CRD）」の目的はどれか。", "choices": ["(A) 現状の問題の全体構造を明らかにする", "(B) 中核問題の背景にある対立構造を明らかにし、解決策のアイデアを創出する", "(C) 解決策の実行計画を作成する", "(D) 解決策の有効性をシミュレーションする"], "answer": "B", "explanation": "CRD＝中核問題の背景にある対立構造を明確化し、それを解消するアイデア＝解決策の指針を創出。FRT＝有効性検証、PRT＝ロードマップ、TrT＝実行計画。"}];
+QUESTIONS = QUESTIONS_DATA;
+loadHistory();
+render();
+</script>
+</body>
+</html>
