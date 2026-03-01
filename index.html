@@ -331,6 +331,26 @@ body {
 }
 .unit-nav-btn.primary { background: var(--primary); color: white; }
 .unit-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* アコーディオン（教科書ユニット） */
+.unit-accordion {
+  margin-bottom: 8px; border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.unit-accordion > summary {
+  list-style: none; -webkit-appearance: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; background: var(--bg);
+  font-weight: 700; font-size: 15px; color: var(--text);
+  border-left: 3px solid var(--primary); user-select: none;
+}
+.unit-accordion > summary::-webkit-details-marker { display: none; }
+.unit-accordion > summary::after {
+  content: '▼'; font-size: 11px; flex-shrink: 0; margin-left: 8px;
+  transition: transform 0.2s; color: var(--text-light);
+}
+.unit-accordion[open] > summary::after { transform: rotate(-180deg); }
+.unit-accordion-content { padding: 8px 4px 4px; }
 </style>
 </head>
 <body>
@@ -420,6 +440,52 @@ function formatTime(ms) {
 }
 
 // === RENDER ===
+function initAccordions() {
+  const container = document.querySelector('.unit-content');
+  if (!container) return;
+  const h3s = container.querySelectorAll(':scope > h3.unit-h3');
+  if (h3s.length < 2) return;
+
+  const allNodes = Array.from(container.childNodes);
+  const sections = [];
+  let current = null;
+  const preNodes = [];
+
+  allNodes.forEach(node => {
+    const isH3 = node.nodeType === 1 && node.tagName === 'H3' && node.classList.contains('unit-h3');
+    if (isH3) {
+      current = { heading: node.textContent.trim(), nodes: [] };
+      sections.push(current);
+    } else if (current) {
+      current.nodes.push(node);
+    } else {
+      preNodes.push(node);
+    }
+  });
+
+  if (sections.length < 2) return;
+
+  container.innerHTML = '';
+  preNodes.forEach(n => container.appendChild(n));
+
+  sections.forEach((sec, idx) => {
+    const details = document.createElement('details');
+    details.className = 'unit-accordion';
+    if (idx === 0) details.open = true;
+
+    const summary = document.createElement('summary');
+    summary.textContent = sec.heading;
+    details.appendChild(summary);
+
+    const div = document.createElement('div');
+    div.className = 'unit-accordion-content';
+    sec.nodes.forEach(n => div.appendChild(n));
+    details.appendChild(div);
+
+    container.appendChild(details);
+  });
+}
+
 function render() {
   const app = document.getElementById('app');
   switch(STATE.view) {
@@ -435,6 +501,7 @@ function render() {
     case 'textbook-unit': app.innerHTML = renderTextbookUnit(); break;
   }
   bindEvents();
+  if (STATE.view === 'textbook-unit') initAccordions();
 }
 
 function renderHome() {
