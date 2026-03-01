@@ -1,3 +1,7 @@
+# Python cache
+__pycache__/
+*.pyc
+
 # Development files
 build-exam-questions-v2.html
 convert-questions-v2.js

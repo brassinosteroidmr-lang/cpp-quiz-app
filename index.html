@@ -1,240 +1,1162 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="調達マスターへの道 - 実務シミュレーション型CPP学習アプリ">
-    <meta name="theme-color" content="#2563eb">
-    <title>調達マスターへの道 | CPP実務シミュレーター</title>
-    <link rel="icon" type="image/svg+xml" href="icon.svg">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="manifest" href="manifest.json">
+<title>CPP B級 学習アプリ</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-light: #dbeafe;
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --danger: #dc2626;
+  --danger-light: #fee2e2;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+}
+.app { max-width: 640px; margin: 0 auto; padding: 0 16px 100px; }
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--primary);
+  color: white;
+  padding: 12px 16px;
+  margin: 0 -16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header h1 { font-size: 16px; font-weight: 700; }
+.header-right { display: flex; gap: 8px; align-items: center; }
+.header-btn {
+  background: rgba(255,255,255,0.2); border: none; color: white;
+  padding: 6px 12px; border-radius: 8px; font-size: 13px; cursor: pointer;
+}
+.header-btn:hover { background: rgba(255,255,255,0.3); }
+/* Navigation */
+.nav {
+  display: flex; gap: 4px; padding: 12px 0; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-btn {
+  flex-shrink: 0;
+  padding: 8px 16px; border-radius: 20px;
+  border: 2px solid var(--border); background: white;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-btn.active {
+  background: var(--primary); color: white; border-color: var(--primary);
+}
+/* Cards */
+.card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 20px; margin-bottom: 12px;
+}
+.card-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+/* Stats grid */
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.stat-box {
+  background: var(--bg); border-radius: 8px; padding: 12px; text-align: center;
+}
+.stat-value { font-size: 24px; font-weight: 800; }
+.stat-label { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+/* Progress bar */
+.progress-bar {
+  height: 8px; background: var(--border); border-radius: 4px;
+  overflow: hidden; margin: 8px 0;
+}
+.progress-fill {
+  height: 100%; border-radius: 4px; transition: width 0.5s ease;
+}
+/* Section cards for dashboard */
+.section-card {
+  background: var(--bg); border-radius: 8px; padding: 12px;
+  margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+}
+.section-card:hover { background: var(--primary-light); }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.section-name { font-size: 14px; font-weight: 600; }
+.section-score { font-size: 14px; font-weight: 700; }
+/* Quiz mode */
+.quiz-info {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; font-size: 13px; color: var(--text-light);
+}
+.quiz-question {
+  font-size: 16px; font-weight: 600; line-height: 1.6;
+  margin: 12px 0 16px;
+}
+.difficulty { display: inline-block; margin-left: 8px; }
+.diff-1 { color: var(--success); }
+.diff-2 { color: var(--warning); }
+.diff-3 { color: var(--danger); }
+.choice-btn {
+  display: block; width: 100%; text-align: left;
+  padding: 14px 16px; margin-bottom: 8px;
+  border: 2px solid var(--border); border-radius: 10px;
+  background: white; font-size: 14px; line-height: 1.5;
+  cursor: pointer; transition: all 0.2s;
+}
+.choice-btn:hover:not(.answered) { border-color: var(--primary); background: var(--primary-light); }
+.choice-btn.correct { border-color: var(--success); background: var(--success-light); }
+.choice-btn.wrong { border-color: var(--danger); background: var(--danger-light); }
+.choice-btn.answered { cursor: default; }
+.choice-btn.show-correct { border-color: var(--success); background: var(--success-light); opacity: 0.7; }
+.explanation {
+  background: #f0f9ff; border-left: 4px solid var(--primary);
+  padding: 12px 16px; margin-top: 12px; border-radius: 0 8px 8px 0;
+  font-size: 13px; line-height: 1.7;
+}
+.next-btn {
+  display: block; width: 100%; padding: 14px;
+  background: var(--primary); color: white; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  cursor: pointer; margin-top: 16px;
+}
+.next-btn:hover { opacity: 0.9; }
+/* Setup */
+.setup-section { margin-bottom: 16px; }
+.setup-label { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.toggle-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.toggle-btn {
+  padding: 8px 14px; border: 2px solid var(--border);
+  border-radius: 8px; background: white; font-size: 13px;
+  cursor: pointer; transition: all 0.2s;
+}
+.toggle-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.count-display {
+  text-align: center; padding: 12px;
+  font-size: 13px; color: var(--text-light);
+  margin: 12px 0;
+}
+.count-display strong { font-size: 20px; color: var(--text); display: block; }
+.start-btn {
+  display: block; width: 100%; padding: 16px;
+  background: var(--primary); color: white; border: none;
+  border-radius: 10px; font-size: 16px; font-weight: 700;
+  cursor: pointer;
+}
+.start-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+/* Results */
+.result-big {
+  text-align: center; padding: 20px 0;
+}
+.result-score { font-size: 48px; font-weight: 800; }
+.result-label { font-size: 14px; color: var(--text-light); }
+.result-bar { max-width: 300px; margin: 12px auto; }
+.result-sections { margin-top: 16px; }
+.result-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.review-btn {
+  display: block; width: 100%; padding: 14px;
+  background: white; color: var(--primary); border: 2px solid var(--primary);
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  cursor: pointer; margin-top: 12px;
+}
+/* Timer */
+.timer {
+  font-size: 14px; font-weight: 700; color: white;
+  background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 6px;
+}
+/* Flashcard */
+.flashcard-container { perspective: 1000px; margin: 16px 0; }
+.flashcard {
+  width: 100%; min-height: 200px;
+  position: relative; cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute; top: 0; left: 0; width: 100%; min-height: 200px;
+  backface-visibility: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; border-radius: var(--radius);
+  box-shadow: var(--shadow); text-align: center;
+}
+.flashcard-front { background: white; }
+.flashcard-back {
+  background: var(--primary-light); transform: rotateY(180deg);
+}
+.flashcard-text { font-size: 16px; line-height: 1.7; font-weight: 600; }
+.flashcard-section { font-size: 12px; color: var(--text-light); margin-bottom: 8px; }
+.flashcard-actions {
+  display: flex; gap: 8px; margin-top: 12px;
+}
+.fc-btn {
+  flex: 1; padding: 12px; border: none; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.fc-btn.know { background: var(--success-light); color: var(--success); }
+.fc-btn.dont-know { background: var(--danger-light); color: var(--danger); }
+.fc-btn.skip { background: var(--bg); color: var(--text-light); }
+/* Weak points */
+.weak-item {
+  padding: 10px 12px; background: var(--danger-light);
+  border-radius: 8px; margin-bottom: 6px; font-size: 13px;
+}
+.weak-item .q-num { font-weight: 700; color: var(--danger); }
+/* Hidden */
+.hidden { display: none !important; }
+/* Responsive */
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .quiz-question { font-size: 15px; }
+}
+/* Quick quiz banner */
+.quick-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white; border-radius: var(--radius); padding: 16px;
+  margin-bottom: 12px; cursor: pointer;
+}
+.quick-banner h3 { font-size: 15px; margin-bottom: 4px; }
+.quick-banner p { font-size: 12px; opacity: 0.85; }
+/* Mode badge */
+.mode-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: 11px; font-weight: 700; margin-right: 6px;
+}
+.badge-quiz { background: var(--primary-light); color: var(--primary); }
+.badge-review { background: var(--warning-light); color: var(--warning); }
+
+/* ===== 教科書モード ===== */
+/* セクションカード */
+.tb-section-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 20px; margin-bottom: 12px;
+  cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 16px;
+}
+.tb-section-card:hover { box-shadow: 0 4px 12px rgba(37,99,235,0.15); transform: translateY(-1px); }
+.tb-section-icon { font-size: 36px; line-height: 1; }
+.tb-section-info { flex: 1; }
+.tb-section-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.tb-section-meta { font-size: 12px; color: var(--text-light); }
+.tb-section-arrow { font-size: 18px; color: var(--text-light); }
+
+/* ユニットリスト */
+.unit-list-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: background 0.15s;
+}
+.unit-list-item:last-child { border-bottom: none; }
+.unit-list-item:hover { background: var(--primary-light); border-radius: 8px; padding-left: 8px; }
+.unit-num { font-size: 13px; font-weight: 700; color: var(--primary); min-width: 24px; }
+.unit-title { flex: 1; font-size: 14px; font-weight: 600; }
+.unit-time { font-size: 11px; color: var(--text-light); background: var(--bg); padding: 3px 8px; border-radius: 12px; }
+
+/* ユニット本文 */
+.unit-content-wrap { padding: 4px 0; }
+.unit-content h3.unit-h3, .unit-content h4.unit-h4 {
+  font-size: 15px; font-weight: 700; margin: 20px 0 8px;
+  padding-left: 10px; border-left: 3px solid var(--primary); color: var(--text);
+}
+.unit-content h4.unit-h4 { font-size: 14px; border-left-color: var(--warning); margin-top: 16px; }
+.unit-content p { font-size: 14px; line-height: 1.8; margin-bottom: 10px; color: var(--text); }
+.unit-content hr.unit-divider { border: none; border-top: 1px dashed var(--border); margin: 16px 0; }
+
+/* テーブル */
+.tb-table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 8px; box-shadow: var(--shadow); }
+.tb-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tb-table th { background: var(--primary); color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+.tb-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); line-height: 1.5; }
+.tb-table tr:nth-child(even) td { background: var(--bg); }
+.tb-table tr:last-child td { border-bottom: none; }
+.tb-table td strong, .tb-table th strong { font-weight: 700; }
+
+/* ハイライトボックス */
+.memo-box, .warning-box, .info-box {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 12px 14px; border-radius: 8px; margin: 10px 0;
+  font-size: 13px; line-height: 1.7;
+}
+.memo-box { background: #eff6ff; border-left: 4px solid var(--primary); }
+.warning-box { background: var(--warning-light); border-left: 4px solid var(--warning); }
+.info-box { background: var(--success-light); border-left: 4px solid var(--success); }
+.box-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+/* 語呂合わせ */
+.mnemo-box {
+  background: #fefce8; border: 2px dashed #fbbf24;
+  border-radius: 8px; padding: 12px 14px; margin: 10px 0;
+  font-size: 13px; line-height: 1.7; color: #78350f;
+}
+
+/* 数式 */
+.formula-box {
+  background: #f1f5f9; border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 16px; margin: 10px 0;
+  font-family: 'Courier New', monospace; font-size: 14px;
+  font-weight: 600; color: var(--text);
+}
+
+/* 難易度バッジ */
+.star-badge { font-size: 12px; margin-left: 4px; }
+.star-1 { color: var(--success); }
+.star-2 { color: var(--warning); }
+.star-3 { color: var(--danger); }
+
+/* リスト */
+.unit-content .unit-list { padding-left: 20px; margin: 8px 0 12px; }
+.unit-content .unit-list li { font-size: 14px; line-height: 1.7; margin-bottom: 4px; }
+
+/* ユニットナビゲーションフッター */
+.unit-nav-footer {
+  display: flex; gap: 8px; margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.unit-nav-btn {
+  flex: 1; padding: 12px 8px; border: 2px solid var(--primary);
+  border-radius: 10px; background: white; color: var(--primary);
+  font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+}
+.unit-nav-btn.primary { background: var(--primary); color: white; }
+.unit-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+</style>
 </head>
 <body>
-    <!-- メインコンテナ -->
-    <div id="app" class="app-container">
+<div class="app" id="app"></div>
+<script>
 
-        <!-- ローディング画面 -->
-        <div id="loading-screen" class="screen active">
-            <div class="loading-content">
-                <div class="loading-spinner"></div>
-                <h2>調達マスターへの道</h2>
-                <p>読み込み中...</p>
-            </div>
-        </div>
+// === STATE ===
+const STATE = {
+  view: 'home', // home, setup, quiz, result, review, flashcard-setup, flashcard, textbook-home, textbook-section, textbook-unit
+  history: [], // answered questions [{qId, chosen, correct}]
+  currentQuiz: { questions: [], index: 0, answers: [], startTime: 0 },
+  flashcard: { cards: [], index: 0, known: 0, unknown: 0 },
+  textbook: { sectionId: null, unitId: null },
+};
 
-        <!-- タイトル画面 -->
-        <div id="title-screen" class="screen">
-            <div class="title-content">
-                <h1 class="title-logo">調達マスターへの道</h1>
-                <p class="title-subtitle">実務シミュレーション型 CPP学習アプリ</p>
-                <div class="title-buttons">
-                    <button id="start-new-game" class="btn btn-primary btn-large">
-                        <span class="btn-icon">🎯</span>
-                        <span>新しく始める</span>
-                    </button>
-                    <button id="continue-game" class="btn btn-secondary btn-large" style="display: none;">
-                        <span class="btn-icon">▶️</span>
-                        <span>続きから</span>
-                    </button>
-                </div>
-                <div class="title-footer">
-                    <p>CPP b級試験対応</p>
-                </div>
-            </div>
-        </div>
+// === STORAGE ===
+function loadHistory() {
+  try {
+    const d = localStorage.getItem('cpp_history');
+    if (d) STATE.history = JSON.parse(d);
+  } catch(e) {}
+}
+function saveHistory() {
+  try {
+    localStorage.setItem('cpp_history', JSON.stringify(STATE.history));
+  } catch(e) {}
+}
 
-        <!-- メイン画面 -->
-        <div id="main-screen" class="screen">
-            <!-- ヘッダー -->
-            <header class="app-header">
-                <div class="header-left">
-                    <h2 class="app-title">調達マスター</h2>
-                </div>
-                <div class="header-right">
-                    <button id="menu-btn" class="btn btn-icon-only">
-                        <span>☰</span>
-                    </button>
-                </div>
-            </header>
+// === HELPERS ===
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function diffStars(d) {
+  return d === 1 ? '★' : d === 2 ? '★★' : '★★★';
+}
+function diffClass(d) {
+  return 'diff-' + d;
+}
+function getSections() {
+  return [
+    { id: 1, name: '専門領域調達', target: 50 },
+    { id: 2, name: 'ビジネスファンダメンタルズ', target: 50 },
+    { id: 3, name: 'CRのための関連知識', target: 50 },
+    { id: 4, name: 'マネジメント手法', target: 50 },
+  ];
+}
+function getSectionStats(sectionId) {
+  const attempts = STATE.history.filter(h => {
+    const q = QUESTIONS.find(qq => qq.id === h.qId);
+    return q && q.sectionId === sectionId;
+  });
+  // Get latest attempt per question
+  const latest = {};
+  attempts.forEach(a => { latest[a.qId] = a; });
+  const vals = Object.values(latest);
+  const correct = vals.filter(v => v.correct).length;
+  const total = vals.length;
+  return { correct, total, rate: total > 0 ? Math.round(correct / total * 100) : 0 };
+}
+function getOverallStats() {
+  const latest = {};
+  STATE.history.forEach(a => { latest[a.qId] = a; });
+  const vals = Object.values(latest);
+  const correct = vals.filter(v => v.correct).length;
+  return {
+    attempted: vals.length,
+    correct,
+    total: QUESTIONS.length,
+    rate: vals.length > 0 ? Math.round(correct / vals.length * 100) : 0,
+  };
+}
+function getWeakQuestions() {
+  const latest = {};
+  STATE.history.forEach(a => { latest[a.qId] = a; });
+  return Object.values(latest).filter(v => !v.correct).map(v => v.qId);
+}
+function formatTime(ms) {
+  const s = Math.floor(ms / 1000);
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
 
-            <!-- メインコンテンツ -->
-            <main class="main-content">
-                <!-- モード選択画面 -->
-                <div id="mode-selection" class="content-section">
-                    <h3 class="section-title">学習モードを選択</h3>
-                    <div class="mode-cards">
-                        <div class="mode-card" id="story-mode-card">
-                            <div class="mode-icon">🎯</div>
-                            <h4>実務シミュレーション</h4>
-                            <p>ストーリー形式で実務を体験しながら学習</p>
-                            <button class="btn btn-primary">プレイ</button>
-                        </div>
-                        <div class="mode-card" id="exam-mode-card">
-                            <div class="mode-icon">📝</div>
-                            <h4>試験対策モード</h4>
-                            <p>CPP b級試験の問題形式で集中学習</p>
-                            <button class="btn btn-primary">学習開始</button>
-                        </div>
-                    </div>
-                </div>
+// === RENDER ===
+function render() {
+  const app = document.getElementById('app');
+  switch(STATE.view) {
+    case 'home': app.innerHTML = renderHome(); break;
+    case 'setup': app.innerHTML = renderSetup(); break;
+    case 'quiz': app.innerHTML = renderQuiz(); break;
+    case 'result': app.innerHTML = renderResult(); break;
+    case 'review': app.innerHTML = renderReview(); break;
+    case 'flashcard-setup': app.innerHTML = renderFlashcardSetup(); break;
+    case 'flashcard': app.innerHTML = renderFlashcard(); break;
+    case 'textbook-home': app.innerHTML = renderTextbookHome(); break;
+    case 'textbook-section': app.innerHTML = renderTextbookSection(); break;
+    case 'textbook-unit': app.innerHTML = renderTextbookUnit(); break;
+  }
+  bindEvents();
+}
 
-                <!-- シナリオリスト -->
-                <div id="scenario-list" class="content-section" style="display: none;">
-                    <button id="back-to-mode-from-scenario" class="btn btn-secondary btn-small mb-1">
-                        <span>← モード選択に戻る</span>
-                    </button>
-                    <h3 class="section-title">利用可能なミッション</h3>
-                    <div id="scenarios-container" class="scenarios-grid">
-                        <!-- シナリオカードが動的に追加されます -->
-                    </div>
-                </div>
+function renderHome() {
+  const overall = getOverallStats();
+  const sections = getSections();
+  const weak = getWeakQuestions();
+  const streakDays = getStudyStreak();
 
-                <!-- シナリオプレイ画面 -->
-                <div id="scenario-play" class="content-section" style="display: none;">
-                    <div class="scenario-header">
-                        <button id="back-to-list" class="btn btn-secondary btn-small">
-                            <span>← 戻る</span>
-                        </button>
-                        <h3 id="scenario-title" class="scenario-title"></h3>
-                    </div>
-                    <div id="scenario-content" class="scenario-content">
-                        <!-- シナリオコンテンツが動的に追加されます -->
-                    </div>
-                </div>
+  let sectionCards = sections.map(s => {
+    const st = getSectionStats(s.id);
+    const color = st.rate >= 70 ? 'var(--success)' : st.rate >= 50 ? 'var(--warning)' : st.rate > 0 ? 'var(--danger)' : 'var(--text-light)';
+    return `<div class="section-card" data-action="start-section" data-sid="${s.id}">
+      <div class="section-header">
+        <span class="section-name">${s.name}</span>
+        <span class="section-score" style="color:${color}">${st.total > 0 ? st.rate + '%' : '---'}</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${st.total > 0 ? (st.total/50*100) : 0}%;background:${color}"></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-light)">${st.correct}/${st.total} 正解（全${s.target}問）</div>
+    </div>`;
+  }).join('');
 
-                <!-- 試験対策：章選択画面 -->
-                <div id="exam-chapter-select" class="content-section" style="display: none;">
-                    <button id="back-to-mode-from-exam" class="btn btn-secondary btn-small mb-1">
-                        <span>← モード選択に戻る</span>
-                    </button>
-                    <h3 class="section-title">章を選択してください</h3>
-                    <div id="chapters-container" class="chapters-grid">
-                        <!-- 章カードが動的に追加されます -->
-                    </div>
-                </div>
-
-                <!-- 試験対策：問題画面 -->
-                <div id="exam-question-screen" class="content-section" style="display: none;">
-                    <div class="exam-header">
-                        <button id="back-to-chapters" class="btn btn-secondary btn-small">
-                            <span>← 章選択に戻る</span>
-                        </button>
-                        <div class="exam-progress">
-                            <span id="exam-progress-text">問題 1 / 10</span>
-                        </div>
-                    </div>
-                    <div id="exam-question-content" class="exam-question-container">
-                        <!-- 問題が動的に追加されます -->
-                    </div>
-                </div>
-
-                <!-- 試験対策：結果画面 -->
-                <div id="exam-result-screen" class="content-section" style="display: none;">
-                    <div class="exam-result-container">
-                        <h3 class="section-title">学習結果</h3>
-                        <div id="exam-result-content">
-                            <!-- 結果が動的に追加されます -->
-                        </div>
-                        <div class="exam-result-actions">
-                            <button id="retry-exam" class="btn btn-secondary">もう一度挑戦</button>
-                            <button id="back-to-chapters-from-result" class="btn btn-primary">章選択に戻る</button>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-
-        <!-- メニュー画面 -->
-        <div id="menu-screen" class="screen overlay-screen">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>メニュー</h3>
-                    <button id="close-menu" class="btn btn-close">×</button>
-                </div>
-                <div class="modal-body">
-                    <div class="learning-stats">
-                        <h4>📊 学習統計</h4>
-                        <div id="learning-stats-content" class="stats-grid">
-                            <!-- 統計情報が動的に追加されます -->
-                        </div>
-                    </div>
-                    <div class="menu-options">
-                        <button id="reset-progress" class="btn btn-secondary btn-full-width">
-                            <span>進捗をリセット</span>
-                        </button>
-                    </div>
-                    <div class="menu-info">
-                        <p><strong>調達マスターへの道</strong></p>
-                        <p>Version 2.0.0</p>
-                        <p>CPP b級試験対応 学習アプリ</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 結果画面モーダル -->
-        <div id="result-modal" class="screen overlay-screen">
-            <div class="modal-content result-modal">
-                <div class="result-header">
-                    <h3 id="result-title">ミッション完了!</h3>
-                </div>
-                <div class="modal-body">
-                    <div id="result-content" class="result-content">
-                        <!-- 結果が動的に追加されます -->
-                    </div>
-                    <div class="result-actions">
-                        <button id="close-result" class="btn btn-primary btn-full-width">
-                            <span>ミッション一覧に戻る</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 問題モーダル -->
-        <div id="question-modal" class="screen overlay-screen">
-            <div class="modal-content question-modal">
-                <div class="modal-header">
-                    <h3>知識確認</h3>
-                </div>
-                <div class="modal-body">
-                    <div id="question-content" class="question-content">
-                        <!-- 問題が動的に追加されます -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 解説モーダル -->
-        <div id="explanation-modal" class="explanation-modal-overlay">
-            <div class="explanation-modal">
-                <div id="explanation-header" class="explanation-modal-header">
-                    <span id="explanation-icon" class="explanation-modal-icon"></span>
-                    <h3 id="explanation-title" class="explanation-modal-title"></h3>
-                </div>
-                <div class="explanation-modal-body">
-                    <div id="explanation-answers" class="explanation-answer-section">
-                        <!-- 正解/あなたの回答が動的に追加されます -->
-                    </div>
-                    <div class="explanation-content-section">
-                        <h4 class="explanation-content-title">📖 詳しい解説</h4>
-                        <div id="explanation-text" class="explanation-content-text"></div>
-                    </div>
-                </div>
-                <div class="explanation-modal-footer">
-                    <button id="explanation-next-btn" class="btn btn-primary"></button>
-                </div>
-            </div>
-        </div>
-
+  return `
+    <div class="header">
+      <h1>CPP B級 学習アプリ</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="reset-confirm">リセット</button>
+      </div>
     </div>
 
-    <!-- JavaScript -->
-    <script src="questions-data.js"></script>
-    <script src="scenarios.js"></script>
-    <script src="exam-questions-v2.js"></script> <!-- 全207問の穴埋め対応版 -->
-    <script src="exam-mode.js"></script>
-    <script src="app.js"></script>
+    <div style="padding-top:12px">
+      <div class="quick-banner" data-action="quick-5">
+        <h3>⚡ クイック5問</h3>
+        <p>ランダム5問で今すぐ学習スタート（約3分）</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">学習の進捗</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value">${overall.attempted}</div>
+            <div class="stat-label">回答済み / ${overall.total}問</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" style="color:${overall.rate >= 70 ? 'var(--success)' : overall.rate >= 50 ? 'var(--warning)' : 'var(--danger)'}">${overall.rate}%</div>
+            <div class="stat-label">正解率</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" style="color:var(--danger)">${weak.length}</div>
+            <div class="stat-label">要復習</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">${streakDays}</div>
+            <div class="stat-label">連続学習日数</div>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin-top:12px">
+          <div class="progress-fill" style="width:${overall.attempted/overall.total*100}%;background:var(--primary)"></div>
+        </div>
+        <div style="text-align:center;font-size:11px;color:var(--text-light);margin-top:4px">全体進捗 ${Math.round(overall.attempted/overall.total*100)}%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">セクション別</div>
+        ${sectionCards}
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button class="start-btn" data-action="go-setup" style="flex:1;font-size:14px;padding:12px">
+          📝 演習問題
+        </button>
+        <button class="start-btn" data-action="go-flashcard" style="flex:1;font-size:14px;padding:12px;background:var(--success)">
+          🃏 フラッシュカード
+        </button>
+      </div>
+      <button class="start-btn" data-action="go-textbook" style="width:100%;font-size:14px;padding:12px;background:linear-gradient(135deg,#7c3aed,#2563eb);margin-bottom:8px">
+        📚 テキストで学ぶ（4セクション 22ユニット）
+      </button>
+
+      ${weak.length > 0 ? `
+      <button class="review-btn" data-action="start-weak" style="margin-bottom:12px">
+        🔥 弱点問題に挑戦（${weak.length}問）
+      </button>` : ''}
+
+      <button class="review-btn" data-action="start-mock" style="margin-bottom:12px">
+        📋 模擬試験（20問 / 20分）
+      </button>
+    </div>`;
+}
+
+function renderSetup() {
+  const sections = getSections();
+  const selectedSections = STATE.setupSections || [1,2,3,4];
+  const selectedDiff = STATE.setupDiff || [1,2,3];
+  const count = STATE.setupCount || 10;
+
+  const filtered = QUESTIONS.filter(q =>
+    selectedSections.includes(q.sectionId) && selectedDiff.includes(q.difficulty)
+  );
+
+  return `
+    <div class="header">
+      <h1>演習設定</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="go-home">戻る</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card">
+        <div class="setup-section">
+          <div class="setup-label">セクション</div>
+          <div class="toggle-group">
+            ${sections.map(s => `<button class="toggle-btn ${selectedSections.includes(s.id)?'selected':''}" data-action="toggle-section" data-sid="${s.id}">${s.name}</button>`).join('')}
+          </div>
+        </div>
+        <div class="setup-section">
+          <div class="setup-label">難易度</div>
+          <div class="toggle-group">
+            <button class="toggle-btn ${selectedDiff.includes(1)?'selected':''}" data-action="toggle-diff" data-did="1">★ 基礎</button>
+            <button class="toggle-btn ${selectedDiff.includes(2)?'selected':''}" data-action="toggle-diff" data-did="2">★★ 応用</button>
+            <button class="toggle-btn ${selectedDiff.includes(3)?'selected':''}" data-action="toggle-diff" data-did="3">★★★ 実践</button>
+          </div>
+        </div>
+        <div class="setup-section">
+          <div class="setup-label">出題数</div>
+          <div class="toggle-group">
+            ${[5,10,20,30,50].map(n => `<button class="toggle-btn ${count===n?'selected':''}" data-action="set-count" data-count="${n}">${n}問</button>`).join('')}
+            <button class="toggle-btn ${count===filtered.length?'selected':''}" data-action="set-count" data-count="${filtered.length}">全${filtered.length}問</button>
+          </div>
+        </div>
+        <div class="count-display">
+          対象問題数<strong>${filtered.length}問</strong>
+        </div>
+        <button class="start-btn" data-action="start-quiz" ${filtered.length===0?'disabled':''}>
+          学習スタート
+        </button>
+      </div>
+    </div>`;
+}
+
+function renderQuiz() {
+  const cq = STATE.currentQuiz;
+  const q = cq.questions[cq.index];
+  const ans = cq.answers[cq.index];
+  const answered = ans !== undefined;
+  const elapsed = Date.now() - cq.startTime;
+
+  return `
+    <div class="header">
+      <h1>問${cq.index + 1} / ${cq.questions.length}</h1>
+      <div class="header-right">
+        <span class="timer">${formatTime(elapsed)}</span>
+        <button class="header-btn" data-action="end-quiz">終了</button>
+      </div>
+    </div>
+    <div style="padding-top:8px">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${(cq.index+1)/cq.questions.length*100}%;background:var(--primary)"></div>
+      </div>
+      <div class="quiz-info">
+        <span>${q.section}</span>
+        <span class="difficulty ${diffClass(q.difficulty)}">${diffStars(q.difficulty)}</span>
+      </div>
+      <div class="card">
+        <div class="quiz-question">${q.question}</div>
+        ${q.choices.map((c, i) => {
+          const letter = String.fromCharCode(65 + i);
+          let cls = 'choice-btn';
+          if (answered) {
+            cls += ' answered';
+            if (letter === q.answer) cls += ' correct';
+            else if (letter === ans) cls += ' wrong';
+          }
+          return `<button class="${cls}" data-action="answer" data-letter="${letter}">${c}</button>`;
+        }).join('')}
+        ${answered ? `
+          <div class="explanation">
+            <strong>${ans === q.answer ? '✅ 正解！' : '❌ 不正解'}</strong><br>
+            ${q.explanation}
+          </div>
+          <button class="next-btn" data-action="next-question">
+            ${cq.index < cq.questions.length - 1 ? '次の問題 →' : '結果を見る'}
+          </button>
+        ` : ''}
+      </div>
+    </div>`;
+}
+
+function renderResult() {
+  const cq = STATE.currentQuiz;
+  const correct = cq.answers.filter((a, i) => a === cq.questions[i].answer).length;
+  const rate = Math.round(correct / cq.questions.length * 100);
+  const elapsed = STATE.quizEndTime - cq.startTime;
+
+  // Section breakdown
+  const secStats = {};
+  cq.questions.forEach((q, i) => {
+    if (!secStats[q.section]) secStats[q.section] = { correct: 0, total: 0 };
+    secStats[q.section].total++;
+    if (cq.answers[i] === q.answer) secStats[q.section].correct++;
+  });
+
+  const wrongQuestions = cq.questions.filter((q, i) => cq.answers[i] !== q.answer);
+
+  const color = rate >= 70 ? 'var(--success)' : rate >= 50 ? 'var(--warning)' : 'var(--danger)';
+  const message = rate >= 80 ? '素晴らしい！この調子で！' :
+                  rate >= 60 ? '良い調子！弱点を復習しよう' :
+                  rate >= 40 ? 'もう一踏ん張り！テキストを見直そう' :
+                  'テキストを読み込んでから再挑戦！';
+
+  return `
+    <div class="header">
+      <h1>結果</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="go-home">ホーム</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card">
+        <div class="result-big">
+          <div class="result-score" style="color:${color}">${rate}%</div>
+          <div class="result-label">${correct} / ${cq.questions.length} 正解 ｜ ${formatTime(elapsed)}</div>
+          <div style="margin-top:8px;font-size:14px">${message}</div>
+          <div class="result-bar">
+            <div class="progress-bar"><div class="progress-fill" style="width:${rate}%;background:${color}"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">セクション別</div>
+        ${Object.entries(secStats).map(([name, st]) => {
+          const r = Math.round(st.correct / st.total * 100);
+          const c = r >= 70 ? 'var(--success)' : r >= 50 ? 'var(--warning)' : 'var(--danger)';
+          return `<div class="result-row">
+            <span>${name}</span>
+            <span style="color:${c};font-weight:700">${st.correct}/${st.total}（${r}%）</span>
+          </div>`;
+        }).join('')}
+      </div>
+
+      ${wrongQuestions.length > 0 ? `
+      <div class="card">
+        <div class="card-title">間違えた問題（${wrongQuestions.length}問）</div>
+        ${wrongQuestions.map(q => `
+          <div class="weak-item">
+            <span class="q-num">問${q.id}</span> ${q.question.substring(0, 50)}...
+          </div>
+        `).join('')}
+        <button class="review-btn" data-action="retry-wrong" style="margin-top:12px">
+          🔥 間違えた問題だけ再挑戦
+        </button>
+      </div>` : ''}
+
+      <button class="start-btn" data-action="go-setup" style="margin-top:12px">もう一度挑戦</button>
+      <button class="review-btn" data-action="go-home" style="margin-top:8px">ホームに戻る</button>
+    </div>`;
+}
+
+function renderFlashcardSetup() {
+  const sections = getSections();
+  const selectedSections = STATE.fcSections || [1,2,3,4];
+  const mode = STATE.fcMode || 'all'; // all, weak
+
+  // Build flashcards from questions (question → answer format)
+  const filtered = QUESTIONS.filter(q => selectedSections.includes(q.sectionId));
+
+  return `
+    <div class="header">
+      <h1>フラッシュカード</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="go-home">戻る</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card">
+        <div class="setup-section">
+          <div class="setup-label">セクション</div>
+          <div class="toggle-group">
+            ${sections.map(s => `<button class="toggle-btn ${selectedSections.includes(s.id)?'selected':''}" data-action="fc-toggle-section" data-sid="${s.id}">${s.name}</button>`).join('')}
+          </div>
+        </div>
+        <div class="setup-section">
+          <div class="setup-label">モード</div>
+          <div class="toggle-group">
+            <button class="toggle-btn ${mode==='all'?'selected':''}" data-action="fc-mode" data-mode="all">全問シャッフル</button>
+            <button class="toggle-btn ${mode==='weak'?'selected':''}" data-action="fc-mode" data-mode="weak">弱点のみ</button>
+          </div>
+        </div>
+        <div class="count-display">
+          対象<strong>${filtered.length}枚</strong>
+        </div>
+        <button class="start-btn" data-action="start-flashcard" ${filtered.length===0?'disabled':''}>
+          スタート
+        </button>
+      </div>
+    </div>`;
+}
+
+function renderFlashcard() {
+  const fc = STATE.flashcard;
+  if (fc.index >= fc.cards.length) {
+    // Done
+    const total = fc.known + fc.unknown;
+    const rate = total > 0 ? Math.round(fc.known / total * 100) : 0;
+    return `
+      <div class="header">
+        <h1>完了！</h1>
+        <div class="header-right">
+          <button class="header-btn" data-action="go-home">ホーム</button>
+        </div>
+      </div>
+      <div style="padding-top:12px">
+        <div class="card">
+          <div class="result-big">
+            <div class="result-score" style="color:var(--success)">${rate}%</div>
+            <div class="result-label">覚えた ${fc.known} / ${total} 枚</div>
+          </div>
+        </div>
+        <button class="start-btn" data-action="go-flashcard">もう一度</button>
+        <button class="review-btn" data-action="go-home" style="margin-top:8px">ホームに戻る</button>
+      </div>`;
+  }
+
+  const card = fc.cards[fc.index];
+  const flipped = STATE.fcFlipped || false;
+
+  return `
+    <div class="header">
+      <h1>${fc.index + 1} / ${fc.cards.length}</h1>
+      <div class="header-right">
+        <span style="font-size:12px;color:rgba(255,255,255,0.7)">
+          ⭕${fc.known} ❌${fc.unknown}
+        </span>
+        <button class="header-btn" data-action="go-home">終了</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${fc.index/fc.cards.length*100}%;background:var(--success)"></div>
+      </div>
+      <div style="font-size:12px;color:var(--text-light);margin:8px 0">${card.section}</div>
+
+      <div class="flashcard-container">
+        <div class="flashcard ${flipped?'flipped':''}" data-action="flip-card" style="position:relative;min-height:220px">
+          <div class="flashcard-face flashcard-front" style="position:${flipped?'absolute':'relative'}">
+            <div class="flashcard-section">タップして答えを見る</div>
+            <div class="flashcard-text">${card.question}</div>
+          </div>
+          <div class="flashcard-face flashcard-back" style="position:absolute;top:0">
+            <div class="flashcard-section">正解：${card.answer}</div>
+            <div class="flashcard-text" style="font-size:14px">${card.explanation}</div>
+          </div>
+        </div>
+      </div>
+
+      ${flipped ? `
+      <div class="flashcard-actions">
+        <button class="fc-btn know" data-action="fc-know">⭕ 覚えた</button>
+        <button class="fc-btn dont-know" data-action="fc-dont-know">❌ もう一回</button>
+      </div>` : `
+      <div style="text-align:center;padding:20px;color:var(--text-light);font-size:13px">
+        カードをタップして答えを確認
+      </div>`}
+    </div>`;
+}
+
+// === EVENT HANDLING ===
+function bindEvents() {
+  document.querySelectorAll('[data-action]').forEach(el => {
+    el.onclick = (e) => {
+      e.stopPropagation();
+      handleAction(el.dataset.action, el.dataset);
+    };
+  });
+  // Timer update
+  if (STATE.view === 'quiz' && STATE.currentQuiz.answers[STATE.currentQuiz.index] === undefined) {
+    if (STATE.timerInterval) clearInterval(STATE.timerInterval);
+    STATE.timerInterval = setInterval(() => {
+      const timer = document.querySelector('.timer');
+      if (timer) timer.textContent = formatTime(Date.now() - STATE.currentQuiz.startTime);
+    }, 1000);
+  } else {
+    if (STATE.timerInterval) clearInterval(STATE.timerInterval);
+  }
+}
+
+function handleAction(action, data) {
+  switch(action) {
+    case 'go-home':
+      STATE.view = 'home'; break;
+    case 'go-setup':
+      STATE.view = 'setup';
+      STATE.setupSections = STATE.setupSections || [1,2,3,4];
+      STATE.setupDiff = STATE.setupDiff || [1,2,3];
+      STATE.setupCount = STATE.setupCount || 10;
+      break;
+    case 'go-flashcard':
+      STATE.view = 'flashcard-setup';
+      STATE.fcSections = STATE.fcSections || [1,2,3,4];
+      break;
+    case 'toggle-section': {
+      const sid = parseInt(data.sid);
+      const idx = STATE.setupSections.indexOf(sid);
+      if (idx >= 0) STATE.setupSections.splice(idx, 1);
+      else STATE.setupSections.push(sid);
+      break;
+    }
+    case 'toggle-diff': {
+      const did = parseInt(data.did);
+      const idx = STATE.setupDiff.indexOf(did);
+      if (idx >= 0) STATE.setupDiff.splice(idx, 1);
+      else STATE.setupDiff.push(did);
+      break;
+    }
+    case 'set-count':
+      STATE.setupCount = parseInt(data.count);
+      break;
+    case 'start-quiz': {
+      let filtered = QUESTIONS.filter(q =>
+        STATE.setupSections.includes(q.sectionId) && STATE.setupDiff.includes(q.difficulty)
+      );
+      filtered = shuffle(filtered).slice(0, STATE.setupCount);
+      STATE.currentQuiz = { questions: filtered, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'quick-5': {
+      const qs = shuffle([...QUESTIONS]).slice(0, 5);
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'start-section': {
+      const sid = parseInt(data.sid);
+      const qs = shuffle(QUESTIONS.filter(q => q.sectionId === sid));
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'start-weak': {
+      const weakIds = getWeakQuestions();
+      const qs = shuffle(QUESTIONS.filter(q => weakIds.includes(q.id)));
+      if (qs.length === 0) { alert('弱点問題はありません'); return; }
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'start-mock': {
+      const qs = shuffle([...QUESTIONS]).slice(0, 20);
+      STATE.currentQuiz = { questions: qs, index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'answer': {
+      const cq = STATE.currentQuiz;
+      if (cq.answers[cq.index] !== undefined) return;
+      const letter = data.letter;
+      cq.answers[cq.index] = letter;
+      const q = cq.questions[cq.index];
+      STATE.history.push({ qId: q.id, chosen: letter, correct: letter === q.answer, time: Date.now() });
+      saveHistory();
+      recordStudyDay();
+      break;
+    }
+    case 'next-question': {
+      const cq = STATE.currentQuiz;
+      if (cq.index < cq.questions.length - 1) {
+        cq.index++;
+      } else {
+        STATE.quizEndTime = Date.now();
+        STATE.view = 'result';
+      }
+      break;
+    }
+    case 'end-quiz':
+      STATE.quizEndTime = Date.now();
+      STATE.view = STATE.currentQuiz.answers.length > 0 ? 'result' : 'home';
+      break;
+    case 'retry-wrong': {
+      const cq = STATE.currentQuiz;
+      const wrong = cq.questions.filter((q, i) => cq.answers[i] !== q.answer);
+      STATE.currentQuiz = { questions: shuffle(wrong), index: 0, answers: [], startTime: Date.now() };
+      STATE.view = 'quiz';
+      break;
+    }
+    case 'reset-confirm':
+      if (confirm('学習履歴をすべてリセットしますか？')) {
+        STATE.history = [];
+        saveHistory();
+        try { localStorage.removeItem('cpp_study_days'); } catch(e) {}
+      }
+      break;
+    // Flashcard
+    case 'fc-toggle-section': {
+      const sid = parseInt(data.sid);
+      if (!STATE.fcSections) STATE.fcSections = [1,2,3,4];
+      const idx = STATE.fcSections.indexOf(sid);
+      if (idx >= 0) STATE.fcSections.splice(idx, 1);
+      else STATE.fcSections.push(sid);
+      break;
+    }
+    case 'fc-mode':
+      STATE.fcMode = data.mode;
+      break;
+    case 'start-flashcard': {
+      let cards = QUESTIONS.filter(q => (STATE.fcSections || [1,2,3,4]).includes(q.sectionId));
+      if (STATE.fcMode === 'weak') {
+        const weakIds = getWeakQuestions();
+        cards = cards.filter(q => weakIds.includes(q.id));
+      }
+      cards = shuffle(cards);
+      STATE.flashcard = { cards, index: 0, known: 0, unknown: 0 };
+      STATE.fcFlipped = false;
+      STATE.view = 'flashcard';
+      break;
+    }
+    case 'flip-card':
+      STATE.fcFlipped = !STATE.fcFlipped;
+      break;
+    case 'fc-know':
+      STATE.flashcard.known++;
+      STATE.flashcard.index++;
+      STATE.fcFlipped = false;
+      break;
+    case 'fc-dont-know':
+      STATE.flashcard.unknown++;
+      // Add back to end
+      STATE.flashcard.cards.push(STATE.flashcard.cards[STATE.flashcard.index]);
+      STATE.flashcard.index++;
+      STATE.fcFlipped = false;
+      break;
+    // === 教科書モード ===
+    case 'go-textbook':
+      STATE.view = 'textbook-home';
+      break;
+    case 'tb-select-section': {
+      STATE.textbook.sectionId = parseInt(data.sid);
+      STATE.textbook.unitId = null;
+      STATE.view = 'textbook-section';
+      break;
+    }
+    case 'tb-select-unit': {
+      STATE.textbook.unitId = parseInt(data.uid);
+      STATE.view = 'textbook-unit';
+      break;
+    }
+    case 'tb-prev-unit': {
+      const sec = getTextbookSection(STATE.textbook.sectionId);
+      if (sec) {
+        const idx = sec.units.findIndex(u => u.id === STATE.textbook.unitId);
+        if (idx > 0) STATE.textbook.unitId = sec.units[idx - 1].id;
+      }
+      break;
+    }
+    case 'tb-next-unit': {
+      const sec = getTextbookSection(STATE.textbook.sectionId);
+      if (sec) {
+        const idx = sec.units.findIndex(u => u.id === STATE.textbook.unitId);
+        if (idx < sec.units.length - 1) STATE.textbook.unitId = sec.units[idx + 1].id;
+      }
+      break;
+    }
+    case 'tb-to-quiz': {
+      STATE.view = 'setup';
+      STATE.setupSections = [STATE.textbook.sectionId];
+      STATE.setupDiff = [1, 2, 3];
+      STATE.setupCount = 10;
+      break;
+    }
+    case 'tb-back-section':
+      STATE.view = 'textbook-section';
+      break;
+    case 'tb-back-home':
+      STATE.view = 'textbook-home';
+      break;
+  }
+  render();
+}
+
+// === TEXTBOOK HELPERS ===
+function getTextbookSection(sectionId) {
+  if (typeof TEXTBOOK_DATA === 'undefined') return null;
+  return TEXTBOOK_DATA.find(s => s.sectionId === sectionId) || null;
+}
+
+// === TEXTBOOK VIEWS ===
+function renderTextbookHome() {
+  if (typeof TEXTBOOK_DATA === 'undefined' || !TEXTBOOK_DATA.length) {
+    return `<div class="header"><h1>📚 テキスト</h1><div class="header-right"><button class="header-btn" data-action="go-home">戻る</button></div></div>
+    <div style="padding-top:20px"><div class="card"><p style="text-align:center;color:var(--text-light)">教科書データを読み込み中...</p></div></div>`;
+  }
+  const sectionCards = TEXTBOOK_DATA.map(sec => {
+    return `<div class="tb-section-card" data-action="tb-select-section" data-sid="${sec.sectionId}">
+      <div class="tb-section-icon">${sec.icon}</div>
+      <div class="tb-section-info">
+        <div class="tb-section-name">${sec.name}</div>
+        <div class="tb-section-meta">${sec.units.length} ユニット ｜ 約${sec.totalMinutes}分</div>
+      </div>
+      <div class="tb-section-arrow">›</div>
+    </div>`;
+  }).join('');
+
+  return `
+    <div class="header">
+      <h1>📚 テキストで学ぶ</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="go-home">戻る</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card" style="background:linear-gradient(135deg,#7c3aed,#2563eb);color:white;padding:16px;margin-bottom:12px">
+        <div style="font-weight:700;margin-bottom:4px">4セクション 22ユニット</div>
+        <div style="font-size:12px;opacity:0.85">各ユニット5〜10分のマイクロラーニング。テキストを読んでからクイズに挑戦しよう</div>
+      </div>
+      ${sectionCards}
+    </div>`;
+}
+
+function renderTextbookSection() {
+  const sec = getTextbookSection(STATE.textbook.sectionId);
+  if (!sec) return renderTextbookHome();
+
+  const unitItems = sec.units.map(u => `
+    <div class="unit-list-item" data-action="tb-select-unit" data-uid="${u.id}">
+      <div class="unit-num">${u.id}</div>
+      <div class="unit-title">${u.title}</div>
+      <div class="unit-time">約${u.estimatedMinutes}分</div>
+    </div>`).join('');
+
+  return `
+    <div class="header">
+      <h1>${sec.icon} ${sec.name}</h1>
+      <div class="header-right">
+        <button class="header-btn" data-action="tb-back-home">戻る</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div class="card">
+        <div class="card-title">${sec.units.length} ユニット ｜ 合計約${sec.totalMinutes}分</div>
+        ${unitItems}
+      </div>
+      <button class="start-btn" data-action="tb-to-quiz" style="margin-top:4px">
+        📝 このセクションのクイズを解く
+      </button>
+    </div>`;
+}
+
+function renderTextbookUnit() {
+  const sec = getTextbookSection(STATE.textbook.sectionId);
+  if (!sec) return renderTextbookHome();
+  const unit = sec.units.find(u => u.id === STATE.textbook.unitId);
+  if (!unit) return renderTextbookSection();
+
+  const unitIndex = sec.units.findIndex(u => u.id === STATE.textbook.unitId);
+  const hasPrev = unitIndex > 0;
+  const hasNext = unitIndex < sec.units.length - 1;
+
+  return `
+    <div class="header">
+      <h1>${sec.icon} ユニット${unit.id}</h1>
+      <div class="header-right">
+        <span style="font-size:11px;color:rgba(255,255,255,0.75)">${unitIndex+1}/${sec.units.length}</span>
+        <button class="header-btn" data-action="tb-back-section">一覧</button>
+      </div>
+    </div>
+    <div style="padding-top:12px">
+      <div style="font-size:12px;color:var(--text-light);margin-bottom:8px">${sec.name} › ${unit.title}</div>
+      <div class="card unit-content-wrap">
+        <div class="card-title">${unit.title} <span style="font-size:12px;font-weight:400;color:var(--text-light)">（約${unit.estimatedMinutes}分）</span></div>
+        ${unit.content}
+      </div>
+      <div class="unit-nav-footer">
+        <button class="unit-nav-btn" data-action="tb-prev-unit" ${hasPrev?'':'disabled'}>← 前</button>
+        <button class="unit-nav-btn primary" data-action="tb-to-quiz">📝 クイズへ</button>
+        <button class="unit-nav-btn" data-action="tb-next-unit" ${hasNext?'':'disabled'}>次 →</button>
+      </div>
+    </div>`;
+}
+
+// === STUDY STREAK ===
+function recordStudyDay() {
+  try {
+    const days = JSON.parse(localStorage.getItem('cpp_study_days') || '[]');
+    const today = new Date().toISOString().split('T')[0];
+    if (!days.includes(today)) { days.push(today); localStorage.setItem('cpp_study_days', JSON.stringify(days)); }
+  } catch(e) {}
+}
+function getStudyStreak() {
+  try {
+    const days = JSON.parse(localStorage.getItem('cpp_study_days') || '[]').sort();
+    if (days.length === 0) return 0;
+    let streak = 1;
+    const today = new Date().toISOString().split('T')[0];
+    if (days[days.length - 1] !== today) {
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+      if (days[days.length - 1] !== yesterday) return 0;
+    }
+    for (let i = days.length - 1; i > 0; i--) {
+      const d1 = new Date(days[i]);
+      const d2 = new Date(days[i-1]);
+      const diff = (d1 - d2) / 86400000;
+      if (diff === 1) streak++;
+      else break;
+    }
+    return streak;
+  } catch(e) { return 0; }
+}
+
+// Data is loaded in the next script block
+</script>
+<script src="questions-data.js"></script>
+<script src="textbook-data.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
+loadHistory();
+render();
+</script>
 </body>
 </html>
